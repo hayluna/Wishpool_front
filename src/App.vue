@@ -1,32 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <page-template />
   </div>
 </template>
+<script>
+import PageTemplate from './components/PageTemplate.vue';
+
+export default {
+  name: 'App',
+  components:{
+    'page-template': PageTemplate,
+  },
+  data(){
+      return{
+      }
+  },
+}
+</script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    @import '@/styles/utils.scss';
+    #app{
+        @include flex-center();
+        position: absolute;
+        left: 0;
+        top:0;
+        bottom:0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: $primary-color;
     }
-  }
-}
 </style>

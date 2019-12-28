@@ -1,0 +1,22 @@
+// 변수 사용하기
+$primary-color: rgb(144, 122, 255);
+$light-gray: rgb(163, 147, 255);
+$purple-gray: #9291A4;
+$dark-gray: #6D7279;
+$sky-gray: #9CAFC0;
+$light-blue: #59D2F1;
+$link-blue: #49B7F5;
+$green: #0EC99C;
+$margenta : #F94288;
+$red: #FE705A;
+$light-white: #FAFAFA;
+
+$font-stack: -apple-system, BlinkMacSystemFont, 'KoPub Dotum', 'Noto Sans KR', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+
+@mixin flex-center(){
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
