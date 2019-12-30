@@ -29,15 +29,17 @@ export default {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        background: $primary-color;
     }
     .content{
         width: 100%;
-        margin-top: auto; //display:flex + margin:auto조합은 중앙고정이 되는데, 아래의 하단고정 margin과 겹쳐 위로 올라가게 됨. 따라서 margin-top.
+        height: 100%;
     }
     .nav{
         width: 100%;
-        flex-basis: 58px;
-        margin-top: auto;  //display:flex + margin-top:auto조합은 하단고정이 된다.
+        height: 50px;
+        position: absolute;
+        bottom : 0
     }
 
     //desktop, tablet
@@ -49,6 +51,9 @@ export default {
             padding: 0;
             border-radius: 4px;
             overflow: hidden;
+        }
+        .nav{
+            width: 500px;
         }
     }
 
