@@ -1,12 +1,12 @@
 <template>
     <div class="template">
-        <div class="content">
-            <router-view></router-view>
-        </div>
-        <div class="nav">
-            <Footer v-if="isLogged" />
-        </div>
-    </div>
+            <div class="content">
+                <router-view></router-view>
+            </div>
+            <div class="nav">
+                <Footer v-if="isLogged" />
+            </div>
+</div>
 </template>
 <script>
 import Footer from './Footer.vue';
@@ -27,17 +27,15 @@ export default {
     //공통
     .template{
         display: flex;
-        justify-content: center;
         flex-direction: column;
     }
     .content{
+        flex:1;
         width: 100%;
-        margin-top: auto; //display:flex + margin:auto조합은 중앙고정이 되는데, 아래의 하단고정 margin과 겹쳐 위로 올라가게 됨. 따라서 margin-top.
     }
     .nav{
         width: 100%;
         flex-basis: 58px;
-        margin-top: auto;  //display:flex + margin-top:auto조합은 하단고정이 된다.
     }
 
     //desktop, tablet

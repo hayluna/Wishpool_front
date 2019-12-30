@@ -40,5 +40,6 @@ export default {
         display:flex;
         justify-content: center;
         fill: $sky-gray;
+        cursor: pointer;
     }
 </style>
