@@ -47,43 +47,45 @@ export default {
         letter-spacing: 2px;
     }
     .welcome{
-        width: 310px;
+       width: 25rem;
         text-align: left;
         margin-top: -2rem;
         h1{
             margin-bottom:0.5rem;
+            font-size: 2.5rem;
         }
         p{
-            margin-top:0.5rem;
-            margin-bottom:0.2rem;
-            font-size: 1rem;
+            margin-bottom:1rem;
+            margin-top: 0.2rem;
+            font-size: 1.5rem;
         }
     }
     .white-box{
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+       box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
         padding: 2rem;
         background: white;
         border-radius: 7px;
         @include flex-center();
         flex-direction: column;
-        width: 250px; //mobile
+        width: 25rem; //mobile;
         color:black;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
+        font-size: 1.5rem;
     }
     .form{
         width: 100%;
-            @include flex-center();
+        @include flex-center();
+        font-size: 1.5rem;
         h3{
             width: 100%;
             margin: 1rem 0 0 0;
-            font-size:1.1rem;
+            font-size:2rem;
         }
         
         input{
             width: 100%;
             border-bottom: 1px solid #adb5bd;
             padding-bottom: 0.5rem;
-            font-size: 1rem;
             font-family: inherit;
             &:focus{
                 border-bottom: 1px solid $dark-gray;
@@ -94,7 +96,6 @@ export default {
             @include flex-center();
             width: 90%;
             border-radius: 4px;
-            font-size:1rem;
             padding: 0.75rem 1rem;
             color: white;
             background: gray;
@@ -109,6 +110,7 @@ export default {
         margin-top: 2rem;
         text-align: right;
         width: 100%;
+        font-size: 1.5rem;
         a{
             color: gray;
             text-decoration: underline;

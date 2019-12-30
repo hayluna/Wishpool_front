@@ -6,7 +6,7 @@
         </div>
         <div class="white-box">
             <!-- <div class="logo-area">WISHPOOL</div> -->
-            <div class="form">
+            <div class="form-login">
                 <h3>로그인</h3>
                 <input type="text" style="margin-top: 1.3rem;" placeholder="아이디" />
                 <input type="password" style="margin-top: 1.5rem;" placeholder="비밀번호" />
@@ -40,16 +40,17 @@ export default {
 
     }
     .welcome{
-        width: 310px;
+        width: 25rem;
         text-align: left;
         margin-top: -2rem;
         h1{
             margin-bottom:0.5rem;
+            font-size: 2.5rem;
         }
         p{
-            margin-bottom:0.5rem;
+            margin-bottom:1rem;
             margin-top: 0.2rem;
-            font-size: 1rem;
+            font-size: 1.5rem;
         }
     }
     .logo-area{
@@ -66,24 +67,25 @@ export default {
         border-radius: 7px;
         @include flex-center();
         flex-direction: column;
-        width: 250px; //mobile;
+        width: 25rem; //mobile;
         color:black;
         margin-top: 0.5rem;
+        font-size: 1.5rem;
     }
-    .form{
+    .form-login{
         width: 100%;
-            @include flex-center();
+        @include flex-center();
+        font-size: 1.5rem;
         h3{
             width: 100%;
             margin: 1rem 0 0 0;
-            font-size:1.1rem;
+            font-size:2rem;
         }
         
         input{
             width: 100%;
             border-bottom: 1px solid #adb5bd;
             padding-bottom: 0.5rem;
-            font-size: 1rem;
             font-family: inherit;
             &:focus{
                 border-bottom: 1px solid $dark-gray;
@@ -94,7 +96,6 @@ export default {
             @include flex-center();
             width: 90%;
             border-radius: 4px;
-            font-size:1rem;
             padding: 0.75rem 1rem;
             color: white;
             background: gray;
@@ -109,6 +110,7 @@ export default {
         margin-top: 2rem;
         text-align: right;
         width: 100%;
+        font-size: 1.5rem;
         a{
             color: gray;
             text-decoration: underline;
@@ -129,8 +131,9 @@ export default {
         }
         .form{
             h3{
-                font-size:1.2rem;
+                font-size:1.3rem;
             }
+
         }
         .welcome{
             width: 450px;

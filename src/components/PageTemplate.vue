@@ -1,12 +1,12 @@
 <template>
-    <div class="template">
-            <div class="content">
-                <router-view></router-view>
-            </div>
-            <div class="nav">
-                <Footer v-if="isLogged" />
-            </div>
-</div>
+    <div class="page-template">
+        <div class="content">
+            <router-view></router-view>
+        </div>
+        <div class="footer-nav">
+            <Footer v-if="isLogged" />
+        </div>
+    </div>
 </template>
 <script>
 import Footer from './Footer.vue';
@@ -25,50 +25,45 @@ export default {
 <style lang="scss" scoped>
     @import '@/styles/utils.scss';
     //공통
-    .template{
+    .page-template{
         display: flex;
         flex-direction: column;
         background: $primary-color;
     }
-    .content{
-        flex:1;
-        width: 100%;
-<<<<<<< HEAD
-    }
-    .nav{
-        width: 100%;
-        flex-basis: 58px;
-=======
-        height: 100%;
-    }
-    .nav{
-        width: 100%;
-        height: 50px;
-        position: absolute;
-        bottom : 0
->>>>>>> 07f7fc9b0c40cc7b9d584018c94aac3cce279236
-    }
 
     //desktop, tablet
     @media (min-width:420px) {
-        .template{
-            width: 500px;
-            height: 900px;
+        .page-template{
+            width: 50rem;
+            height: 90rem;
             margin: 0;
             padding: 0;
-            border-radius: 4px;
             overflow: hidden;
         }
-        .nav{
-            width: 500px;
+        .content{
+            flex: 1;
+        }
+        .footer-nav{
+            width: 50rem;;
+            height: 5rem;
         }
     }
 
     //mobile
     @media (max-width: 420px){
-        .template{
+        .page-template{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
             width: 100%;
             height: 100%;
+        }
+        .content{
+            flex:1;
+        }
+        .footer-nav{
+            width: 100%;
+            height: 5rem;
         }
 
     }
