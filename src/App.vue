@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container" :class="classObject">
     <page-template />
   </div>
 </template>
@@ -13,14 +13,24 @@ export default {
   },
   data(){
       return{
+        isLoggedIn: false,
       }
   },
+  computed: {
+    classObject(){
+      return {
+        'primary-color' : !this.isLoggedIn,
+        'gray-color' :  this.isLoggedIn
+      }
+    }
+  }
+
 }
 </script>
 
 <style lang="scss">
     @import '@/styles/utils.scss';
-    #app{
+    .container{
         @include flex-center();
         position: absolute;
         left: 0;
@@ -29,6 +39,15 @@ export default {
         right: 0;
         width: 100%;
         height: 100%;
+<<<<<<< HEAD
         background: $sky-gray;
+=======
+    }
+    .primary-color {
+      background: #907AFF
+    }
+    .gray-color {
+      background: #FAFAFA
+>>>>>>> 07f7fc9b0c40cc7b9d584018c94aac3cce279236
     }
 </style>

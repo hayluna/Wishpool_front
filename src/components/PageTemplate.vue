@@ -28,14 +28,25 @@ export default {
     .template{
         display: flex;
         flex-direction: column;
+        background: $primary-color;
     }
     .content{
         flex:1;
         width: 100%;
+<<<<<<< HEAD
     }
     .nav{
         width: 100%;
         flex-basis: 58px;
+=======
+        height: 100%;
+    }
+    .nav{
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        bottom : 0
+>>>>>>> 07f7fc9b0c40cc7b9d584018c94aac3cce279236
     }
 
     //desktop, tablet
@@ -47,6 +58,9 @@ export default {
             padding: 0;
             border-radius: 4px;
             overflow: hidden;
+        }
+        .nav{
+            width: 500px;
         }
     }
 
