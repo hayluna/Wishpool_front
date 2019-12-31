@@ -17,7 +17,7 @@ const routes = [
   { path:'/', component:Login, name:'login' },
   { path:'/item/list/', component:ItemList, name:'itemList' },
   // { path:'/item/list/:userId', component:ItemList, name:'itemList' },
-  { path:'/item/add', component:ItemInsert, name:'itemAdd' },
+  { path:'/item/insert', component:ItemInsert, name:'itemInsert' },
   { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify' },
   { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail' },
   { path:'/user/login', component:Login, name:'login' },

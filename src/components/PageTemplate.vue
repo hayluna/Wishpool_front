@@ -38,7 +38,7 @@ export default {
             height: 90rem;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: scroll;
         }
         .content{
             flex: 1;
@@ -54,7 +54,7 @@ export default {
         .page-template{
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: scroll;
             width: 100%;
             height: 100%;
         }
@@ -64,6 +64,9 @@ export default {
         .footer-nav{
             width: 100%;
             height: 5rem;
+            position: fixed;
+            left:0;
+            bottom:0;
         }
 
     }
