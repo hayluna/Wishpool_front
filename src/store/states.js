@@ -11,4 +11,5 @@ export default {
     othersFollowers: [],
     othersItemList: [],
     othersDoneList: [],
+    loading: false
 }

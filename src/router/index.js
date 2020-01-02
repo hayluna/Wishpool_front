@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import Login from '@/components/user/Login.vue'
 import Register from '@/components/user/Register.vue'
 import ItemInsert from '@/components/item/ItemInsert.vue'
@@ -15,8 +16,7 @@ Vue.use(VueRouter)
 const routes = [
   // { path:'/', component:Login, name:'login', meta: {requiresAuth:true} },
   { path:'/', component:Login, name:'login' },
-  { path:'/item/list/', component:ItemList, name:'itemList' },
-  // { path:'/item/list/:userId', component:ItemList, name:'itemList' },
+  { path:'/item/list/:userId', component:ItemList, name:'itemList' },
   { path:'/item/insert', component:ItemInsert, name:'itemInsert' },
   { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify' },
   { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail' },
@@ -36,4 +36,8 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next)=> {
+  store.commit('startLoading');
+  next();
+})
 export default router

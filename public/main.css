@@ -1,10 +1,10 @@
+
 html{
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'KoPub Dotum', 'Noto Sans KR', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow: scroll
 }
 body{
     margin:0;
@@ -12,10 +12,6 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, 'KoPub Dotum', 'Noto Sans KR', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow: scroll;
-}
-html .page {
-    overflow: scroll;
 }
 a{
     color: inherit;

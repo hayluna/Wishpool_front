@@ -29,6 +29,7 @@ export default {
         display: flex;
         flex-direction: column;
         background: $primary-color;
+        position: sticky;
     }
 
     //desktop, tablet
@@ -38,7 +39,8 @@ export default {
             height: 90rem;
             margin: 0;
             padding: 0;
-            overflow: scroll;
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
         .content{
             flex: 1;
@@ -46,6 +48,10 @@ export default {
         .footer-nav{
             width: 50rem;;
             height: 5rem;
+            position: fixed;
+            z-index: 3;
+            margin-top: 85rem;
+            overflow: hidden;
         }
     }
 
@@ -54,9 +60,9 @@ export default {
         .page-template{
             margin: 0;
             padding: 0;
-            overflow: scroll;
             width: 100%;
             height: 100%;
+            overflow-x: hidden;
         }
         .content{
             flex:1;

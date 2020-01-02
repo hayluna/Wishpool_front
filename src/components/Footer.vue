@@ -7,6 +7,9 @@
     </div>
 </template>
 <script>
+import store from '../store';
+const { state } = store;
+
 export default {
     name: 'Footer',
     methods:{
@@ -14,7 +17,7 @@ export default {
             this.$router.push({name:'followList'}, ()=>{});
         },
         list(){
-            this.$router.push({name:'itemList'}), ()=>{};
+            this.$router.push({name: 'itemList', params: {userId: state.userId}}, ()=>{});
         },
         noti(){
             this.$router.push({name:'notiList'}, ()=>{});

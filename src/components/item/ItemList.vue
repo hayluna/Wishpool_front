@@ -28,7 +28,7 @@
             <!-- 아이템 목록 -->
             <div class="tab-pane active" id="wish">
                 <ul class="ul-item">
-                    <li v-for="item in items" :key="item._id">
+                    <li v-for="item in wishItems" :key="item._id">
                         <item 
                         :item="item" />
                     </li>
@@ -37,7 +37,10 @@
             <!-- 완료 목록 -->
             <div class="tab-pane" id="done">
                 <ul class="ul-item">
-                    <item />
+                     <li v-for="item in doneWishItems" :key="item._id">
+                        <item 
+                        :item="item" />
+                    </li>
                 </ul>
             </div>
         </div>
@@ -57,8 +60,30 @@ export default {
             items: []
         }
     },
-    created(){
+    computed:{
+        wishItems(){
+            var items = this.items.filter(item => item.purchasedBy == '');
+            return items;
+        },
+        doneWishItems(){
+            var items = this.items.filter(item => item.purchasedBy != '');
+            return items;
+        }
+    },
+    beforeRouteEnter(to, from, next){
+        //비동기로 itemlist전부를 가져온다.
         dispatch('fetchMyAllItemList');
+        //loading==false가 될 때 라우터 이동을 허용한다.
+        store.watch(
+            (state, getters) => state.loading,
+            (newValue, oldValue) =>{
+                if(newValue == false){
+                    next();
+                }
+            }
+        )
+    },
+    created(){
         this.items = getters.myAllItemList;
     },
     methods:{
@@ -73,11 +98,10 @@ export default {
     .view{
         background: white;
         height: 100%;
+        overflow: hidden;
     }
     .fix-top{
         position: fixed;
-        left: 0;
-        top: 0;
         width: 100%;
         background: white;
         z-index: 4;
@@ -89,10 +113,6 @@ export default {
         padding: 0 1rem 0 1rem;
         height: 5rem;
         box-shadow: 0px 3px 6px lightgray;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width:100%;
         z-index: 3;
     }
     .nav{
@@ -111,6 +131,7 @@ export default {
         flex:1;
         justify-content: flex-end;
         font-size: 1rem;
+        cursor: pointer;
         .add-text{
             font-size: 1.4rem;
             margin-right: 5px;
@@ -138,7 +159,6 @@ export default {
         border-bottom: 1px solid #555;
     }
     .nav-tabs-wide{
-        margin-top: 5rem;
         width: 100%;
         border: none;
         display: flex;
@@ -166,6 +186,9 @@ export default {
         }
     }
     @media (min-width:420px){
+        .fix-top{
+            width: 50rem;
+        }
         .header{
             height: 6rem;
             padding: 0 1.5rem 0 1.5rem;
