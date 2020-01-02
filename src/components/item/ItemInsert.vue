@@ -12,20 +12,24 @@
         <div class="contents">
             <div class="cont">
                 <span class="small-title">아이템 이름(*)</span>
-                <div>
-                    <input type="text" v-model="item.itemName"/>
+                <div class="input-item">
+                    <input type="text" ref="name" v-model="item.itemName"/>
+                    <svg @click="clearName" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
                 <span class="small-title">아이템 가격</span>
-                <div style="font-weight: bold;">
-                    <input type="text" v-model="item.itemPrice" style="width:90%; margin-right:1rem; font-weight: normal" placeholder="숫자만 입력해주세요"/>원
+                <div style="font-weight: bold;" class="input-item">
+                    <input type="text" ref="price" v-model="item.itemPrice" style="width:80%; margin-right:1rem; font-weight: normal" placeholder="숫자만 입력해주세요"/>
+                    <svg @click="clearPrice" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
+                    원
                 </div>
             </div>
             <div class="cont">
                 <span class="small-title">링크</span>
-                <div>
-                    <input type="text" v-model="item.itemLink" placeholder="링크를 입력해주세요"/>
+                <div class="input-item">
+                    <input type="text" ref="link" v-model="item.itemLink" placeholder="링크를 입력해주세요"/>
+                    <svg @click="clearLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
@@ -34,7 +38,7 @@
                     <label class="btn" >
                         <input type="radio" name="jb-radio" id="jb-radio-1" value="public" v-model="item.visibleTo" > 공개
                     </label>
-                    <label class="btn active focus">
+                    <label class="btn active">
                         <input type="radio" name="jb-radio" id="jb-radio-2" value="private" v-model="item.visibleTo"> 비공개
                     </label>
                 </div>
@@ -45,7 +49,7 @@
                     <svg style="margin-right:1rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><circle cx="12" cy="12" r="3"/><path d="M20 4h-3.17l-1.24-1.35c-.37-.41-.91-.65-1.47-.65H9.88c-.56 0-1.1.24-1.48.65L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
                     사진 추가하기
                 </div> -->
-                <input type="file" id="photo" class="file-upload" accept="image/*" v-on:change="onFileUpload" ref="thumbnail">
+                <input type="file" id="photo" style="margin-top: 1.2rem;" class="file-upload" accept="image/*" v-on:change="onFileUpload" ref="thumbnail">
                 <div class="thumbnail" v-if="preview">
                     <img :src="preview" />
                     <div class="overlay" v-if="preview"><svg @click="deletePreview" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg></div>
@@ -90,6 +94,18 @@ export default {
         }
     },
     methods:{
+        clearName(){
+            this.item.itemName = ''
+            this.$refs.name.focus();
+        },
+        clearPrice(){
+            this.item.itemPrice = ''
+            this.$refs.price.focus();
+        },
+        clearLink(){
+            this.item.itemLink = '';
+            this.$refs.link.focus();
+        },
          onFileUpload(e){
             var file = e.target.files[0];
             if(file && file.type.match(/^image\/(png|jpeg)$/)){
@@ -186,13 +202,36 @@ export default {
     .cont {
         margin-top: 5rem;
         margin-bottom: 2.5rem;
+    }
+    .file-upload{
+        font-size: 1.3rem;
+        border: 1px solid lightgray;
+        background: #f6f6fe;
+        color: #333333;
+        border-radius: 5px;
+        padding: 1rem;
+    }
+     .input-item{
+        border-bottom: 1px solid lightgray;
+        svg{
+            visibility: hidden;
+            fill: transparent;
+            width: 1.8rem; 
+            height: 1.8rem;
+        }
+        &:focus-within, &:active{
+            border-bottom: 1px solid black;
+            svg{
+                visibility: visible;
+                fill:lightgray;
+            }
+        }
         input{
-            width: 100%;
             outline: none;
             margin-top: 0.5rem;
-            border-bottom: 1px solid lightgray;
+            width: 90%;
+            background: transparent;
             &:focus{
-                border-bottom: 1px solid black;
                 color: black;
                 font-size:2rem;
                 &::placeholder{
@@ -204,14 +243,6 @@ export default {
                 font-size: 1.7rem;
             }
         }
-    }
-    .file-upload{
-        font-size: 1.3rem;
-        border: 1px solid lightgray;
-        background: #f6f6fe;
-        color: #333333;
-        border-radius: 5px;
-        padding: 1rem;
     }
     label{
         flex:1;

@@ -1,6 +1,8 @@
 <template>
     <div class="item">
-        <div class="thumb"></div>
+        <div class="thumb">
+            <img :src="item.itemImgPath" @error="imgLoadError">
+        </div>
         <div class="desc">
             <div class="text">
                 <span class="name">{{ item.itemName | filterName }}</span>
@@ -36,6 +38,11 @@ export default {
             return '복구'
         }
     },
+    data(){
+        return{
+            isError: true
+        }
+    },
     methods:{
         onCopy(){
             //url copy
@@ -50,7 +57,7 @@ export default {
             this.$router.push({name:'itemModify', params:{itemId:this.item._id}});
         },
         onRemove(){
-
+            dispatch('removeItem', this.item);
         },
         onToggle(){
             if(this.getType == '완료'){
@@ -59,6 +66,9 @@ export default {
                 this.item.purchasedBy = '';
             }
             dispatch('handleToggle', this.item);
+        },
+        imgLoadError(){
+            this.item.itemImgPath='/assets/images/data_usage.svg';
         }
     },
     filters:{
@@ -106,7 +116,14 @@ export default {
     height: 4.5rem;
     justify-self: flex-start;
     border-radius: 15px;
-    border: 1px solid #3e414b;
+    border: 1px solid lightgray;
+    @include flex-center();
+    img{
+        width: 95%;
+        height: 95%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
 }
 .badge{
     margin-left: 0.5rem;

@@ -6,7 +6,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
                 </div>
             </div>
-            <div class="title">아이템 추가</div>
+            <div class="title">아이템 수정</div>
             <div class="empty"></div>
         </div>
         <div class="contents">
@@ -14,14 +14,14 @@
                 <span class="small-title">아이템 이름(*)</span>
                 <div class="input-item">
                     <input type="text" ref="name" v-model="item.itemName" placeholder="아이템 이름을 입력해주세요"/>
-                    <div class="clear"><svg @click="clearName" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg></div>
+                    <svg @click="clearName" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
                 <span class="small-title">아이템 가격</span>
                 <div class="input-item" style="font-weight: bold;">
                     <input type="text" ref="price" v-model="item.itemPrice" style="width:80%; margin-right:1rem; font-weight: normal; display:inline;" placeholder="숫자만 입력해주세요"/>
-                    <div class="clear"><svg @click="clearPrice" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg></div>
+                    <svg @click="clearPrice" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 원
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <span class="small-title">링크</span>
                 <div class="input-item">
                     <input type="text" ref="link" v-model="item.itemLink" placeholder="링크를 입력해주세요"/>
-                    <div class="clear"><svg @click="clearLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg></div>
+                    <svg @click="clearLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
@@ -38,18 +38,18 @@
                     <label class="btn" >
                         <input type="radio" name="jb-radio" id="jb-radio-1" value="public" v-model="item.visibleTo" > 공개
                     </label>
-                    <label class="btn active focus">
+                    <label class="btn active">
                         <input type="radio" name="jb-radio" id="jb-radio-2" value="private" v-model="item.visibleTo"> 비공개
                     </label>
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">사진 업로드</span>
+                <span class="small-title">사진 수정하기</span>
                 <!-- <div class="pic">
                     <svg style="margin-right:1rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><circle cx="12" cy="12" r="3"/><path d="M20 4h-3.17l-1.24-1.35c-.37-.41-.91-.65-1.47-.65H9.88c-.56 0-1.1.24-1.48.65L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
                     사진 추가하기
                 </div> -->
-                <input type="file" id="photo" class="file-upload" accept="image/*" v-on:change="onFileUpload" ref="thumbnail">
+                <input type="file" id="photo" style="margin-top: 1.2rem;" class="file-upload" accept="image/*" v-on:change="onFileUpload" ref="thumbnail">
                 <div class="thumbnail" v-if="preview">
                     <img :src="preview" />
                     <div class="overlay" v-if="preview"><svg @click="deletePreview" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg></div>
@@ -60,19 +60,23 @@
                 <textarea v-model="item.itemMemo"></textarea>
             </div>
             <div class="btn-area">
-                <a @click="onSubmit">아이템 추가하기<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M24 24H0V0h24v24z"/><path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z"/></svg></a>
+                <a @click="onSubmit">아이템 수정하기<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M24 24H0V0h24v24z"/><path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z"/></svg></a>
             </div>
         </div>
     </div>
 </template>
 <script>
 import store from '../../store';
-const { state, getters } = store;
+const { state, getters, dispatch } = store;
 
 export default {
     name: 'ItemModify',
     beforeRouteEnter(to, from, next){
-        next(vm => vm.item = getters.myAllItemList.find(item=>item._id == to.params.itemId));
+        next(vm => {
+                vm.item = getters.myAllItemList.find(item=>item._id == to.params.itemId);
+                vm.preview = vm.item.itemImgPath;
+            });
+
     },
     created(){
         // this.item = getters.myAllItemList.find(item=>item._id == this.$route.params);
@@ -81,7 +85,8 @@ export default {
         return{
             item: {},
             thumbnail:'',
-            preview:''
+            preview:'',
+            prevImgName: ''
         }
     },
     methods:{
@@ -102,6 +107,7 @@ export default {
             if(file && file.type.match(/^image\/(png|jpeg)$/)){
                 this.preview = window.URL.createObjectURL(file);
                 this.thumbnail = file;
+                this.prevImgName = this.item.itemImgName;
             }
         },
         onSubmit(){
@@ -112,11 +118,14 @@ export default {
             formData.append('visibleTo', this.item.visibleTo);
             formData.append('purchasedBy', this.item.purchasedBy);
             formData.append('itemMemo', this.item.itemMemo);
+            formData.append('itemImgName', this.item.itemImgName);
+            formData.append('itemImgPath', this.item.itemImgPath);
             formData.append('userId', state.userId);
             formData.append('thumbnail', this.thumbnail);
+            formData.append('prevImgName', this.prevImgName);
             (async()=>{
                 try{
-                    const res = await this.$http.post(this.$api+'/item/insert/'+state.userId, formData, {
+                    const res = await this.$http.patch(this.$api+'/item/modify/'+this.item._id, formData, {
                         header: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -126,6 +135,8 @@ export default {
                     }else if(res.data.code == 500){
                         console.log('서버오류 : '+res.data.msg);
                     }
+                    
+                // }
                 }catch(e){
                     console.error(e);
                 }
@@ -133,8 +144,13 @@ export default {
             })();
         },
         deletePreview(){
-            this.preview = '';
-            this.thumbnail = '';
+            if(confirm('아이템을 삭제하시겠습니까?')){
+                this.prevImgName = this.item.itemImgName;
+                this.item.itemImgPath = '';
+                this.item.itemImgName = '';
+                this.preview = '';
+                this.thumbnail = '';
+            }
             document.getElementById("photo").value=""
         },
         onBack(){
@@ -197,29 +213,17 @@ export default {
     }
     .input-item{
         border-bottom: 1px solid lightgray;
-        .clear{
-            visibility: hidden;
-            display:inline-flex; 
-            border-radius:100%; 
-            width: 2rem; 
-            height: 2rem; 
-            justify-content: center;
-            align-items: center;
-        }
         svg{
+            visibility: hidden;
             fill: transparent;
             width: 1.8rem; 
             height: 1.8rem;
         }
-        &:focus-within{
+        &:focus-within, &:active{
             border-bottom: 1px solid black;
-            .clear{
-                visibility: visible;
-                background:lightgray; 
-            }
             svg{
                 visibility: visible;
-                fill:white;
+                fill:lightgray;
             }
         }
         input{
@@ -254,7 +258,7 @@ export default {
         background: #F6F6FE;
     }
     .btn.active.focus, .btn.active:focus,
-    .btn.focus, .btn:active.focus, .btn:focus, .btn.active{
+    .btn:active.focus, .btn:focus, .btn.active{
         outline:none;
         background: $purple-gray;
         color: white;
@@ -284,6 +288,7 @@ export default {
         img{
             width:100%;
             height:100%;
+            object-fit: cover;
         }
        
         svg{

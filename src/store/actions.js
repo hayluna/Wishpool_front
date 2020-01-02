@@ -9,6 +9,7 @@ export default{
                 const { code, msg, items } = res.data;
                 if(code == "200"){
                     commit(FETCH_MY_ALL_ITEM_LIST, items);
+                    console.log(items);
                 }
             } catch (e) {
                 console.error(e);
