@@ -10,5 +10,11 @@ export default {
     },
     endLoading(state){
         state.loading = false;
+    },
+    removeItem(state, item){
+        const index = state.myAllItemList.findIndex(el => el._id == item._id);
+        if(index){
+            state.myAllItemList.splice(index, 1);
+        }
     }
 }

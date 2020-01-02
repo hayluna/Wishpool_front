@@ -31,5 +31,21 @@ export default{
                 console.error(e);
             }
         })();
+    },
+    removeItem({ commit }, item){
+        return (async()=>{
+            try{
+                commit('removeItem', item); //안해줘도 되지만, 이걸하면 깜박임이 사라져 UX가 좋아진다.
+                console.log(item);
+                const res = await axios.patch(this._vm.$api+'/item/delete/'+item._id, item)
+                const { code, msg, items } = res.data;
+                console.log(items);
+                if(code == "200"){
+                    commit(FETCH_MY_ALL_ITEM_LIST, items);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
     }
 }

@@ -1,9 +1,9 @@
 <template>
     <div class="item">
-        <div class="thumb">
+        <div class="thumb" @click="onClick">
             <img :src="item.itemImgPath" @error="imgLoadError">
         </div>
-        <div class="desc">
+        <div class="desc" @click="onClick">
             <div class="text">
                 <span class="name">{{ item.itemName | filterName }}</span>
                 <span class="badge">{{ item.visibleTo | filterBadge }}</span>
@@ -69,6 +69,9 @@ export default {
         },
         imgLoadError(){
             this.item.itemImgPath='/assets/images/data_usage.svg';
+        },
+        onClick(){
+            this.$emit('onClick', this.item);
         }
     },
     filters:{

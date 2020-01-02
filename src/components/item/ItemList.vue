@@ -1,15 +1,28 @@
 <template>
-    <div class="view">
+    <div class="view"> 
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+            <div>
+                <p>위시리스트</p>
+                <p>총 금액</p>
+                <p>{{ wishTotal }}원</p>
+            </div>
+            <div>
+                <p>완료리스트</p>
+                <p>총 금액</p>
+                <p>{{ doneWishTotal }}원</p>
+            </div>
+        </div>
         <div class="fix-top">
             <div class="header">
-                <div class="nav">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="14" viewBox="0 0 17 14">
-                <g id="구성_요소_5_1" data-name="구성 요소 5 – 1" transform="translate(1 1)">
-                    <line id="선_22" data-name="선 22" x2="8" fill="none" stroke="#3a404a" stroke-linecap="round" stroke-width="2"/>
-                    <line id="선_23" data-name="선 23" x2="15" transform="translate(0 6)" fill="none" stroke="#3a404a" stroke-linecap="round" stroke-width="2"/>
-                    <line id="선_24" data-name="선 24" x2="12" transform="translate(0 12)" fill="none" stroke="#3a404a" stroke-linecap="round" stroke-width="2"/>
-                </g>
-                </svg>
+                <div class="nav" @click="openNav">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="14" viewBox="0 0 17 14">
+                    <g id="구성_요소_5_1" data-name="구성 요소 5 – 1" transform="translate(1 1)">
+                        <line id="선_22" data-name="선 22" x2="8" fill="none" stroke="#3a404a" stroke-linecap="round" stroke-width="2"/>
+                        <line id="선_23" data-name="선 23" x2="15" transform="translate(0 6)" fill="none" stroke="#3a404a" stroke-linecap="round" stroke-width="2"/>
+                        <line id="선_24" data-name="선 24" x2="12" transform="translate(0 12)" fill="none" stroke="#3a404a" stroke-linecap="round" stroke-width="2"/>
+                    </g>
+                    </svg>
                 </div>
                 <div class="title">위시리스트</div>
                 <div class="add-button" @click="onInsert">
@@ -31,7 +44,7 @@
                     <li v-for="item in wishItems" :key="item._id">
                         <item 
                         :item="item"
-                        :onToggle="handleToggle" />
+                        @onClick="handleClick" />
                     </li>
                 </ul>
             </div>
@@ -41,7 +54,7 @@
                      <li v-for="item in doneWishItems" :key="item._id">
                         <item 
                         :item="item"
-                        :onToggle="handleToggle" />
+                        @onClick="handleClick" />
                     </li>
                 </ul>
             </div>
@@ -57,12 +70,10 @@ export default {
     components: {
         'item' : Item
     },
-    data(){
-        return{
-            items: []
-        }
-    },
     computed:{
+        items(){
+            return getters.myAllItemList;
+        },
         wishItems(){
             var items = this.items.filter(item => item.purchasedBy == '');
             return items;
@@ -70,6 +81,24 @@ export default {
         doneWishItems(){
             var items = this.items.filter(item => item.purchasedBy != '');
             return items;
+        },
+        wishTotal(){
+            let total = 0;
+            this.items.forEach(item => {
+                if(item.itemPrice && item.purchasedBy == ''){
+                    total += parseInt(item.itemPrice, 10);
+                }
+            });
+            return total;
+        },
+        doneWishTotal(){
+            let total = 0;
+            this.items.forEach(item => {
+                if(item.itemPrice && item.purchasedBy != ''){
+                    total += parseInt(item.itemPrice, 10);
+                }
+            });
+            return total;
         }
     },
     beforeRouteEnter(to, from, next){
@@ -86,14 +115,20 @@ export default {
         )
     },
     created(){
-        this.items = getters.myAllItemList;
+        // this.items = getters.myAllItemList;
     },
     methods:{
         onInsert(){
             this.$router.push({name:'itemInsert'})
         },
-        handleToggle(payload){
-
+        handleClick(item){
+            this.$router.push({name:'itemDetail', params:{itemId: item._id}});
+        },
+        openNav(){
+            document.getElementById("mySidenav").style.width = "20rem";
+        },
+        closeNav(){
+            document.getElementById("mySidenav").style.width = "0";
         }
     }
 }
@@ -189,6 +224,55 @@ export default {
         li{
             list-style: none;
         }
+    }
+    /* The side navigation menu */
+    .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #fff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
+
+    /* The navigation menu links */
+    .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+    color: #f1f1f1;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    }
+
+    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+    #main {
+    transition: margin-left .5s;
+    padding: 20px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
     }
     @media (min-width:420px){
         .fix-top{
