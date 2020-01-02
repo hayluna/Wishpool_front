@@ -30,7 +30,8 @@
                 <ul class="ul-item">
                     <li v-for="item in wishItems" :key="item._id">
                         <item 
-                        :item="item" />
+                        :item="item"
+                        :onToggle="handleToggle" />
                     </li>
                 </ul>
             </div>
@@ -39,7 +40,8 @@
                 <ul class="ul-item">
                      <li v-for="item in doneWishItems" :key="item._id">
                         <item 
-                        :item="item" />
+                        :item="item"
+                        :onToggle="handleToggle" />
                     </li>
                 </ul>
             </div>
@@ -89,6 +91,9 @@ export default {
     methods:{
         onInsert(){
             this.$router.push({name:'itemInsert'})
+        },
+        handleToggle(payload){
+
         }
     }
 }
