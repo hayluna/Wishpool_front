@@ -14,7 +14,7 @@ export default {
     name: 'Footer',
     methods:{
         follow(){
-            this.$router.push({name:'followList'}, ()=>{});
+            this.$router.push({name:'followList', params: {userId: state.userId}}, ()=>{});
         },
         list(){
             this.$router.push({name: 'itemList', params: {userId: state.userId}}, ()=>{});

@@ -6,15 +6,15 @@
                 <div class="title">
                     친구목록
                 </div>
-                <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+                <span @click="findFollow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
             </div>
             <div class="user-me">
                 <div class="thumb"></div>
                 <div class="desc">
                     <div class="text">
-                        <span class="name">My Name</span>
+                        <span class="name">{{ myProfile.nickName }}</span>
                     </div>
-                    <span class="msg">My profileMsg</span>
+                    <span class="msg">{{ myProfile.profileMsg }}</span>
                 </div>
             </div>
             <ul class="nav nav-tabs nav-tabs-wide">
@@ -26,13 +26,21 @@
             <!-- follow 목록 -->
             <div class="tab-pane active" id="wish">
                 <ul class="ul-item">
-                    <follow-user />
+                    <li v-for="user in followings" :key="user._id">
+                        <follow-user
+                        :user="user"
+                         />
+                    </li>
                 </ul>
             </div>
             <!-- follower 목록 -->
             <div class="tab-pane" id="done">
                 <ul class="ul-item">
-                    <follow-user />
+                    <li v-for="user in followers" :key="user._id">
+                        <follow-user
+                        :user="user"
+                         />
+                    </li>
                 </ul>
             </div>
         </div>
@@ -40,12 +48,41 @@
 </template>
 <script>
 import FollowUser from './FollowUser.vue'
+import store from '../../store';
+const { state, getters, dispatch } = store;
 export default {
     name: 'FollowList',
     components: {
         'follow-user': FollowUser
     },
+    beforeRouteEnter(to, from, next){
+        //비동기로 itemlist전부를 가져온다.
+        dispatch('fetchMyFollowList');
+        //loading==false가 될 때 라우터 이동을 허용한다.
+        store.watch(
+            (state, getters) => state.loading,
+            (newValue, oldValue) =>{
+                if(newValue == false){
+                    next();
+                }
+            }
+        )
+    },
+    computed:{
+        myProfile(){
+            return getters.myProfile;
+        },
+        followers(){
+            return getters.myFollowers;
+        },
+        followings(){
+            return getters.myFollowings;
+        }
+    },
     methods: {
+        findFollow(){
+            this.$router.push({name:'followSearch', params:{userId:state.userId}});
+        }
     }
 }
 </script>
@@ -65,7 +102,7 @@ export default {
         display: flex;
         align-items: center;
         background: white;
-        padding: 0 1rem 0 1rem;
+        padding: 0 1.5rem 0 1.5rem;
         height: 5rem;
         box-shadow: 0px 3px 6px lightgray;
         span{

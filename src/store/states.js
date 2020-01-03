@@ -2,6 +2,7 @@ export default {
     userId: '5ded64280ee4351ae8dbc6d2',
     token: localStorage.getItem('wishToken') || '',
     sid:'',
+    myProfile:{},
     myFollowings: [],
     myFollowers: [],
     myAllItemList: [],
@@ -11,5 +12,5 @@ export default {
     othersFollowers: [],
     othersItemList: [],
     othersDoneList: [],
-    loading: false
+    loading: false,
 }

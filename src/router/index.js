@@ -8,6 +8,7 @@ import ItemList from '@/components/item/ItemList.vue'
 import ItemModify from '@/components/item/ItemModify.vue'
 import ItemDetail from '@/components/item/ItemDetail.vue'
 import FollowList from '@/components/follow/FollowList.vue'
+import FollowSearch from '@/components/follow/FollowSearch.vue'
 import NotiList from '@/components/notification/NotiList.vue'
 import More from '@/components/setting/More.vue'
 
@@ -22,8 +23,8 @@ const routes = [
   { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail' },
   { path:'/user/login', component:Login, name:'login' },
   { path:'/user/register', component:Register, name:'register' },    
-  { path:'/follow/list', component:FollowList, name:'followList' },
-  // { path:'/follow/list/:userId', component:FollowList, name:'followList' },
+  { path:'/follow/list/:userId', component:FollowList, name:'followList' },
+  { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch' },
   { path:'/noti/list', component:NotiList, name:'notiList' },
   // { path:'/noti/list/:userId', component:NotiList, name:'notiList' },
   { path:'/more', component:More, name:'more' },

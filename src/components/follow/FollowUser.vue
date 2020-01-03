@@ -1,17 +1,18 @@
 <template>
-    <li class="user">
+    <div class="user">
         <div class="thumb"></div>
         <div class="desc">
             <div class="text">
-                <span class="name">user.userName</span>
+                <span class="name">{{user.userName}}</span>
             </div>
-            <span class="msg">user.profileMsg</span>
+            <span class="msg">{{user.profileMsg}}</span>
         </div>
-    </li>
+    </div>
 </template>
 <script>
 export default {
-    
+    name: 'FollowUser',
+    props: ['user']
 }
 </script>
 <style lang="scss" scoped>
