@@ -1,16 +1,16 @@
 <template>
     <div class="view"> 
         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
-            <div>
-                <p>위시리스트</p>
-                <p>총 금액</p>
-                <p>{{ wishTotal }}원</p>
+            <a href="javascript:void(0)" class="closebtn" style="font-size:2.5rem; color:black;" @click="closeNav">&times;</a>
+            <div style="padding-left: 4rem; margin-top: 2rem;">
+                <p style="font-weight:bold; font-size:1.5rem;color:transparent;">위시리스트</h4>
+                <p style="margin-bottom:0;color:transparent;">총 금액</p>
+                <p style="color:transparent; font-weight:bold; font-size:1.5rem;">{{ wishTotal }}원</p>
             </div>
-            <div>
-                <p>완료리스트</p>
-                <p>총 금액</p>
-                <p>{{ doneWishTotal }}원</p>
+            <div style="padding-left: 4rem; margin-top: 2rem;">
+                <p style="font-weight:bold; font-size:1.5rem;color:transparent;">완료리스트</p>
+                <p style="margin-bottom:0;color:transparent;">총 금액</p>
+                <p style="color:transparent; font-weight:bold; font-size:1.5rem;">{{ doneWishTotal }}원</p>
             </div>
         </div>
         <div class="fix-top">
@@ -126,9 +126,27 @@ export default {
         },
         openNav(){
             document.getElementById("mySidenav").style.width = "20rem";
+            setTimeout(function(){
+                document.getElementById("mySidenav").children[1].children[0].style.color="black"
+                document.getElementById("mySidenav").children[1].children[1].style.color="black"
+                document.getElementById("mySidenav").children[1].children[2].style.color="gray"
+                document.getElementById("mySidenav").children[2].children[0].style.color="black"
+                document.getElementById("mySidenav").children[2].children[1].style.color="black"
+                document.getElementById("mySidenav").children[2].children[2].style.color="gray"
+            }, 200)
+            
         },
         closeNav(){
             document.getElementById("mySidenav").style.width = "0";
+            setTimeout(function(){
+                document.getElementById("mySidenav").children[1].children[0].style.color="transparent"
+                document.getElementById("mySidenav").children[1].children[1].style.color="transparent"
+                document.getElementById("mySidenav").children[1].children[2].style.color="transparent"
+                document.getElementById("mySidenav").children[2].children[0].style.color="transparent"
+                document.getElementById("mySidenav").children[2].children[1].style.color="transparent"
+                document.getElementById("mySidenav").children[2].children[2].style.color="transparent"
+            },50)
+            
         }
     }
 }
@@ -150,13 +168,14 @@ export default {
         display: flex;
         align-items: center;
         background: white;
-        padding: 0 1rem 0 1rem;
+        padding: 0.2rem 1.7rem 0 1.7rem;
         height: 5rem;
         box-shadow: 0px 3px 6px lightgray;
         z-index: 3;
     }
     .nav{
         flex:1;
+        padding-top: 0.2rem;
     }
     .title{
         flex:1;
@@ -239,21 +258,6 @@ export default {
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     }
 
-    /* The navigation menu links */
-    .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-    }
-
-    /* When you mouse over the navigation links, change their color */
-    .sidenav a:hover {
-    color: #f1f1f1;
-    }
-
     /* Position and style the close button (top right corner) */
     .sidenav .closebtn {
     position: absolute;
@@ -261,8 +265,9 @@ export default {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    padding-left: 5rem;
     }
-
+    
     /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
     #main {
     transition: margin-left .5s;
