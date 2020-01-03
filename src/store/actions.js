@@ -1,4 +1,4 @@
-import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_FOLLOW_LIST } from './mutations-types';
+import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_FOLLOW_LIST, FETCH_SEARCH_USER_LIST } from './mutations-types';
 import axios from 'axios';
 import state from './states';
 export default{
@@ -22,7 +22,6 @@ export default{
                 const res = await axios.get(this._vm.$api+'/follow/list/'+state.userId);
                 const { code, msg, followers, followings, profile } = res.data;
                 const all = { followers, followings, profile };
-                console.log(all);
                 if(code == "200"){
                     commit(FETCH_MY_FOLLOW_LIST, all);
                 }
@@ -31,10 +30,20 @@ export default{
             }
         })();
     },
-    fetchQuery({ commit }){
+    fetchQuery({ commit }, payload){
         return(async()=>{
             try {
-                const res = await axios.get(this._vm.$api+'/follow/search/');
+                const res = await axios.get(this._vm.$api+'/follow/search/',
+                {
+                    params:{
+                        query: payload.query,
+                        id: payload._id
+                    }
+                });
+                const { code, msg, matchUsers } = res.data;
+                if(code=="200"){
+                    commit(FETCH_SEARCH_USER_LIST, matchUsers);
+                }
             } catch (e) {
                 console.error(e);
             }

@@ -34,4 +34,7 @@ export default {
 .msg{
         color: #bebebe;
     }
+.name{
+    color: black;
+}
 </style>

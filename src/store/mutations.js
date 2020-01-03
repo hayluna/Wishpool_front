@@ -1,4 +1,4 @@
-import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_FOLLOW_LIST } from './mutations-types'
+import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_FOLLOW_LIST, FETCH_SEARCH_USER_LIST } from './mutations-types'
 
 export default {
     [FETCH_MY_ALL_ITEM_LIST] (state, items){
@@ -10,6 +10,9 @@ export default {
         state.myFollowers = all.followers;
         state.myFollowings = all.followings;
         state.loading = false;
+    },
+    [FETCH_SEARCH_USER_LIST](state, users){
+        state.searchUserList = users;
     },
     startLoading(state){
         state.loading = true;

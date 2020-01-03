@@ -8,6 +8,7 @@ export default {
     myAllItemList: [],
     myItemList: [],
     myDoneList: [],
+    searchUserList:[],
     othersFollowings: [],
     othersFollowers: [],
     othersItemList: [],

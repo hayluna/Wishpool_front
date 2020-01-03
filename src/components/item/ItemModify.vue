@@ -112,10 +112,12 @@ export default {
         },
         onSubmit(){
             if(this.item.itemName ==''){
-                alert('아이템 이름은 필수 입력값입니다!')
+                alert('아이템 이름은 필수 입력값입니다!');
+                return false;
             }
             if(isNaN(this.itemPrice)){
-                alert('가격은 숫자만 입력가능합니다!')
+                alert('가격은 숫자만 입력가능합니다!');
+                return false;
             }
             var formData = new FormData();
             formData.append('itemName', this.item.itemName);

@@ -4,4 +4,5 @@ export default {
     myFollowers : state => state.myFollowers,
     myFollowings: state => state.myFollowings,
     myProfile : state => state.myProfile,
+    searchUserList : state => state.searchUserList
 }
