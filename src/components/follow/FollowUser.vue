@@ -1,5 +1,5 @@
 <template>
-    <div class="user">
+    <div class="user" data-toggle="modal" data-target="#profile">
         <div class="thumb"></div>
         <div class="desc">
             <div class="text">

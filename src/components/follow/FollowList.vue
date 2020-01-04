@@ -1,4 +1,5 @@
 <template>
+<div class="view-box">
     <div class="view">
         <div class="fix-top">
             <div class="header">
@@ -29,6 +30,7 @@
                     <li v-for="user in followings" :key="user._id">
                         <follow-user
                         :user="user"
+                        @click.native="getClickedUser(user)"
                          />
                     </li>
                 </ul>
@@ -39,21 +41,29 @@
                     <li v-for="user in followers" :key="user._id">
                         <follow-user
                         :user="user"
+                        @click.native="getClickedUser(user)"
                          />
                     </li>
                 </ul>
             </div>
         </div>
+        <profile-detail
+            :user="clickedUser"
+         />
     </div>
+    
+</div>
 </template>
 <script>
 import FollowUser from './FollowUser.vue'
 import store from '../../store';
+import ProfileDetail from '../profile/ProfileDetail'
 const { state, getters, dispatch } = store;
 export default {
     name: 'FollowList',
     components: {
-        'follow-user': FollowUser
+        'follow-user': FollowUser,
+        'profile-detail' : ProfileDetail,
     },
     beforeRouteEnter(to, from, next){
         dispatch('fetchMyProfile'); //내 프로필 정보를 가져온다.
@@ -66,6 +76,11 @@ export default {
                 }
             }
         )
+    },
+    data(){
+        return{
+            clickedUser: {}
+        }
     },
     computed:{
         myProfile(){
@@ -81,13 +96,16 @@ export default {
     methods: {
         findFollow(){
             this.$router.push({name:'followSearch', params:{userId:state.userId}});
+        },
+        getClickedUser(user){
+            this.clickedUser = user;
         }
     }
 }
 </script>
 <style lang="scss" scoped>
     @import '@/styles/utils.scss';
-     .view{
+     .view, .view-box{
         background: white;
         height: 100%;
     }

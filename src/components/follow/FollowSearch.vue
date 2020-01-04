@@ -32,11 +32,13 @@
                 </ul>
             </div>
         </div>
+        <profile-detail />
     </div>
 </template>
 <script>
 import FollowSearchUser from './FollowSearchUser';
 import store from '../../store';
+import ProfileDetail from '../profile/ProfileDetail'
 const { getters, dispatch } = store;
 export default {
     name: 'FollowSearch',
@@ -58,7 +60,8 @@ export default {
         } 
     },
     components:{
-        'follow-user' : FollowSearchUser
+        'follow-user' : FollowSearchUser,
+        'profile-detail' : ProfileDetail,
     },
     methods:{
         onBack(){
