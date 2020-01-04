@@ -56,8 +56,7 @@ export default {
         'follow-user': FollowUser
     },
     beforeRouteEnter(to, from, next){
-        //비동기로 itemlist전부를 가져온다.
-        dispatch('fetchMyFollowList');
+        dispatch('fetchMyProfile'); //내 프로필 정보를 가져온다.
         //loading==false가 될 때 라우터 이동을 허용한다.
         store.watch(
             (state, getters) => state.loading,
@@ -187,5 +186,8 @@ export default {
         .nav-tabs-wide{
             font-size: 1.5rem;
         }
+    }
+    li{
+        list-style: none;
     }
 </style>

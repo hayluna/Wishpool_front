@@ -5,17 +5,51 @@
             <div class="text">
                 <span class="name">{{user.userName}}</span>
             </div>
-            <span class="msg">{{user.profileMsg}}</span>
+            <!-- <span class="msg">{{user.profileMsg | filterMsg}}</span> -->
         </div>
-        <div class="person">
-            <svg style="width:1.5rem; height:1.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V8c0-.55-.45-1-1-1s-1 .45-1 1v2H2c-.55 0-1 .45-1 1s.45 1 1 1h2v2c0 .55.45 1 1 1s1-.45 1-1v-2h2c.55 0 1-.45 1-1s-.45-1-1-1H6zm9 4c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"/></svg>
+        <div class="person" style="background: #9291A4" v-if="doIFollow" @click="removeFollow">
+            <v-icon name="user-check" class="user-check"></v-icon>
+        </div>
+        <div class="person" style="background: #0EC99C" v-if="!doIFollow" @click="addFollow">
+            <v-icon name="user-plus" class="user-plus"></v-icon>
         </div>
     </div>
 </template>
 <script>
+import store from '../../store';
+const { getters, dispatch } = store;
 export default {
     name: 'FollowUser',
-    props: ['user']
+    props: ['user'],
+    data(){
+        return{
+        }
+    },
+    computed:{
+        doIFollow(){
+            //내 팔로잉유저객체의 아이디목록에 이 검색된 유저가 존재한다면, 내가 이미 팔로잉중인 사람
+            if(getters.myFollowings.map(f=>f._id).includes(this.user._id)){
+                return true;
+            }               
+            return false;                                                                                                      
+        },
+    },
+    filters:{
+        filterMsg(val){
+            if(val.length>13){
+                return val.substr(0, 13)+'...'
+            }
+            return val;
+        }
+    },
+    methods:{
+        addFollow(){
+            dispatch('addFollow', this.user);
+        },
+        removeFollow(){
+            dispatch('removeFollow', this.user);
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -25,9 +59,9 @@ export default {
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid lightgray;
-    padding: 1rem 2rem;
+    padding: 1.5rem 1rem;
     font-size: 1.2rem;
-    justify-content: space-between
+    justify-content: space-between;
 }
 .thumb{
     width: 3rem;
@@ -41,18 +75,24 @@ export default {
     }
 .name{
     color: black;
+    font-weight: bold;
 }
 .desc{
     flex:1;
 }
 .person{
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 100%;
-    background: $green;
+    padding-left: 0.3rem;
+    
     @include flex-center();
-    svg{
-        fill:white;
+    .user-plus, .user-check{
+        color:white;
+        width: 1.3rem;
+        height: 1.3rem;
+        @include flex-center();
     }
 }
+
 </style>

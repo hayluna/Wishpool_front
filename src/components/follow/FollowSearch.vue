@@ -179,7 +179,8 @@ export default {
         background: transparent;
     }
     ul{
-        padding: 0;
+        margin: auto 1.5rem;
+        padding: 0.5rem 1rem;;
         background: white;
         border-radius: 10px;
     }

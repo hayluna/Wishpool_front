@@ -1,18 +1,19 @@
-import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_FOLLOW_LIST, FETCH_SEARCH_USER_LIST } from './mutations-types'
+import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_PROFILE, FETCH_SEARCH_USER_LIST, ADD_FOLLOW_LIST } from './mutations-types'
 
 export default {
     [FETCH_MY_ALL_ITEM_LIST] (state, items){
         state.myAllItemList = items;
         state.loading = false;
     },
-    [FETCH_MY_FOLLOW_LIST](state, all){
-        state.myProfile = all.profile;
-        state.myFollowers = all.followers;
-        state.myFollowings = all.followings;
+    [FETCH_MY_PROFILE](state, profile){
+        state.myProfile = profile;
         state.loading = false;
     },
     [FETCH_SEARCH_USER_LIST](state, users){
         state.searchUserList = users;
+    },
+    [ADD_FOLLOW_LIST](state, user){
+        state.myProfile.followingId.push(user);
     },
     startLoading(state){
         state.loading = true;
