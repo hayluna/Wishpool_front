@@ -1,4 +1,10 @@
-import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_PROFILE, FETCH_SEARCH_USER_LIST, ADD_FOLLOW_LIST } from './mutations-types';
+import { 
+    FETCH_MY_ALL_ITEM_LIST, 
+    FETCH_MY_PROFILE, 
+    FETCH_SEARCH_USER_LIST, 
+    ADD_FOLLOW_LIST,
+    REMOVE_FOLLOW_LIST,
+ } from './mutations-types';
 import axios from 'axios';
 import state from './states';
 export default{
@@ -9,7 +15,6 @@ export default{
                 const { code, msg, items } = res.data;
                 if(code == "200"){
                     commit(FETCH_MY_ALL_ITEM_LIST, items);
-                    // console.log(items);
                 }
             } catch (e) {
                 console.error(e);
@@ -52,12 +57,12 @@ export default{
         return(async()=>{
             try {
                 await commit(ADD_FOLLOW_LIST, user); //내 프로필의 followingId '유저객체'에 해당 유저 추가
-                user.followerId = state.userId; //상대의 follower목록에 내 아이디 추가
+                user.followerId.push(state.userId); //상대의 follower목록에 내 아이디 추가
                 const payload ={
                     me: state.myProfile,
                     other: user
                 }
-                const res = await axios.patch(this._vm.$api+'/follow/add/'+state.userId, payload);
+                await axios.patch(this._vm.$api+'/follow/update/'+state.userId, payload);
             } catch (e) {
                 console.error(e);
             }
@@ -66,11 +71,16 @@ export default{
     removeFollow({ commit }, user){
         return(async()=>{
             try {
-                const res = await axios.patch(this._vm.$api+'/follow/remove/'+state.userId, user);
-                const { code, msg, matchUsers } = res.data;
-                if(code=="200"){
-                    commit(FETCH_SEARCH_USER_LIST, matchUsers);
+                //내 프로필의 followingId '유저객체'에 해당 유저 삭제
+                await commit(REMOVE_FOLLOW_LIST, user); 
+                //상대의 follower목록에 내 아이디 삭제
+                const index = user.followerId.findIndex(f=>f._id == state.userId); 
+                user.followerId.splice(index, 1); 
+                const payload ={
+                    me: state.myProfile,
+                    other: user
                 }
+                await axios.patch(this._vm.$api+'/follow/update/'+state.userId, payload);
             } catch (e) {
                 console.error(e);
             }
@@ -96,10 +106,8 @@ export default{
         return (async()=>{
             try{
                 commit('removeItem', item); //안해줘도 되지만, 이걸하면 깜박임이 사라져 UX가 좋아진다.
-                console.log(item);
                 const res = await axios.patch(this._vm.$api+'/item/delete/'+item._id, item)
                 const { code, msg, items } = res.data;
-                console.log(items);
                 if(code == "200"){
                     commit(FETCH_MY_ALL_ITEM_LIST, items);
                 }

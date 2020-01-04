@@ -75,12 +75,10 @@ export default {
             return getters.myAllItemList;
         },
         wishItems(){
-            var items = this.items.filter(item => item.purchasedBy == '');
-            return items;
+            return getters.myItemList;
         },
         doneWishItems(){
-            var items = this.items.filter(item => item.purchasedBy != '');
-            return items;
+            return getters.myDoneList;
         },
         wishTotal(){
             let total = 0;

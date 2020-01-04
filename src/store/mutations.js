@@ -1,4 +1,10 @@
-import { FETCH_MY_ALL_ITEM_LIST, FETCH_MY_PROFILE, FETCH_SEARCH_USER_LIST, ADD_FOLLOW_LIST } from './mutations-types'
+import { 
+    FETCH_MY_ALL_ITEM_LIST, 
+    FETCH_MY_PROFILE, 
+    FETCH_SEARCH_USER_LIST, 
+    ADD_FOLLOW_LIST,
+    REMOVE_FOLLOW_LIST, 
+} from './mutations-types'
 
 export default {
     [FETCH_MY_ALL_ITEM_LIST] (state, items){
@@ -14,6 +20,10 @@ export default {
     },
     [ADD_FOLLOW_LIST](state, user){
         state.myProfile.followingId.push(user);
+    },
+    [REMOVE_FOLLOW_LIST](state, user){
+        const index = state.myProfile.followingId.findIndex(f=>f._id == user._id); //myProfile의 followingId는 유저객체이다.
+        state.myProfile.followingId.splice(index, 1);
     },
     startLoading(state){
         state.loading = true;
