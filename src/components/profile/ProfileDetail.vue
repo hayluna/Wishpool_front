@@ -32,14 +32,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="person" style="background: #9291A4" v-if="doIFollow" @click="removeFollow">
+                <div class="person" style="background: #9291A4; padding-left: 0.5rem;" v-if="doIFollow" @click="removeFollow">
                     <v-icon name="user-check" class="user-check"></v-icon>
                 </div>
-                <div class="person" style="background: #0EC99C" v-if="!doIFollow" @click="addFollow">
+                <div class="person" style="background: #0EC99C; padding-left: 0.5rem;" v-if="!doIFollow" @click="addFollow">
                     <v-icon name="user-plus" class="user-plus"></v-icon>
                 </div>
-                <div class="person" style="background: #FE705A" v-if="!doIFollow" @click="addFollow">
-                    <v-icon name="gift" class="user-plus"></v-icon>
+                <div class="person" style="background: #FE705A" @click="openWish" data-dismiss="modal" aria-label="Close">
+                    <v-icon name="package" class="user-plus" style="border: white;"></v-icon>
                 </div>
             </div>
             </div>
@@ -48,14 +48,16 @@
 </template>
 <script>
 import store from '../../store';
-const { getters, state } = store;
+const { getters, state, dispatch } = store;
 export default {
     name: 'ProfileDetail',
     props: ['user'],
+    created(){
+    },
     computed:{
         doIFollow(){
             //내 팔로잉유저객체의 아이디목록에 이 검색된 유저가 존재한다면, 내가 이미 팔로잉중인 사람
-            if(getters.myFollowings.map(f=>f._id).includes(state.userId)){
+            if(getters.myFollowings.map(f=>f._id).includes(this.user._id)){
                 return true;
             }               
             return false;                                                                                                      
@@ -67,6 +69,9 @@ export default {
         },
         removeFollow(){
             dispatch('removeFollow', this.user);
+        },
+        openWish(){
+            this.$router.push({name:'othersItemList', params:{userId: this.user._id}});
         }
     }
 }
@@ -78,7 +83,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 10px;
     }
     .modal-header{
         width: 100%;
@@ -133,14 +137,11 @@ export default {
         display:flex;
         justify-content:space-evenly;
         flex-direction: row;
-
     }
-    
 .person{
     width: 5rem;
     height: 5rem;
     border-radius: 100%;
-    padding-left: 0.3rem;
     
     @include flex-center();
     .user-plus, .user-check{

@@ -3,7 +3,8 @@ import {
     FETCH_MY_PROFILE, 
     FETCH_SEARCH_USER_LIST, 
     ADD_FOLLOW_LIST,
-    REMOVE_FOLLOW_LIST, 
+    REMOVE_FOLLOW_LIST,
+    FETCH_OTHERS_ITEM_LIST, 
 } from './mutations-types'
 
 export default {
@@ -18,6 +19,10 @@ export default {
     [FETCH_SEARCH_USER_LIST](state, users){
         state.searchUserList = users;
     },
+    [FETCH_OTHERS_ITEM_LIST](state, items){
+        state.othersAllItemList = items;
+        state.loading = false;
+    },
     [ADD_FOLLOW_LIST](state, user){
         state.myProfile.followingId.push(user);
     },
@@ -30,6 +35,9 @@ export default {
     },
     endLoading(state){
         state.loading = false;
+    },
+    setCurrentUser(state, user){
+        state.currentUser = user;
     },
     removeItem(state, item){
         const index = state.myAllItemList.findIndex(el => el._id == item._id);

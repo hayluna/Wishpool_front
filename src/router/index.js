@@ -5,8 +5,10 @@ import Login from '@/components/user/Login.vue'
 import Register from '@/components/user/Register.vue'
 import ItemInsert from '@/components/item/ItemInsert.vue'
 import ItemList from '@/components/item/ItemList.vue'
+import OthersItemList from '@/components/item/OthersItemList.vue'
 import ItemModify from '@/components/item/ItemModify.vue'
 import ItemDetail from '@/components/item/ItemDetail.vue'
+import OthersItemDetail from '@/components/item/OthersItemDetail.vue'
 import FollowList from '@/components/follow/FollowList.vue'
 import FollowSearch from '@/components/follow/FollowSearch.vue'
 import NotiList from '@/components/notification/NotiList.vue'
@@ -18,9 +20,11 @@ const routes = [
   // { path:'/', component:Login, name:'login', meta: {requiresAuth:true} },
   { path:'/', component:Login, name:'login' },
   { path:'/item/list/:userId', component:ItemList, name:'itemList' },
+  { path:'/item/othersList/:userId', component:OthersItemList, name:'othersItemList' },
   { path:'/item/insert', component:ItemInsert, name:'itemInsert' },
   { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify' },
   { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail' },
+  { path:'/item/othersDetail/:itemId', component:OthersItemDetail, name:'othersItemDetail' },
   { path:'/user/login', component:Login, name:'login' },
   { path:'/user/register', component:Register, name:'register' },    
   { path:'/follow/list/:userId', component:FollowList, name:'followList' },

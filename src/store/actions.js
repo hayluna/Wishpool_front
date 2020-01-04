@@ -4,6 +4,7 @@ import {
     FETCH_SEARCH_USER_LIST, 
     ADD_FOLLOW_LIST,
     REMOVE_FOLLOW_LIST,
+    FETCH_OTHERS_ITEM_LIST,
  } from './mutations-types';
 import axios from 'axios';
 import state from './states';
@@ -52,6 +53,22 @@ export default{
                 console.error(e);
             }
         })();
+    },
+    fetchOthersItemList({ commit }, id){
+        return (async ()=>{
+            try {
+                const res = await axios.get(this._vm.$api+'/item/othersList/'+ id);
+                const { code, msg, items } = res.data;
+                if(code == "200"){
+                    commit(FETCH_OTHERS_ITEM_LIST, items);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    },
+    setCurrentUser({ commit }, user){
+        return commit('setCurrentUser', user);
     },
     addFollow({ commit }, user){
         return(async()=>{

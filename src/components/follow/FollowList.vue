@@ -99,6 +99,7 @@ export default {
         },
         getClickedUser(user){
             this.clickedUser = user;
+            dispatch('setCurrentUser', user);
         }
     }
 }

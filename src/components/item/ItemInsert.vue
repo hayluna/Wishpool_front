@@ -118,7 +118,7 @@ export default {
                 alert('아이템 이름은 필수 입력값입니다!');
                 return false;
             }
-            if(isNaN(this.itemPrice)){
+            if(isNaN(this.item.itemPrice)){
                 alert('가격은 숫자만 입력가능합니다!');
                 return false;
             }

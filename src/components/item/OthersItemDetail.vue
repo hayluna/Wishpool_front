@@ -7,20 +7,10 @@
                 </div>
             </div>
             <div class="empty"></div>
-            <div class="dropdown">
-                <a data-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" @click="onShare">복사</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" @click="onEdit">수정</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" @click="onRemove">삭제</a></li>
-                </ul>
-            </div>    
         </div>
         <div class="contents">
             <div class="contents-header">
-                <div class="item-name">{{item.itemName}}<span class="badge">{{item.visibleTo}}</span></div>
+                <div class="item-name">{{item.itemName}}<span class="badge">공개</span></div>
                 <!-- <div class="badge-area"><span class="badge">{{item.visibleTo}}</span></div> -->
                 <div class="item-price">&#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
             </div>
@@ -32,7 +22,7 @@
                 <div class="item-link">
                     <a :href="item.itemLink" v-if="!voidLink" >{{item.itemLink|filterLink}}</a>
                     <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:lightgray;">링크 없음</a>
-                    <svg @click="onCopyLink" v-if="!voidLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M17 7h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c1.65 0 3 1.35 3 3s-1.35 3-3 3h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c2.76 0 5-2.24 5-5s-2.24-5-5-5zm-9 5c0 .55.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1H9c-.55 0-1 .45-1 1zm2 3H7c-1.65 0-3-1.35-3-3s1.35-3 3-3h3c.55 0 1-.45 1-1s-.45-1-1-1H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h3c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
+                    <svg @click="onShare" v-if="!voidLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M17 7h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c1.65 0 3 1.35 3 3s-1.35 3-3 3h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c2.76 0 5-2.24 5-5s-2.24-5-5-5zm-9 5c0 .55.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1H9c-.55 0-1 .45-1 1zm2 3H7c-1.65 0-3-1.35-3-3s1.35-3 3-3h3c.55 0 1-.45 1-1s-.45-1-1-1H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h3c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
                 </div>
             </div>
             <div class="cont">
@@ -40,20 +30,24 @@
                 <div>{{item.itemMemo|filterMemo}}</div>
             </div>
             <div class="btn-area">
-                <a @click="onShare">아이템 공유하기<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M24 24H0V0h24v24z"/><path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z"/></svg></a>
+                <a @click="onShare" style="margin-bottom:1.5rem;">공유하기</a>
+                <a @click="reserveItem">내가 사주기</a>
             </div>
         </div>
-        <div id="snackbar">링크가 복사되었습니다!<br><span style="color:lightgreen">친구와 공유해보세요!</span></div>
+        <div id="snackbarLink">링크가 복사되었습니다!<br><span style="color:lightgreen">친구와 공유해보세요!</span></div>
+        <div id="snackbar">사주기 요청을<br><span style="color:lightgreen"> {{user.userName}}</span>님에게 보냈습니다!</div>
+        <div id="snackbar2"><span style="color:lightgreen">{{user.userName}}</span> 님이 수락하시면 <br>해당 아이템이 사주기 완료가 됩니다!</div>
     </div>
 </template>
 <script>
 import store from '../../store';
 const { getters, dispatch } = store;
 export default {
-    name: 'ItemDetail',
+    name: 'OthersItemDetail',
     beforeRouteEnter(to, from, next){
         next(vm => {
-                vm.item = getters.myAllItemList.find(item=>item._id == to.params.itemId);
+                vm.item = getters.othersAllItemList.find(item=>item._id == to.params.itemId);
+                vm.user = getters.getCurrentUser;
                 vm.preview = vm.item.itemImgPath;
             });
 
@@ -69,18 +63,12 @@ export default {
     data(){
         return{
             item: {},
+            user: {},
             thumbnail:'',
             preview:'',
         }
     },
     filters:{
-        filterVisible(val){
-            if(this.item.visibleTo == 'private'){
-                return '공개'
-            }else if(this.item.visibleTo == 'public'){
-                return '비공개'
-            }
-        },
         filterPrice(val){
             if(val==undefined){
                 return '가격 없음'
@@ -100,7 +88,7 @@ export default {
             }
         },
         filterLink(val){
-            if(val=='undefined'|| val==''){
+            if(val=='undefined'||val==''){
                 return '링크 없음';
             }
         },
@@ -118,12 +106,25 @@ export default {
             this.$router.go(-1);
         },
         onShare(){
+            if(this.item.itemPrice ==''||this.item.itemPrice == 'undefined'){
+                alert('복사할 링크가 없습니다.');
+            }
             //url copy
-            navigator.clipboard.writeText(this.$url+this.$route.fullPath);
+            navigator.clipboard.writeText(this.$route.fullPath);
+            //toast
+            var x = document.getElementById("snackbarLink");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2500);
+            navigator.clipboard.writeText(this.$url+'/item/detail/'+this.item._id);
+        },
+        reserveItem(){
             //toast
             var x = document.getElementById("snackbar");
+            var y = document.getElementById("snackbar2");
             x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            setTimeout(function(){ x.className = x.className.replace("show", ""); y.className = "show";}, 2500);
+            setTimeout(function(){ y.className = y.className.replace("show", ""); }, 5000);
+            //사주기 취소로 토글
         },
         onEdit(){
             this.$router.push({name:'itemModify', params:{itemId:this.item._id}});
@@ -132,14 +133,6 @@ export default {
             dispatch('removeItem', this.item);
             this.$router.push({name:'itemList', params:{itemId:this.item._id}});
         },
-        onCopyLink(){
-            //url copy
-            navigator.clipboard.writeText(this.item.itemLink);
-            //toast
-            var x = document.getElementById("snackbar");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-        }
     }
 }
 </script>
@@ -166,6 +159,7 @@ export default {
         flex:1;
     }
     .back{
+        @include flex-center();
         border: 1px solid $dark-gray;
         border-radius: 5px;
         width: 2.5rem;
@@ -277,11 +271,14 @@ export default {
     }
     .btn-area{
         width: 100%;
-        @include flex-center();
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
         margin-top: 2rem;
-        margin-bottom: 5rem;
+        margin-bottom: 6.5rem;
         a{
-            height: 6rem;
+            height: 5rem;
             border-radius: 10px;
             width: 20rem;
             background: #F6F6FE;
@@ -324,7 +321,7 @@ export default {
     }
 }
     /* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar {
+#snackbar, #snackbarLink, #snackbar2 {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 2.5rem; /* Set a default minimum width */
   width: 25rem;
@@ -341,10 +338,10 @@ export default {
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show {
+#snackbar.show, #snackbarLink.show, #snackbar2.show {
   visibility: visible; /* Show the snackbar */
-  -webkit-animation: fadein 1s, fadeout 0.8s 1.3s; //fadeout합과 setTimeout시간과 일치시켜야한다. 합쳐서 2s여야하는데, 막상 2s하면 잔상이 남음. delay시간을 0.1s더 잡아주면 됨.
-  animation: fadein 1s, fadeout 0.8s 1.3s;
+  -webkit-animation: fadein 1s, fadeout 0.8s 1.8s; //fadeout합과 setTimeout시간과 일치시켜야한다. 합쳐서 2.5s여야하는데, 막상 2s하면 잔상이 남음. delay시간을 0.1s더 잡아주면 됨.
+  animation: fadein 1s, fadeout 0.8s 1.8s;
 }
 
 /* Animations to fade the snackbar in and out */
