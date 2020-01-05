@@ -19,7 +19,7 @@
 import store from '../../store';
 const { getters, dispatch } = store;
 export default {
-    name: 'FollowUser',
+    name: 'FollowSearchUser',
     props: ['user'],
     data(){
         return{
