@@ -87,6 +87,7 @@ export default {
             }else if(val == 'public'){
                 return '공개';
             }
+            return '비공개';
         },
         filterPrice(val){
             if(val==null){

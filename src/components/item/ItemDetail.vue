@@ -20,7 +20,9 @@
         </div>
         <div class="contents">
             <div class="contents-header">
-                <div class="item-name">{{item.itemName}}<span class="badge">{{item.visibleTo}}</span></div>
+                <div class="item-name">{{item.itemName}}
+                    <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
+                </div>
                 <!-- <div class="badge-area"><span class="badge">{{item.visibleTo}}</span></div> -->
                 <div class="item-price">&#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
             </div>
@@ -31,7 +33,7 @@
                 <h5>LINK</h5>
                 <div class="item-link">
                     <a :href="item.itemLink" v-if="!voidLink" >{{item.itemLink|filterLink}}</a>
-                    <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:lightgray;">링크 없음</a>
+                    <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">링크 없음</a>
                     <svg @click="onCopyLink" v-if="!voidLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M17 7h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c1.65 0 3 1.35 3 3s-1.35 3-3 3h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c2.76 0 5-2.24 5-5s-2.24-5-5-5zm-9 5c0 .55.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1H9c-.55 0-1 .45-1 1zm2 3H7c-1.65 0-3-1.35-3-3s1.35-3 3-3h3c.55 0 1-.45 1-1s-.45-1-1-1H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h3c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
                 </div>
             </div>
@@ -64,20 +66,27 @@ export default {
                 return true;
             }
             return false;
-        }
+        },
+        isPublic(){
+            if(this.item.visibleTo == 'public'){
+                return true;
+            }
+            return false;
+        },
     },
     data(){
         return{
             item: {},
             thumbnail:'',
             preview:'',
+            badgeClass: 'badge',
         }
     },
     filters:{
         filterVisible(val){
-            if(this.item.visibleTo == 'private'){
+            if(val=='public'){
                 return '공개'
-            }else if(this.item.visibleTo == 'public'){
+            }else{
                 return '비공개'
             }
         },
@@ -103,11 +112,13 @@ export default {
             if(val=='undefined'|| val==''){
                 return '링크 없음';
             }
+            return val;
         },
         filterMemo(val){
             if(val=='undefined'||val==''){
                 return '메모없음';
             }
+            return val;
         }
     },
     methods:{
@@ -196,6 +207,7 @@ export default {
         img{
             width:100%;
             height:100%;
+            object-fit: cover;
         }
        
         svg{
@@ -234,15 +246,19 @@ export default {
             
         }
         .badge{
-                height: 2rem;
-                width: 10rem;
-                background : transparent;
-                border: 1px solid $margenta;
-                color: $margenta;
-            }
+            height: 2rem;
+            width: 10rem;
+            background : transparent;
+            border: 1px solid $margenta;
+            color: $margenta;
+        }
+        .blue-badge{
+            border: 1px solid $light-blue;
+            color: $light-blue;
+        }
         .item-price{
             font-size:1.5rem;
-            color: #bebebe;
+            color: black;
             flex: 0.3;
             display: flex;
             justify-content: flex-end;

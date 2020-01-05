@@ -178,6 +178,7 @@ export default {
     }
     .ul-item{
         margin-top: 10rem;
+        margin-bottom: 10rem;
         padding: 0 1.5rem 0 1.5rem;
         li{
             list-style: none;

@@ -35,11 +35,11 @@
             <div class="cont">
                 <span class="small-title">공개설정</span>
                 <div class="btn-group btn-group-toggle" style="width:100%; display:flex; margin-top:1.5rem; border-radius:10px; box-shadow: 0 3px 6px lightgray;" data-toggle="buttons">
-                    <label class="btn" >
-                        <input type="radio" name="jb-radio" id="jb-radio-1" value="public" v-model="item.visibleTo" > 공개
+                    <label :class="[btnClass, {active:isActive}]" @click="toggleVisibility">
+                        <input type="radio" name="jb-radio" id="jb-radio-1" value="public" > 공개
                     </label>
-                    <label class="btn active">
-                        <input type="radio" name="jb-radio" id="jb-radio-2" value="private" v-model="item.visibleTo"> 비공개
+                    <label :class="[btnClass, {active:!isActive}]" @click="toggleVisibility">
+                        <input type="radio" name="jb-radio" id="jb-radio-2" value="private" > 비공개
                     </label>
                 </div>
             </div>
@@ -90,7 +90,18 @@ export default {
                 userId:'',
             },
             thumbnail:'',
-            preview:''
+            preview:'',
+            btnClass: 'btn'
+        }
+    },
+    computed:{
+        isActive(){
+            if(this.item.visibleTo == 'public'){
+                return true;
+            }else if(this.item.visibleTo == 'private'){
+                return false;
+            }
+            return false;
         }
     },
     methods:{
@@ -156,6 +167,9 @@ export default {
         },
         onBack(){
             this.$router.go(-1);
+        },
+        toggleVisibility(e){
+            this.item.visibleTo = e.target.firstChild.value;
         },
         
     }

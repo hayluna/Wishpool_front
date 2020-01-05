@@ -35,11 +35,11 @@
             <div class="cont">
                 <span class="small-title">공개설정</span>
                 <div class="btn-group btn-group-toggle" style="width:100%; display:flex; margin-top:1.5rem; border-radius:10px; box-shadow: 0 3px 6px lightgray;" data-toggle="buttons">
-                    <label class="btn" >
-                        <input type="radio" name="jb-radio" id="jb-radio-1" value="public" v-model="item.visibleTo" > 공개
+                    <label :class="[btnClass, {active:isActive}]" @click="toggleVisibility">
+                        <input type="radio" name="jb-radio" id="public" value="public"> 공개
                     </label>
-                    <label class="btn active">
-                        <input type="radio" name="jb-radio" id="jb-radio-2" value="private" v-model="item.visibleTo"> 비공개
+                    <label :class="[btnClass, {active:!isActive}]" @click="toggleVisibility">
+                        <input type="radio" name="jb-radio" id="private" value="private"> 비공개
                     </label>
                 </div>
             </div>
@@ -78,15 +78,23 @@ export default {
             });
 
     },
-    created(){
-        // this.item = getters.myAllItemList.find(item=>item._id == this.$route.params);
+    computed:{
+        isActive(){
+            if(this.item.visibleTo == 'public'){
+                return true;
+            }else if(this.item.visibleTo == 'private'){
+                return false;
+            }
+            return false;
+        }
     },
     data(){
         return{
             item: {},
             thumbnail:'',
             preview:'',
-            prevImgName: ''
+            prevImgName: '',
+            btnClass: 'btn',
         }
     },
     methods:{
@@ -119,6 +127,7 @@ export default {
                 alert('가격은 숫자만 입력가능합니다!');
                 return false;
             }
+            console.log(this.item.visibleTo);
             var formData = new FormData();
             formData.append('itemName', this.item.itemName);
             formData.append('itemPrice', this.item.itemPrice);
@@ -164,7 +173,9 @@ export default {
         onBack(){
             this.$router.go(-1);
         },
-        
+        toggleVisibility(e){
+            this.item.visibleTo = e.target.firstChild.value;
+        },
     }
 }
 </script>
