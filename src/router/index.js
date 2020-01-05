@@ -29,8 +29,7 @@ const routes = [
   { path:'/user/register', component:Register, name:'register' },    
   { path:'/follow/list/:userId', component:FollowList, name:'followList' },
   { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch' },
-  { path:'/noti/list', component:NotiList, name:'notiList' },
-  // { path:'/noti/list/:userId', component:NotiList, name:'notiList' },
+  { path:'/noti/list/:userId', component:NotiList, name:'notiList' },
   { path:'/more', component:More, name:'more' },
   // { path:'/more/:userId', component:More, name:'more' },
 ]

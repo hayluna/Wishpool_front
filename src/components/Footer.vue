@@ -20,7 +20,7 @@ export default {
             this.$router.push({name: 'itemList', params: {userId: state.userId}}, ()=>{});
         },
         noti(){
-            this.$router.push({name:'notiList'}, ()=>{});
+            this.$router.push({name:'notiList', params: {userId:state.userId}}, ()=>{});
         },
         more(){
             this.$router.push({name:'more'}, ()=>{})

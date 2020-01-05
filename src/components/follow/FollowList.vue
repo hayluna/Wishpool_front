@@ -69,6 +69,7 @@ export default {
         'profile-detail' : ProfileDetail,
     },
     beforeRouteEnter(to, from, next){
+        dispatch('pending');
         dispatch('fetchMyProfile'); //내 프로필 정보를 가져온다.
         //loading==false가 될 때 라우터 이동을 허용한다.
         store.watch(
