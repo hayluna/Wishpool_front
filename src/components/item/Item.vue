@@ -26,7 +26,7 @@
 </template>
 <script>
 import store from '../../store';
-const { dispatch } = store;
+const { dispatch, state } = store;
 export default {
     name: 'Item',
     props: ['item'],
@@ -61,7 +61,7 @@ export default {
         },
         onToggle(){
             if(this.getType == '완료'){
-                this.item.purchasedBy = 'MYSELF';
+                this.item.purchasedBy = state.userId;
             }else if(this.getType == '복구'){
                 this.item.purchasedBy = '';
             }

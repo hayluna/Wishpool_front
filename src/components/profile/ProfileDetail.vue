@@ -5,11 +5,13 @@
             <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true" style="position:absolute; right: 1rem; top:1rem;">&times;</span>
                 </button>
+                <img :src="user.profileImgPath" v-if="!isProfileError" @error="profileImgLoadError">
             </div>
             <div class="thumb">
-                <img src="" />
+                <img :src="user.profileImgPath" v-if="!isError" @error="imgLoadError">
+                <v-icon v-if="isError" name="user" class="user-icon"></v-icon>
             </div>
             <div class="modal-body">
                 <div class="profile">
@@ -19,11 +21,11 @@
                 <div class="info-box">
                     <div class="info-item">
                         <p>팔로잉</p>
-                        <p>0</p>
+                        <p>{{countFollows}}</p>
                     </div>
                     <div class="info-item">
                         <p>팔로워</p>
-                        <p>0</p>
+                        <p>{{countFollowers}}</p>
                     </div>
                     <div class="info-item">
                         <p>아이템</p>
@@ -31,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" v-if="!isSelf">
                 <div class="person" style="background: #9291A4; padding-left: 0.5rem;" v-if="doIFollow" @click="removeFollow">
                     <v-icon name="user-check" class="user-check"></v-icon>
                 </div>
@@ -62,6 +64,32 @@ export default {
             }               
             return false;                                                                                                      
         },
+        countFollows(){
+            if(this.user.followingId){
+                return this.user.followingId.length;
+            }
+            return 0;
+        },
+        countFollowers(){
+            if(this.user.followerId){
+                return this.user.followerId.length;
+            }
+            return 0;
+        },
+        isSelf(){
+            if(this.user._id){
+                if(this.user._id == state.userId){
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
+    data(){
+        return{
+            isError: false,
+            isProfileError: false
+        }
     },
     methods:{
         addFollow(){
@@ -72,7 +100,13 @@ export default {
         },
         openWish(){
             this.$router.push({name:'othersItemList', params:{userId: this.user._id}});
-        }
+        },
+        imgLoadError(){
+            this.isError = true;
+        },
+        profileImgLoadError(){
+            this.isProfileError = true;
+        },
     }
 }
 </script>
@@ -91,6 +125,14 @@ export default {
         background: lightgray;
         border-radius: 5px 5px 0 0;
         border: none;
+        padding: 0;
+        img{
+            background: white;
+            border-radius: 5px 5px 0 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
     .modal-content{
         display:flex;
@@ -99,6 +141,12 @@ export default {
     }
     .modal-dialog{
         width: 28.5rem;
+        transform: translate(0,0);
+        -webkit-transform: translate(0, 0);
+    }
+    .modal.fade .modal-dialog{
+        transform: translate(0,0);
+        -webkit-transform: translate(0, 0);
     }
     .thumb{
         border: 1px solid lightgray;
@@ -108,6 +156,14 @@ export default {
         height: 10rem;
         z-index: 1;
         background: white;
+        @include flex-center();
+        img{
+            background: white;
+            width: 100%;            
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+        }
     }
     .modal-body{
         width: 100%;
@@ -138,17 +194,22 @@ export default {
         justify-content:space-evenly;
         flex-direction: row;
     }
-.person{
-    width: 5rem;
-    height: 5rem;
-    border-radius: 100%;
-    
-    @include flex-center();
-    .user-plus, .user-check{
-        color:white;
-        width: 2.5rem;
-        height: 2.5rem;
-        @include flex-center();
+    .user-icon{
+        width: 7rem;
+        height: 7rem;
+        color: lightgray;
     }
-}
+    .person{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100%;
+        
+        @include flex-center();
+        .user-plus, .user-check{
+            color:white;
+            width: 2.5rem;
+            height: 2.5rem;
+            @include flex-center();
+        }
+    }
 </style>
