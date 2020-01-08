@@ -21,19 +21,20 @@ socket.on('sid', sid=>{
   store.dispatch('updateSid', sid);
 });
 
-//처음시작할 때 로그인 체크를 한다.
 store.dispatch('checkLogin');
+
 //매 라우터 이동시 로그인체크를 한다.
-router.beforeEach((to, from, next)=>{
+router.beforeEach(async (to, from, next)=>{
+  //이동하려는 곳이 인증을 필요하는지 체크
   if(to.matched.some(record => record.meta.requiresAuth)){
-      if(store.getters.isLoggedIn){
-          next();
-          return;
+    //현재 로그인 상태라면 통과시킨다.
+    if(store.getters.isLoggedIn){
+        next();
+      }else{
+        next('/');
       }
-      alert('로그인을 해주세요');
-      next('/');
-  }else{
-      next();
+  }else{ //인증을 필요하지 않는 곳이라면 그냥 통과시켜준다.
+    next(); 
   }
 });
 

@@ -6,7 +6,7 @@
         </div>
         <div class="desc">
             <div class="text">
-                <span class="name">{{user.userName}}</span>
+                <span class="name">{{user.nickname}}</span>
             </div>
             <span class="msg">{{user.profileMsg}}</span>
         </div>
@@ -44,6 +44,7 @@ export default {
     border-color: transparent;
     margin-right: 1.5rem;
     background: white;
+    box-shadow: 0px 3px 6px lightgray;
         @include flex-center();
         img{
             background: white;
@@ -54,9 +55,14 @@ export default {
         }
 }
 .msg{
-        color: #bebebe;
-    }
+    color: #bebebe;
+}
 .name{
     color: black;
+    font-size: 1.5rem;
 }
+.user-icon{
+        color: #999ca3;
+        width: 3rem;
+    }
 </style>

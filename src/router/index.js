@@ -32,8 +32,7 @@ const routes = [
   { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch', meta: { requiresAuth: true } },
   { path:'/follow/searchList', component:FollowSearchList, name:'followSearchList', meta: { requiresAuth: true } },
   { path:'/noti/list/:userId', component:NotiList, name:'notiList', meta: { requiresAuth: true } },
-  { path:'/more', component:More, name:'more', meta: { requiresAuth: true } },
-  // { path:'/more/:userId', component:More, name:'more' },
+  { path:'/more/:userId', component:More, name:'more', meta: { requiresAuth: true } },
 ]
 
 const router = new VueRouter({

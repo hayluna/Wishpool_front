@@ -1,21 +1,19 @@
 <template>
     <div class="view-box">
     <div class="view">
-        <div class="fix-top">
-            <div class="header">
+        <div class="header">
                 <div class="nav">
                 <div class="back" @click="onBack">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
                 </div>
             </div>
                 <div class="title">
-                    친구목록
+                    친구추가
                 </div>
                 <div class="empty"></div>
             </div>
-        </div>
-        <div class="result-box" v-if="hasSearched">
-            <h3>검색결과 : '{{query}}'</h3>
+        <div class="result-box">
+            <div class="result-header">검색결과 : '{{query}}'</div>
             <ul>
                 <li v-for="user in searchedUser" :key="user._id">
                     <follow-user
@@ -35,7 +33,7 @@
 import FollowSearchUser from './FollowSearchUser';
 import ProfileDetail from '../profile/ProfileDetail'
 import store from '../../store';
-const { getters, dispatch } = store;
+const { getters, dispatch, state } = store;
 export default {
     name: 'FollowSearchList',
     components: {
@@ -50,13 +48,14 @@ export default {
     beforeRouteEnter(to, from, next){
         next( vm =>{
             vm.user = getters.myProfile;
+            vm.query = state.query;
         });
     },
     data(){
         return{
             user: {},
             query: '',
-            hasSearched: false,
+            clickedUser: {}
         }
     },
     computed: {
@@ -68,5 +67,63 @@ export default {
 </script>
 <style lang="scss" scoped>
     @import '@/styles/utils.scss';
-
+    .view, .view-box{
+        background: white;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        padding: 0 1rem 0 1rem;
+        height: 5rem;
+        box-shadow: 0px 3px 6px lightgray;
+        position:fixed;
+        width: 100%;
+        z-index: 3;
+    }
+    .nav{
+        justify-self: flex-start;
+        flex:1;
+    }
+    .back{
+        border: 1px solid $dark-gray;
+        border-radius: 5px;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .title{
+        text-align: center;
+        font-weight: bolder;
+        font-size: 1.6rem;
+        flex:1
+    }
+    .empty{
+        flex:1;
+    }
+    .result-box{
+        margin-top: 5rem;
+    }
+    .result-header{
+        font-size: 2rem;
+        padding: 2.5rem 2rem;
+        border-bottom : 1px solid #E7E7EB;
+    }
+    .user-icon{
+        color: #999ca3;
+        width: 3rem;
+    }
+    ul{
+        width: 100%;
+        padding: 0;
+    }
+    li{
+        list-style: none;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #E7E7EB;
+    }
 </style>

@@ -10,7 +10,7 @@
         <div class="contents" ref="contents">
             <div class="text" ref="text">
                 <p>친구를 찾아보세요,</p>
-                <h4>{{user.nickName}}<span style="font-weight:normal;">님!</span></h4>
+                <h4>{{user.nickname}}<span style="font-weight:normal;">님!</span></h4>
                 <p style="font-size:1.5rem; margin-top:1rem;">전화번호를 통해</p>
                 <p style="font-size:1.5rem; margin-bottom:1rem;">친구의 위시리스트를 찾아보세요!</p>
             </div>
@@ -23,18 +23,17 @@
             </div>
             
         </div>
-        <profile-detail />
     </div>
 </template>
 <script>
 import FollowSearchUser from './FollowSearchUser';
-import ProfileDetail from '../profile/ProfileDetail'
 import store from '../../store';
 const { getters, dispatch } = store;
 export default {
     name: 'FollowSearch',
     beforeRouteEnter(to, from, next){
         next( vm =>{
+            console.log(getters.myProfile);
             vm.user = getters.myProfile;
         });
     },
@@ -52,7 +51,6 @@ export default {
     },
     components:{
         'follow-user' : FollowSearchUser,
-        'profile-detail' : ProfileDetail,
     },
     methods:{
         onBack(){
@@ -68,23 +66,22 @@ export default {
                 this.$refs.inputBox.focus();
                 return false;
             }
-            this.$refs.text.style.display = 'none';
-            this.$refs.contents.style.justifyContent = 'flex-start';
-            this.$refs.contents.style.marginTop = '0';
-            this.hasSearched = true;
-            const payload = {
-                query : this.query,
-                _id : this.user._id
-            }
-            try {
-                (async()=>
-                    await dispatch('fetchQuery', payload)
-                )();
-            } catch (e) {
-                console.error(e);
-            }
-            this.$router.push({name:followSearchList})
-        }
+            // this.$refs.text.style.display = 'none';
+            // this.$refs.contents.style.justifyContent = 'flex-start';
+            // this.$refs.contents.style.marginTop = '0';
+            // this.hasSearched = true;
+            // const data = 
+            (async()=>{
+                 try {
+                    await dispatch('fetchQuery', {query : this.query, _id : this.user._id });
+                    this.$router.push({name:'followSearchList'})
+                } catch (e) {
+                    console.error(e);
+                }
+            })();
+           
+        },
+        
     }
 }
 </script>
@@ -189,5 +186,9 @@ export default {
     }
     li{
         list-style:none;
+    }
+    .user-icon{
+        color: #999ca3;
+        width: 3rem;
     }
 </style>

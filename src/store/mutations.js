@@ -47,6 +47,9 @@ export default {
     setCurrentUser(state, user){
         state.currentUser = user;
     },
+    saveQuery(state, query){
+        state.query = query;
+    },
     removeItem(state, item){
         const index = state.myAllItemList.findIndex(el => el._id == item._id);
         if(index){
@@ -65,6 +68,14 @@ export default {
     auth_error(state){
         state.status = 'error';
         localStorage.removeItem('wishToken');
+    },
+    register_error(state, msg){
+        state.registerErrMsg = msg;
+    },
+    logout(state){
+        state.status = ''
+        state.token = '';
+        state.userId = ''
     },
     update_sid(state, sid){
         state.sid = sid;

@@ -49,6 +49,7 @@ export default{
                 });
                 const { code, msg, matchUsers } = res.data;
                 if(code=="200"){
+                    commit('saveQuery', payload.query);
                     commit(FETCH_SEARCH_USER_LIST, matchUsers);
                 }
             } catch (e) {
@@ -159,10 +160,12 @@ export default{
             try{
                 const response = await axios.post(this._vm.$api +'/users/register', user);
                 const { code, msg, payload } = response.data;
-                if(code === 200){
+                if(code == 200){
                     const { token, newUser } = payload;
                     localStorage.setItem('wishToken', token);
                     await commit('auth_success', {token, userId:newUser._id}); // state.userId = _id; (ObjectId)
+                }else{
+                    commit('register_error', msg);
                 }
 			} catch(err){
                 console.error(err);
@@ -193,16 +196,15 @@ export default{
                 });
                 const { code, msg, user } = res.data;
                 if(code=="200"){ //서버에서 유효한 사용자라고 판단이 났다면,
-                    console.log(msg);
-                    commit('auth_success', {token, userId:user._id});
+                    await commit('auth_success', {token, userId:user._id});
                     resolve(res);
                 }else{
-                    console.log(res.data.message);
-                    commit('auth_error');
+                    await commit('auth_error');
+                    resolve(res);
                 }
             } catch (e) {
                 console.error(e);
-                commit('auth_error');
+                await commit('auth_error');
                 reject(e);
             }
         });
@@ -217,6 +219,10 @@ export default{
             }
         })();
         
+    },
+    logout({commit}){
+        localStorage.removeItem('wishToken');
+        commit('logout');
     },
     updateSid({ commit }, sid){
         commit('update_sid', sid);

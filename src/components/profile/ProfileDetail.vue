@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
                 <div class="profile">
-                    <div class="nickname">{{user.nickName}}</div>
+                    <div class="nickname">{{user.nickname}}</div>
                     <div class="msg">{{user.profileMsg}}</div>
                 </div>
                 <div class="info-box">

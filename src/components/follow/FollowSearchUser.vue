@@ -1,9 +1,12 @@
 <template>
     <div class="user">
-        <div class="thumb"></div>
+        <div class="thumb">
+            <img :src="user.profileImgPath" v-if="!isError" @error="imgLoadError">
+            <v-icon v-if="isError" name="user" class="user-icon"></v-icon>
+        </div>
         <div class="desc">
             <div class="text">
-                <span class="name">{{user.userName}}</span>
+                <span class="name">{{user.nickname}}</span>
             </div>
             <!-- <span class="msg">{{user.profileMsg | filterMsg}}</span> -->
         </div>
@@ -23,6 +26,7 @@ export default {
     props: ['user'],
     data(){
         return{
+            isError:false
         }
     },
     computed:{
@@ -48,7 +52,10 @@ export default {
         },
         removeFollow(){
             dispatch('removeFollow', this.user);
-        }
+        },
+        imgLoadError(){
+            this.isError = true;
+        },
     }
 }
 </script>
@@ -58,17 +65,21 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 1px solid lightgray;
-    padding: 1.5rem 1rem;
+    padding: 0.5rem 2rem;
     font-size: 1.2rem;
     justify-content: space-between;
+    width: 100%;
 }
 .thumb{
-    width: 3rem;
-    height: 3rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 10px;
-    border: 0.5px solid #3e414b;
+    border: 0.5px solid lightgray;
     margin-right: 1.5rem;
+    @include flex-center();
+    svg{
+        width: 3rem;
+    }
 }
 .msg{
         color: #bebebe;
@@ -76,23 +87,27 @@ export default {
 .name{
     color: black;
     font-weight: bold;
+    font-size: 1.5rem;
 }
 .desc{
     flex:1;
 }
 .person{
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 100%;
     padding-left: 0.3rem;
     
     @include flex-center();
     .user-plus, .user-check{
         color:white;
-        width: 1.3rem;
-        height: 1.3rem;
+        width: 1.5rem;
+        height: 1.5rem;
         @include flex-center();
     }
 }
-
+.user-icon{
+        color: #999ca3;
+        width: 3rem;
+    }
 </style>

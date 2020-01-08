@@ -18,9 +18,27 @@
 </template>
 <script>
 import store from '../../store';
-const { dispatch } = store;
+const { state, dispatch, getters } = store;
 export default {
     name: 'Login',
+    beforeRouteEnter(to, from, next){
+        (async()=>{
+            try {
+                await dispatch('checkLogin'); //내 프로필 정보를 가져온다.
+                if(getters.isLoggedIn){
+                    next({
+                        name: 'followList',
+                        params: { userId: state.userId }
+                    });
+                }else{
+                    next();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+       
+    },
     data(){
         return {
             user: {}
@@ -31,7 +49,11 @@ export default {
             this.$router.push({name:'register'});
         },
         onSubmit(){
-            dispatch('login', this.user);
+            (async()=>{
+                await dispatch('login', this.user);
+                this.$router.push({name:'followList', params:{userId:state.userId}})
+            })();
+            
         }
     }
 }

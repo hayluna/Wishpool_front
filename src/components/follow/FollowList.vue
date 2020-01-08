@@ -16,7 +16,7 @@
                 </div>
                 <div class="desc">
                     <div class="text">
-                        <span class="name">{{ myProfile.nickName }}</span>
+                        <span class="name">{{ myProfile.nickname }}</span>
                     </div>
                     <span class="msg">{{ myProfile.profileMsg }}</span>
                 </div>
@@ -149,8 +149,9 @@ export default {
         font-weight: bolder;
         font-size: 1.6rem;
     }
-    svg{
-        fill: #999ca3;
+    .user-icon{
+        color: #999ca3;
+        width: 3rem;
     }
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
         color: #555;
@@ -195,7 +196,8 @@ export default {
         width: 4.5rem;
         height: 4.5rem;
         border-radius: 15px;
-        border-color: transparent;
+        border: transparent;
+        box-shadow: 0 3px 6px lightgray;
         margin-right: 1.5rem;
         background: white;
         @include flex-center();
@@ -206,6 +208,9 @@ export default {
             object-fit: cover;
             border-radius: 100%;
         }
+    }
+    .name{
+        font-size: 1.5rem;
     }
     .msg{
         color: #bebebe;
