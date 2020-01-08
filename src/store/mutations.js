@@ -5,6 +5,8 @@ import {
     ADD_FOLLOW_LIST,
     REMOVE_FOLLOW_LIST,
     FETCH_OTHERS_ITEM_LIST, 
+    FETCH_NOTI_LIST,
+    ADD_FOLLOW_NOTI,
 } from './mutations-types'
 
 export default {
@@ -30,6 +32,12 @@ export default {
         const index = state.myProfile.followingId.findIndex(f=>f._id == user._id); //myProfile의 followingId는 유저객체이다.
         state.myProfile.followingId.splice(index, 1);
     },
+    [FETCH_NOTI_LIST](state, notis){
+        state.notiList = notis;
+    },
+    [ADD_FOLLOW_NOTI](state, newFollowNoti){
+        state.notiList.push(newFollowNoti);
+    },
     startLoading(state){
         state.loading = true;
     },
@@ -44,5 +52,21 @@ export default {
         if(index){
             state.myAllItemList.splice(index, 1);
         }
+    },
+    auth_request(state){
+        state.status = 'auth_loading'
+    },
+    auth_success(state, payload){
+        state.status = 'success';
+        state.token = payload.token;
+        state.userId = payload.userId;
+        this._vm.$socket.emit('uid', state.userId);
+    },
+    auth_error(state){
+        state.status = 'error';
+        localStorage.removeItem('wishToken');
+    },
+    update_sid(state, sid){
+        state.sid = sid;
     }
 }

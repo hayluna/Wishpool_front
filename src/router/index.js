@@ -11,6 +11,7 @@ import ItemDetail from '@/components/item/ItemDetail.vue'
 import OthersItemDetail from '@/components/item/OthersItemDetail.vue'
 import FollowList from '@/components/follow/FollowList.vue'
 import FollowSearch from '@/components/follow/FollowSearch.vue'
+import FollowSearchList from '@/components/follow/FollowSearchList.vue'
 import NotiList from '@/components/notification/NotiList.vue'
 import More from '@/components/setting/More.vue'
 
@@ -19,18 +20,19 @@ Vue.use(VueRouter)
 const routes = [
   // { path:'/', component:Login, name:'login', meta: {requiresAuth:true} },
   { path:'/', component:Login, name:'login' },
-  { path:'/item/list/:userId', component:ItemList, name:'itemList' },
-  { path:'/item/othersList/:userId', component:OthersItemList, name:'othersItemList' },
-  { path:'/item/insert', component:ItemInsert, name:'itemInsert' },
-  { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify' },
-  { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail' },
-  { path:'/item/othersDetail/:itemId', component:OthersItemDetail, name:'othersItemDetail' },
-  { path:'/user/login', component:Login, name:'login' },
+  { path:'/item/list/:userId', component:ItemList, name:'itemList', meta: { requiresAuth: true } },
+  { path:'/item/othersList/:userId', component:OthersItemList, name:'othersItemList', meta: { requiresAuth: true } },
+  { path:'/item/insert', component:ItemInsert, name:'itemInsert', meta: { requiresAuth: true } },
+  { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify', meta: { requiresAuth: true } },
+  { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail', meta: { requiresAuth: true } },
+  { path:'/item/othersDetail/:itemId', component:OthersItemDetail, name:'othersItemDetail', meta: { requiresAuth: true } },
+  // { path:'/user/login', component:Login, name:'login' },
   { path:'/user/register', component:Register, name:'register' },    
-  { path:'/follow/list/:userId', component:FollowList, name:'followList' },
-  { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch' },
-  { path:'/noti/list/:userId', component:NotiList, name:'notiList' },
-  { path:'/more', component:More, name:'more' },
+  { path:'/follow/list/:userId', component:FollowList, name:'followList', meta: { requiresAuth: true } },
+  { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch', meta: { requiresAuth: true } },
+  { path:'/follow/searchList', component:FollowSearchList, name:'followSearchList', meta: { requiresAuth: true } },
+  { path:'/noti/list/:userId', component:NotiList, name:'notiList', meta: { requiresAuth: true } },
+  { path:'/more', component:More, name:'more', meta: { requiresAuth: true } },
   // { path:'/more/:userId', component:More, name:'more' },
 ]
 

@@ -8,9 +8,9 @@
             <!-- <div class="logo-area">WISHPOOL</div> -->
             <div class="form">
                 <h3>회원가입</h3>
-                <input type="text" style="margin-top: 1.3rem;" placeholder="아이디" />
-                <input type="password" style="margin-top: 1.5rem;" placeholder="비밀번호" />
-                <input type="password" style="margin-top: 1.5rem;" placeholder="비밀번호 확인" />
+                <input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" />
+                <input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" />
+                <input type="password" v-model="confirmPassword" style="margin-top: 1.5rem;" placeholder="비밀번호 확인" />
                 <a @click="onSubmit">회원가입</a>
             </div>
             <div class="footer"><a @click="login">로그인</a></div>
@@ -18,11 +18,27 @@
     </div>
 </template>
 <script>
+import store from '../../store';
+const { dispatch, state } = store;
 export default {
     name: 'Register',
+    data(){
+        return{
+            user: {},
+            confirmPassword:'',
+        }
+    },
      methods:{
         login(){
             this.$router.push({name:'login'});
+        },
+        onSubmit(){
+            //유효성검사
+            (async()=>{
+                await dispatch('register', this.user);
+                this.$router.push({name:'followList', params:{userId:state.userId}});
+            })();
+           
         }
     }
 }

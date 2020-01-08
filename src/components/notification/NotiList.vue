@@ -16,9 +16,12 @@
                     <div> 안 읽은 메세지가 <span class="num">3</span>개 있어요</div>
                 </div>
                 <div class="noti-contents">
-                    <noti-request/>
-                    <noti-follow />
-                    <noti-response />
+                    <ul>
+                        <li></li>
+                        <noti-request/>
+                        <noti-follow />
+                        <noti-response />
+                    </ul>
                 </div>
             </div>
         </div>
@@ -41,6 +44,7 @@ export default {
     beforeRouteEnter(to, from, next){
         dispatch('pending');
         dispatch('fetchMyProfile'); //내 프로필 정보를 가져온다.
+        dispatch('fetchNotiList');
         //loading==false가 될 때 라우터 이동을 허용한다.
         store.watch(
             (state, getters) => state.loading,
@@ -51,10 +55,18 @@ export default {
             }
         )
     },
+    created(){
+        this.$socket.on('follow-noti', newFollowNoti=>{
+            dispatch('addFollowNoti');
+        })
+    },
     computed:{
         myProfile(){
             return getters.myProfile;
         },
+        notiList(){
+            return getter.notiList;
+        }
     },
 }
 </script>

@@ -1,5 +1,6 @@
 export default {
-    isLoggedIn : state => !!state.token,
+    isLoggedIn : state => (state.status=="success"),
+    authStatus: state => state.status,
     myAllItemList : state => state.myAllItemList,
     myItemList: state => state.myAllItemList.filter(item => item.purchasedBy == ''),
     myDoneList: state => state.myAllItemList.filter(item => item.purchasedBy != ''),

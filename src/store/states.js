@@ -1,6 +1,7 @@
 export default {
-    userId: '5ded64280ee4351ae8dbc6d2',
+    userId: '',
     token: localStorage.getItem('wishToken') || '',
+    status:'',
     sid:'',
     myProfile:{}, //내 프로필의 followingId, followerId는 id목록이 아닌 populated된 객체임.
     myAllItemList: [],
@@ -9,5 +10,6 @@ export default {
     othersFollowings: [],
     othersFollowers: [],
     othersAllItemList: [],
+    notiList: [],
     loading: false,
 }

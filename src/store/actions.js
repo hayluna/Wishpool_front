@@ -2,9 +2,11 @@ import {
     FETCH_MY_ALL_ITEM_LIST, 
     FETCH_MY_PROFILE, 
     FETCH_SEARCH_USER_LIST, 
+    FETCH_NOTI_LIST,
     ADD_FOLLOW_LIST,
     REMOVE_FOLLOW_LIST,
     FETCH_OTHERS_ITEM_LIST,
+    ADD_FOLLOW_NOTI,
  } from './mutations-types';
 import axios from 'axios';
 import state from './states';
@@ -80,10 +82,16 @@ export default{
                     other: user
                 }
                 await axios.patch(this._vm.$api+'/follow/update/'+state.userId, payload);
+                await axios.patch(this._vm.$api+'/noti/add/'+state.userId, payload);
+                this._vm.$socket.emit('follow-add', payload);
+                
             } catch (e) {
                 console.error(e);
             }
         })();
+    },
+    addFollowNoti({ commit }, newFollowNoti){
+        return commit(ADD_FOLLOW_NOTI, newFollowNoti);
     },
     removeFollow({ commit }, user){
         return(async()=>{
@@ -132,5 +140,85 @@ export default{
                 console.error(e);
             }
         })();
+    },
+    fetchNotiList({ commit }, id){
+        return (async()=>{
+            try {
+                const res = await axios.get(this._vm.$api+'/noti/list/'+state.userId);
+                const { code, msg, notis } = res.data;
+                if(code=="200"){
+                    commit(FETCH_NOTI_LIST, notis);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    } ,   
+    register({ commit }, user){
+        return (async()=>{
+            try{
+                const response = await axios.post(this._vm.$api +'/users/register', user);
+                const { code, msg, payload } = response.data;
+                if(code === 200){
+                    const { token, newUser } = payload;
+                    localStorage.setItem('wishToken', token);
+                    await commit('auth_success', {token, userId:newUser._id}); // state.userId = _id; (ObjectId)
+                }
+			} catch(err){
+                console.error(err);
+            }
+        })();
+    },
+    login({ commit }, user){
+        return (async()=>{
+            const res = await axios.post(this._vm.$api+'/users/login', user);
+            const { code, msg, payload } = res.data;
+            if( code == "200"){
+                const { token, user } = payload;
+                localStorage.setItem('wishToken', token);
+                commit('auth_success', {token, userId:user._id});
+            }else{
+                console.log(code+': '+msg);
+            }
+
+        })();
+    },
+    checkLogin({commit}){
+        return new Promise(async (resolve, reject)=>{
+            const token = localStorage.getItem('wishToken');
+            commit('auth_request');
+            try {
+                const res = await axios.get(this._vm.$api+'/users/check', {
+                    headers: {authorization: token}
+                });
+                const { code, msg, user } = res.data;
+                if(code=="200"){ //서버에서 유효한 사용자라고 판단이 났다면,
+                    console.log(msg);
+                    commit('auth_success', {token, userId:user._id});
+                    resolve(res);
+                }else{
+                    console.log(res.data.message);
+                    commit('auth_error');
+                }
+            } catch (e) {
+                console.error(e);
+                commit('auth_error');
+                reject(e);
+            }
+        });
+    },
+    authSuccess({commit}, payload){
+        return (async()=>{
+            try {
+                await commit('auth_success', payload);
+                this._vm.$socket.emit('uid', payload._id);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+        
+    },
+    updateSid({ commit }, sid){
+        commit('update_sid', sid);
     }
 }

@@ -14,14 +14,16 @@
                 <div class="empty"></div>
             </div>
         </div>
-        <ul class="ul-item">
-            <li>
-                <follow-user
-                :user="user"
-                @click.native="getClickedUser(user)"
+        <div class="result-box" v-if="hasSearched">
+            <h3>검색결과 : '{{query}}'</h3>
+            <ul>
+                <li v-for="user in searchedUser" :key="user._id">
+                    <follow-user
+                    :user="user"
                     />
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
         <profile-detail
             :user="clickedUser"
          />
@@ -30,12 +32,38 @@
 </div>
 </template>
 <script>
-import FollowSearchUser from './FollowSearchUser'
+import FollowSearchUser from './FollowSearchUser';
+import ProfileDetail from '../profile/ProfileDetail'
+import store from '../../store';
+const { getters, dispatch } = store;
 export default {
     name: 'FollowSearchList',
     components: {
-        'follow-user':FollowSearchUser
-    }
+        'follow-user' : FollowSearchUser,
+        'profile-detail' : ProfileDetail,
+    },
+    methods:{
+        onBack(){
+            this.$router.go(-1);
+        },
+    },
+    beforeRouteEnter(to, from, next){
+        next( vm =>{
+            vm.user = getters.myProfile;
+        });
+    },
+    data(){
+        return{
+            user: {},
+            query: '',
+            hasSearched: false,
+        }
+    },
+    computed: {
+        searchedUser(){
+            return getters.searchUserList;
+        } 
+    },
 }
 </script>
 <style lang="scss" scoped>

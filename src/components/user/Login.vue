@@ -8,8 +8,8 @@
             <!-- <div class="logo-area">WISHPOOL</div> -->
             <div class="form-login">
                 <h3>로그인</h3>
-                <input type="text" style="margin-top: 1.3rem;" placeholder="아이디" />
-                <input type="password" style="margin-top: 1.5rem;" placeholder="비밀번호" />
+                <input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" />
+                <input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" />
                 <a @click="onSubmit">로그인</a>
             </div>
             <div class="footer"><a @click="register">회원가입</a></div>
@@ -17,11 +17,21 @@
     </div>
 </template>
 <script>
+import store from '../../store';
+const { dispatch } = store;
 export default {
     name: 'Login',
+    data(){
+        return {
+            user: {}
+        }
+    },
     methods:{
         register(){
             this.$router.push({name:'register'});
+        },
+        onSubmit(){
+            dispatch('login', this.user);
         }
     }
 }
