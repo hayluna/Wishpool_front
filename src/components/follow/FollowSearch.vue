@@ -92,6 +92,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-self: flex-start;
+        font-family: $font-stack;
     }
     .header{
         display: flex;

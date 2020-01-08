@@ -106,6 +106,7 @@ export default {
     align-items: center;
     border-bottom: 1px solid lightgray;
     padding: 2rem 0.2rem 2rem 1.5rem;
+    font-family: $font-stack;
 }
 .desc{
     flex:1;

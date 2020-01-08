@@ -36,6 +36,7 @@ export default {
     align-items: center;
     border-bottom: 1px solid lightgray;
     padding: 1.7rem 2rem;
+    font-family: $font-stack;
 }
 .thumb{
     width: 4.5rem;

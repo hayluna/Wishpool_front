@@ -1,5 +1,5 @@
 <template>
-    <div class="user">
+    <div class="user" data-toggle="modal" data-target="#profile">
         <div class="thumb">
             <img :src="user.profileImgPath" v-if="!isError" @error="imgLoadError">
             <v-icon v-if="isError" name="user" class="user-icon"></v-icon>
@@ -69,6 +69,7 @@ export default {
     font-size: 1.2rem;
     justify-content: space-between;
     width: 100%;
+    font-family: $font-stack;
 }
 .thumb{
     width: 4.5rem;

@@ -87,6 +87,7 @@ export default {
         background: white;
         height: 100%;
         overflow: hidden;
+        font-family: $font-stack;
     }
     .fix-top{
         position: fixed;

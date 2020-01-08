@@ -17,6 +17,7 @@
             <ul>
                 <li v-for="user in searchedUser" :key="user._id">
                     <follow-user
+                    @click.native="getClickedUser(user)"
                     :user="user"
                     />
                 </li>
@@ -43,6 +44,10 @@ export default {
     methods:{
         onBack(){
             this.$router.go(-1);
+        },
+        getClickedUser(user){
+            this.clickedUser = user;
+            dispatch('setCurrentUser', user);
         },
     },
     beforeRouteEnter(to, from, next){
@@ -72,6 +77,7 @@ export default {
         height: 100%;
         display: flex;
         flex-direction: column;
+        font-family: $font-stack;
     }
     .header{
         display: flex;

@@ -151,10 +151,12 @@ export default {
 </script>
 <style lang="scss" scoped>
     @import '@/styles/utils.scss';
+    @import url('/assets/KoPubDotum.min.css');
     .view{
         background: white;
         height: 100%;
         overflow: hidden;
+        font-family: $font-stack;
     }
     .fix-top{
         position: fixed;

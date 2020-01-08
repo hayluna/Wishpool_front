@@ -30,6 +30,7 @@ export default {
 
 <style lang="scss">
     @import '@/styles/utils.scss';
+    @import url('/assets/KoPubDotum.min.css');
     .app-container{
         @include flex-center();
         position: absolute;

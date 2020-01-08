@@ -21,11 +21,13 @@ export default {
 </script>
 <style lang="scss" scoped>
     @import '@/styles/utils.scss';
+    @import url('/assets/KoPubDotum.min.css');
 .noti{
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 1.5rem 0.2rem 1.5rem 2.5rem;
+    font-family: $font-stack;
 }
 .desc{
     flex:1;

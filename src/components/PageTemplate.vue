@@ -30,6 +30,7 @@ export default {
         flex-direction: column;
         background: $primary-color;
         position: sticky;
+        font-family: $font-stack;
     }
 
     //desktop, tablet

@@ -117,6 +117,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        font-family: $font-stack;
     }
     .modal-header{
         width: 100%;

@@ -8,8 +8,8 @@
             <!-- <div class="logo-area">WISHPOOL</div> -->
             <div class="form-login">
                 <h3>로그인</h3>
-                <input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" />
-                <input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" />
+                <div class="input-item"><input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" /></div>
+                <div class="input-item"><input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" /></div>
                 <a @click="onSubmit">로그인</a>
             </div>
             <div class="footer"><a @click="register">회원가입</a></div>
@@ -69,6 +69,7 @@ export default {
         height: 100%;
         color: white;
         @include flex-center();
+        font-family: $font-stack;
 
     }
     .welcome{
@@ -116,13 +117,11 @@ export default {
         
         input{
             width: 100%;
-            border-bottom: 1px solid #adb5bd;
             padding-bottom: 0.5rem;
             font-family: inherit;
-            &:focus{
-                border-bottom: 1px solid $dark-gray;
-                color: $dark-gray;
-            }
+            outline: none;
+            background: transparent;
+            border:none;
         }
         a{
             @include flex-center();
@@ -136,6 +135,15 @@ export default {
             &:hover{
                 background: $dark-gray;
             }
+        }
+    }
+    .input-item{
+        width: 100%;
+        padding: 0 0.2rem;
+        border-bottom: 1px solid #adb5bd;
+        &:focus-within, &:active{
+            border-bottom: 1px solid $dark-gray;
+            color: $dark-gray;
         }
     }
     .footer{

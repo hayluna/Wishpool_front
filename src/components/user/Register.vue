@@ -145,6 +145,7 @@ export default {
         margin: 0;
         color: white;
         @include flex-center();
+        font-family: $font-stack;
     }
     .logo-area{
         display: block;

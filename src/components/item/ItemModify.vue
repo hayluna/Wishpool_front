@@ -184,6 +184,7 @@ export default {
     .view{
         background: white;
         height: 100%;
+        font-family: $font-stack;
     }
     .header{
         display: flex;

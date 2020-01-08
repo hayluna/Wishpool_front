@@ -120,6 +120,7 @@ export default {
      .view, .view-box{
         background: white;
         height: 100%;
+        font-family: $font-stack;
     }
     .fix-top{
         position: fixed;
