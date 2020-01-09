@@ -12,7 +12,7 @@
                 <div class="input-item"><input type="text" ref="id" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" /><div @click="clearId" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 <div class="input-item"><input type="password" ref="pwd" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" /><div @click="clearPwd" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 <div class="input-item"><input type="password" ref="confirmPwd" v-model="confirmPassword" style="margin-top: 1.5rem;" placeholder="비밀번호 확인" /><div @click="clearPwdConfirm" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
-                <div class="input-item"><input type="text" ref="phone" class="phoneNumber" @keydown="regex" v-model="user.phone" style="margin-top: 1.5rem;" placeholder="전화번호" /><div @click="clearPhone" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
+                <div class="input-item"><input type="text" ref="phone" class="phoneNumber" @keydown="regex" v-model="user.phone" style="margin-top: 1.5rem;" placeholder="'-'없이 전화번호만 입력" /><div @click="clearPhone" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 
                 <div class="input-box" style="margin-top:2rem;"><span class="border-middle"></span><span>선택 입력</span><span class="border-middle"></span></div>
                 <div class="input-item"><input type="text" ref="nickname" v-model="user.nickname" style="margin-top: 1.5rem;" placeholder="닉네임" /><div @click="clearNickname" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>

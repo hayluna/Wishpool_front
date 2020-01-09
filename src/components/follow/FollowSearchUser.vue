@@ -10,10 +10,10 @@
             </div>
             <!-- <span class="msg">{{user.profileMsg | filterMsg}}</span> -->
         </div>
-        <div class="person" style="background: #9291A4" v-if="doIFollow" @click="removeFollow">
+        <div class="person" style="background: #9291A4" v-if="doIFollow" @click.stop="removeFollow">
             <v-icon name="user-check" class="user-check"></v-icon>
         </div>
-        <div class="person" style="background: #0EC99C" v-if="!doIFollow" @click="addFollow">
+        <div class="person" style="background: #0EC99C" v-if="!doIFollow" @click.stop="addFollow">
             <v-icon name="user-plus" class="user-plus"></v-icon>
         </div>
     </div>

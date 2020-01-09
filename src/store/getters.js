@@ -16,4 +16,14 @@ export default {
     tab2: state => state.tab2,
     tab3: state => state.tab3,
     tab4: state => state.tab4,
+    notiList: state => state.notiList,
+    notiNum: state => {
+        let count = 0;
+        state.notiList.forEach(noti=>{
+            if(noti.haveRead==false){
+                count++;
+            }
+        });
+        return count;
+    }
 }

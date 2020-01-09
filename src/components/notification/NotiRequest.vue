@@ -5,9 +5,9 @@
         </div>
         <div class="desc">
             <div class="text">
-                <span class="user-name">팡이</span>님이
-                <span class="item-name">스타벅스 텀블러 겨울 에디션</span>을 
-                <span class="text-bold">사주기</span>를 예약하셨습니다. <span class="date">3일 전</span>
+                <span class="user-name">{{noti.from}}</span>님이
+                <span class="item-name">{{noti.itemName}}</span>을 
+                <span class="text-bold">사주기</span>를 예약하셨습니다. <span class="date">{{date}}</span>
             </div>
         </div>
         <div class="close-area">
@@ -18,7 +18,43 @@
 </template>
 <script>
 export default {
-    name: 'NoiRequest'
+    name: 'NoiRequest',
+    props: ['noti'],
+    computed:{
+        date(){
+            let now = new Date();
+            const createdAt = new Date(this.noti.createdAt);
+            var minus;
+            var time = '';
+            if(now.getFullYear() > createdAt.getFullYear()){
+                minus= now.getFullYear()-createdAt.getFullYear();
+                time += minus+"년 ";
+                return time += '전';
+            }
+            if(now.getMonth() > createdAt.getMonth()){
+                minus= now.getMonth()-createdAt.getMonth();
+                time += minus+"달 ";
+                return time += '전';
+            }
+            if(now.getDate() > createdAt.getDate()){
+                minus= now.getDate()-createdAt.getDate();
+                time +=  minus+"일 ";
+                return time += '전';
+            }
+
+            if(now.getHours() > createdAt.getHours()){
+                minus = now.getHours() - createdAt.getHours();
+                time +=  minus+"시간 ";
+                return time += '전';
+            }
+            
+            if(now.getMinutes() > createdAt.getMinutes()){
+                minus = now.getMinutes() - createdAt.getMinutes();
+                time += minus+"분 ";
+                return time += '전';
+            }
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

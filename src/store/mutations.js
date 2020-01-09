@@ -6,7 +6,6 @@ import {
     REMOVE_FOLLOW_LIST,
     FETCH_OTHERS_ITEM_LIST, 
     FETCH_NOTI_LIST,
-    ADD_FOLLOW_NOTI,
 } from './mutations-types'
 
 export default {
@@ -35,8 +34,11 @@ export default {
     [FETCH_NOTI_LIST](state, notis){
         state.notiList = notis;
     },
-    [ADD_FOLLOW_NOTI](state, newFollowNoti){
-        state.notiList.push(newFollowNoti);
+    increaseNoti(state){
+        state.notiNum = state.notiNum+1;
+    },
+    removeNoti(state){
+        state.notiNum = 0;
     },
     startLoading(state){
         state.loading = true;

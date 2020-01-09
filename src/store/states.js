@@ -18,4 +18,16 @@ export default {
     tab2: false,
     tab3: false,
     tab4: false,
+    noti:{
+        type: '', // 3 types: noti-follow, noti-request, noti-response
+        userId: '',
+        by: '', //nickname
+        profileImgPath: '',
+        profileImgName : '',
+        itemName:'',
+        date: '',
+        nid:'',
+        haveRead: false
+    },
+    notiNum: 0,
 }

@@ -5,18 +5,67 @@
         </div>
         <div class="desc">
             <div class="text">
-                <span class="user-name">팡이</span>님이 팔로우합니다. <span class="date">3일 전</span>
+                <span class="user-name">{{noti.from}}</span>님이 팔로우합니다. <span class="date">{{date}}</span>
             </div>
         </div>
         <div class="close-area">
-            <v-icon name="x" class="icon-close"></v-icon>
+            <v-icon name="x" class="icon-close" @click="onClose"></v-icon>
         </div>
         <!-- <div id="snackbar">{{ item.itemName }}의 링크가 복사되었습니다!<br>친구와 공유해보세요!</div> -->
     </div>
 </template>
 <script>
 export default {
-    name: 'NotiFollow'
+    name: 'NotiFollow',
+    props: ['noti'],
+    computed:{
+        date(){
+            let now = new Date();
+            const createdAt = new Date(this.noti.createdAt);
+            var minus;
+            var time = '';
+            if(now.getFullYear() > createdAt.getFullYear()){
+                minus= now.getFullYear()-createdAt.getFullYear();
+                time += minus+"년 ";
+                return time += '전';
+            }
+            if(now.getMonth() > createdAt.getMonth()){
+                minus= now.getMonth()-createdAt.getMonth();
+                time += minus+"달 ";
+                return time += '전';
+            }
+            if(now.getDate() > createdAt.getDate()){
+                minus= now.getDate()-createdAt.getDate();
+                time +=  minus+"일 ";
+                return time += '전';
+            }
+
+            if(now.getHours() > createdAt.getHours()){
+                minus = now.getHours() - createdAt.getHours();
+                time +=  minus+"시간 ";
+                return time += '전';
+            }
+            
+            if(now.getMinutes() > createdAt.getMinutes()){
+                minus = now.getMinutes() - createdAt.getMinutes();
+                time += minus+"분 ";
+                return time += '전';
+            }
+        }
+    },
+    methods:{
+        onClose(){
+            (async()=>{
+                try {
+                    await dispatch('removeNotiItem', nid);
+                    this.$bus.$emit('onClose', this.noti._id);  
+                } catch (e) {
+                    console.error(e);
+                }
+            })();
+           
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

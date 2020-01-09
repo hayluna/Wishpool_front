@@ -83,16 +83,49 @@ export default{
                     other: user
                 }
                 await axios.patch(this._vm.$api+'/follow/update/'+state.userId, payload);
-                await axios.patch(this._vm.$api+'/noti/add/'+state.userId, payload);
-                this._vm.$socket.emit('follow-add', payload);
-                
+                const res = await axios.post(this._vm.$api+'/noti/follow/'+payload.other._id, payload);//상대방의 notiList에 저장
+                if(res.data.code==200){
+                    this._vm.$socket.emit('follow-add', payload);
+                }
             } catch (e) {
                 console.error(e);
             }
         })();
     },
-    addFollowNoti({ commit }, newFollowNoti){
-        return commit(ADD_FOLLOW_NOTI, newFollowNoti);
+    increaseNoti({ commit }){
+        return commit('increaseNoti');
+    },
+    removeNoti({commit}){
+        commit('removeNoti');
+        state.notiList.forEach(noti=>{noti.haveRead = true; console.log(noti)});
+        return (async()=>{
+            try {
+                const res = await axios.patch(this._vm.$api+'/noti/toggle', state.notiList);
+                const { code, msg, notiList } = res.data;
+                if(code=="200"){
+                    console.log('222', notiList)
+                    commit(FETCH_NOTI_LIST, notiList);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    },
+    removeNotiItem({commit}, nid){
+        let notis = state.notiList;
+        const index = notis.findIndex(noti=>noti._id==nid);
+        notis.splice(index, 1);
+        return (async()=>{
+            try {
+                const res = await axios.patch(this._vm.$api+'/remove', notis);
+                const { code, msg } = res.data;
+                if(code=="200"){
+                    commit('removeNotiItem', notis);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
     },
     removeFollow({ commit }, user){
         return(async()=>{
@@ -142,7 +175,7 @@ export default{
             }
         })();
     },
-    fetchNotiList({ commit }, id){
+    fetchNotiList({ commit }){
         return (async()=>{
             try {
                 const res = await axios.get(this._vm.$api+'/noti/list/'+state.userId);
@@ -179,7 +212,8 @@ export default{
             if( code == "200"){
                 const { token, user } = payload;
                 localStorage.setItem('wishToken', token);
-                commit('auth_success', {token, userId:user._id});
+                await commit('auth_success', {token, userId:user._id});
+                this.dispatch('fetchNotiList');
             }else{
                 console.log(code+': '+msg);
             }
@@ -197,6 +231,7 @@ export default{
                 const { code, msg, user } = res.data;
                 if(code=="200"){ //서버에서 유효한 사용자라고 판단이 났다면,
                     await commit('auth_success', {token, userId:user._id});
+                    await this.dispatch('fetchNotiList');
                     resolve(res);
                 }else{
                     await commit('auth_error');

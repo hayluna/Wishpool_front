@@ -9,19 +9,21 @@
                     </div>
                     <div class="empty"></div>
                 </div>
-                <div class="noti-header">
-                    <div class="text">
-                        <div class="name">안녕하세요 {{ myProfile.nickName }}님,</div>
+                <div class="area">
+                    <div class="noti-header">
+                        <div class="text">
+                            <div class="name">안녕하세요 {{ myProfile.nickName }}님,</div>
+                        </div>
+                        <div> 안 읽은 메세지가 <span class="num">{{notiNum}}</span>개 있어요</div>
                     </div>
-                    <div> 안 읽은 메세지가 <span class="num">3</span>개 있어요</div>
-                </div>
-                <div class="noti-contents">
-                    <ul>
-                        <li></li>
-                        <noti-request/>
-                        <noti-follow />
-                        <noti-response />
-                    </ul>
+                    <div class="noti-contents">
+                        <ul>
+                            <li v-for="noti in notiList" :key="noti._id">
+                                <noti
+                                :noti="noti" />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,16 +32,12 @@
 <script>
 
 import store from '../../store';
-import NotiRequest from './NotiRequest.vue';
-import NotiResponse from './NotiResponse.vue';
-import NotiFollow from './NotiFollow.vue';
+import Noti from './Noti.vue';
 const { state, getters, dispatch } = store;
 export default {
     name: 'NotiList',
     components:{
-        'noti-request': NotiRequest,
-        'noti-response': NotiResponse,
-        'noti-follow': NotiFollow,
+        'noti': Noti,
     },
     beforeRouteEnter(to, from, next){
         dispatch('pending');
@@ -55,9 +53,12 @@ export default {
             }
         )
     },
+    beforeRouteLeave (to, from, next) {
+        dispatch('removeNoti');
+    },
     created(){
-        this.$socket.on('follow-noti', newFollowNoti=>{
-            dispatch('addFollowNoti');
+        this.$bus.$on('onClose', ()=>{
+            dispatch('fetchNotiList');
         })
     },
     computed:{
@@ -65,7 +66,10 @@ export default {
             return getters.myProfile;
         },
         notiList(){
-            return getter.notiList;
+            return getters.notiList;
+        },
+        notiNum(){
+            return getters.notiNum;
         }
     },
 }
@@ -105,6 +109,10 @@ export default {
         font-weight: bolder;
         font-size: 1.6rem;
     }
+    .area{
+        height: 100%;
+        overflow: scroll;
+    }
     .noti-header{
         color: #A9AAB9;
         font-weight: bold;
@@ -117,6 +125,11 @@ export default {
         padding: 4rem;
         margin-bottom: 1rem;
     }
+    .noti-contents{
+        z-index: 0;
+        overflow: scroll;
+        height: 100%;
+    }
     .text{
         color: $dark-gray;
         font-weight: bold;
@@ -124,5 +137,14 @@ export default {
     .num{
         color: $dark-gray;
         font-weight: bold;
+    }
+    ul{
+        height: 100%;
+        padding: 0.5rem;
+        z-index: 0;
+        overflow: scroll;
+    }
+    li{
+        list-style: none;
     }
 </style>

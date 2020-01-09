@@ -50,7 +50,7 @@ export default {
             width: 50rem;;
             height: 5rem;
             position: fixed;
-            z-index: 3;
+            z-index: 1000;
             margin-top: 85rem;
             overflow: hidden;
         }
@@ -74,6 +74,7 @@ export default {
             position: fixed;
             left:0;
             bottom:0;
+            z-index:1000;
         }
 
     }

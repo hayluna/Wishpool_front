@@ -5,7 +5,8 @@
 </template>
 <script>
 import PageTemplate from './components/PageTemplate.vue';
-
+import store from './store';
+const { dispatch, getters, state } = store;
 export default {
   name: 'App',
   components:{
@@ -15,6 +16,10 @@ export default {
       return{
         isLoggedIn: false,
       }
+  },
+  created(){
+    this.$socket.on('increase-noti', ()=>{
+    })
   },
   computed: {
     classObject(){
