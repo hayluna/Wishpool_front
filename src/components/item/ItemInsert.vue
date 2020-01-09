@@ -71,6 +71,8 @@ const { state } = store;
 
 export default {
     name: 'ItemInsert',
+    components:{
+    },
     data(){
         return{
             item: {
@@ -150,6 +152,7 @@ export default {
                         }
                     });
                     if(res.data.code == "200"){
+                        this.$bus.$emit('completeSnackbar');
                         this.$router.push({name: 'itemList', params: {userId: state.userId}})
                     }else if(res.data.code == 500){
                         console.log('서버오류 : '+res.data.msg);
@@ -251,6 +254,7 @@ export default {
         }
         input{
             outline: none;
+            border:none;
             margin-top: 0.5rem;
             width: 90%;
             background: transparent;

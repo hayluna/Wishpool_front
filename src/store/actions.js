@@ -226,5 +226,17 @@ export default{
     },
     updateSid({ commit }, sid){
         commit('update_sid', sid);
-    }
+    },
+    tab1({ commit }){
+        commit('tab1');
+    },
+    tab2({ commit }){
+        commit('tab2');
+    },
+    tab3({ commit }){
+        commit('tab3');
+    },
+    tab4({ commit }){
+        commit('tab4');
+    },
 }

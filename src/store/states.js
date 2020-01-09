@@ -14,4 +14,8 @@ export default {
     othersAllItemList: [],
     notiList: [],
     loading: true,
+    tab1: true,
+    tab2: false,
+    tab3: false,
+    tab4: false,
 }

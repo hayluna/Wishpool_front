@@ -29,7 +29,7 @@
         <div class="tab-content" style="padding-top:20rem;">
             <!-- follow 목록 -->
             <div class="tab-pane active" id="wish">
-                <ul class="ul-item">
+                <ul class="ul-item" v-if="!isFollowEmpty">
                     <li v-for="user in followings" :key="user._id">
                         <follow-user
                         :user="user"
@@ -37,10 +37,14 @@
                          />
                     </li>
                 </ul>
+                <div v-if="isFollowEmpty" class="empty-list">
+                    <div class="person"><v-icon name="user-plus"></v-icon></div>
+                    <br>팔로우 할 친구를 찾아보세요!
+                </div>
             </div>
             <!-- follower 목록 -->
             <div class="tab-pane" id="done">
-                <ul class="ul-item">
+                <ul class="ul-item" v-if="!isFollowerEmpty">
                     <li v-for="user in followers" :key="user._id">
                         <follow-user
                         :user="user"
@@ -48,6 +52,10 @@
                          />
                     </li>
                 </ul>
+                <div v-if="isFollowerEmpty" class="empty-list">
+                    <div class="person"><v-icon name="user"></v-icon></div>
+                    <br>아직 팔로워가 없네요!
+                </div>
             </div>
         </div>
         <profile-detail
@@ -96,7 +104,19 @@ export default {
         },
         followings(){
             return getters.myFollowings;
-        }
+        },
+        isFollowEmpty(){
+            if(this.followings.length==0){
+                return true;
+            }
+            return false;
+        },
+        isFollowerEmpty(){
+            if(this.followers.length==0){
+                return true;
+            }
+            return false;
+        },
     },
     methods: {
         findFollow(){
@@ -182,6 +202,9 @@ export default {
             padding: 1rem 1rem 1.5rem 1rem;
         }
     }
+    .tab-content, .tab-pane{
+        height:100%;
+    }
     .ul-item{
         padding: 0 1rem;
     }
@@ -215,6 +238,26 @@ export default {
     }
     .msg{
         color: #bebebe;
+    }
+    .empty-list{
+        width: 100%;
+        height: 100%;
+        @include flex-center();
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .person{
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 100%;
+        background: $green;
+        @include flex-center();
+        svg{
+            color:white;
+            width: 2.2rem;
+            height: 2.2rem;
+            @include flex-center();
+        }
     }
     @media (min-width:420px){
         

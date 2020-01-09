@@ -21,7 +21,7 @@
                 <li role="presentation"><a role="menuitem" tabindex="-1" @click="onToggle">{{ getType }}</a></li>
             </ul>
         </div>
-        <div id="snackbar">{{ item.itemName }}의 링크가 복사되었습니다!<br>친구와 공유해보세요!</div>
+        <div id="snackbar"><span style="color:#0EC99C">'{{ item.itemName }}'</span>의<br> 링크가 복사되었습니다!<br><span style="color:#49B7F5">친구와 공유해보세요!</span></div>
     </div>
 </template>
 <script>
@@ -58,6 +58,7 @@ export default {
         },
         onRemove(){
             dispatch('removeItem', this.item);
+            this.$emit('onChange');
         },
         onToggle(){
             if(this.getType == '완료'){
@@ -66,13 +67,15 @@ export default {
                 this.item.purchasedBy = '';
             }
             dispatch('handleToggle', this.item);
+            this.$emit('onChange');
         },
         imgLoadError(){
             this.item.itemImgPath='/assets/images/data_usage.svg';
         },
         onClick(){
             this.$emit('onClick', this.item);
-        }
+        },
+        
     },
     filters:{
         filterName(val){
@@ -168,8 +171,8 @@ svg{
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
-  min-width: 250px; /* Set a default minimum width */
-  margin-left: -125px; /* Divide value of min-width by 2 */
+//   min-width: 250px; /* Set a default minimum width */
+  width: 25rem;
   background-color: #333; /* Black background color */
   color: #fff; /* White text color */
   text-align: center; /* Centered text */
@@ -178,6 +181,7 @@ svg{
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
   left: 50%; /* Center the snackbar */
+  transform: translateX(-50%);
   bottom: 10rem; /* 30px from the bottom */
 }
 

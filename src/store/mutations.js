@@ -79,5 +79,29 @@ export default {
     },
     update_sid(state, sid){
         state.sid = sid;
-    }
+    },
+    tab1(state){
+        state.tab1 = true;
+        state.tab2 = false;
+        state.tab3 = false;
+        state.tab4 = false;
+    },
+    tab2(state){
+        state.tab1 = false;
+        state.tab2 = true;
+        state.tab3 = false;
+        state.tab4 = false;
+    },
+    tab3(state){
+        state.tab1 = false;
+        state.tab2 = false;
+        state.tab3 = true;
+        state.tab4 = false;
+    },
+    tab4(state){
+        state.tab1 = false;
+        state.tab2 = false;
+        state.tab3 = false;
+        state.tab4 = true;
+    },
 }

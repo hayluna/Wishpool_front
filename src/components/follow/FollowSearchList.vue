@@ -13,8 +13,8 @@
                 <div class="empty"></div>
             </div>
         <div class="result-box">
-            <div class="result-header">검색결과 : '{{query}}'</div>
-            <ul>
+            <div class="result-header"><v-icon name="search"></v-icon>검색결과 : '{{query}}'</div>
+            <ul v-if="result">
                 <li v-for="user in searchedUser" :key="user._id">
                     <follow-user
                     @click.native="getClickedUser(user)"
@@ -22,6 +22,11 @@
                     />
                 </li>
             </ul>
+            <div v-if="!result" class="empty-result">
+                검색 결과가 없네요!<br />
+                친구에게 문자를 보내 위시풀에 초대해보세요!<br /><br />
+                <div class="person"><v-icon name="mail"></v-icon></div>
+            </div>
         </div>
         <profile-detail
             :user="clickedUser"
@@ -66,6 +71,12 @@ export default {
     computed: {
         searchedUser(){
             return getters.searchUserList;
+        },
+        result(){
+            if(this.searchedUser.length==0){
+                return false;
+            }
+            return true;
         } 
     },
 }
@@ -112,11 +123,21 @@ export default {
     }
     .result-box{
         margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
     .result-header{
         font-size: 2rem;
         padding: 2.5rem 2rem;
         border-bottom : 1px solid #E7E7EB;
+        display:flex;
+        align-items: center;
+        svg{
+            width: 2rem;
+            height: 2rem;
+            margin-right: 1rem;
+        }
     }
     .user-icon{
         color: #999ca3;
@@ -131,5 +152,25 @@ export default {
         width: 100%;
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #E7E7EB;
+    }
+    .empty-result{
+        width: 100%;
+        height: 100%;
+        @include flex-center();
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .person{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100%;
+        background: $green;
+        @include flex-center();
+        svg{
+            color:white;
+            width: 2.5rem;
+            height: 2.5rem;
+            @include flex-center();
+        }
     }
 </style>

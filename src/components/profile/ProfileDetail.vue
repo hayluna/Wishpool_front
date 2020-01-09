@@ -37,23 +37,28 @@
                 <div class="person" style="background: #9291A4; padding-left: 0.5rem;" v-if="doIFollow" @click="removeFollow">
                     <v-icon name="user-check" class="user-check"></v-icon>
                 </div>
-                <div class="person" style="background: #0EC99C; padding-left: 0.5rem;" v-if="!doIFollow" @click="addFollow">
+                <div class="person" style="background: #59D2F1; padding-left: 0.5rem;" v-if="!doIFollow" @click="addFollow">
                     <v-icon name="user-plus" class="user-plus"></v-icon>
                 </div>
-                <div class="person" style="background: #FE705A" @click="openWish" data-dismiss="modal" aria-label="Close">
+                <div class="person" style="background: #0EC99C" @click="openWish" data-dismiss="modal" aria-label="Close">
                     <v-icon name="package" class="user-plus" style="border: white;"></v-icon>
                 </div>
             </div>
             </div>
         </div>
+        <complete-snackbar/>
     </div>
 </template>
 <script>
 import store from '../../store';
+import CompleteSnackbar from '../CompleteSnackbar.vue';
 const { getters, state, dispatch } = store;
 export default {
     name: 'ProfileDetail',
     props: ['user'],
+    components:{
+        'complete-snackbar' : CompleteSnackbar
+    },
     created(){
     },
     computed:{
@@ -94,9 +99,15 @@ export default {
     methods:{
         addFollow(){
             dispatch('addFollow', this.user);
+            var x = document.getElementById("complete");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
         },
         removeFollow(){
             dispatch('removeFollow', this.user);
+             var x = document.getElementById("complete");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
         },
         openWish(){
             this.$router.push({name:'othersItemList', params:{userId: this.user._id}});
@@ -213,4 +224,5 @@ export default {
             @include flex-center();
         }
     }
+       
 </style>

@@ -40,35 +40,48 @@
         <div class="tab-content">
             <!-- 아이템 목록 -->
             <div class="tab-pane active" id="wish">
-                <ul class="ul-item">
+                <ul class="ul-item" v-if="!isWishEmpty">
                     <li v-for="item in wishItems" :key="item._id">
                         <item 
                         :item="item"
-                        @onClick="handleClick" />
+                        @onClick="handleClick"
+                        @onChange="completeSnackbar" />
                     </li>
                 </ul>
+                <div v-if="isWishEmpty" class="empty-list">
+                    <div class="person"><v-icon name="edit-3"></v-icon></div>
+                    <br>아직 추가된 아이템이 없네요!
+                </div>
             </div>
             <!-- 완료 목록 -->
             <div class="tab-pane" id="done">
-                <ul class="ul-item">
+                <ul class="ul-item" v-if="!isDoneEmpty">
                      <li v-for="item in doneWishItems" :key="item._id">
                         <item 
                         :item="item"
-                        @onClick="handleClick" />
+                        @onClick="handleClick"
+                        @onChange="completeSnackbar" />
                     </li>
                 </ul>
+                <div v-if="isDoneEmpty" class="empty-list">
+                    <div class="person"><v-icon name="edit-3"></v-icon></div>
+                    <br>아직 완료된 아이템이 없네요!
+                </div>
             </div>
         </div>
+        <complete-snackbar />
     </div>
 </template>
 <script>
 import store from '../../store';
 const { getters, dispatch } = store;
 import Item from './Item.vue';
+import CompleteSnackbar from '../CompleteSnackbar.vue'
 export default {
     name: 'ItemList',
     components: {
-        'item' : Item
+        'item' : Item,
+         'complete-snackbar' : CompleteSnackbar
     },
     computed:{
         items(){
@@ -97,7 +110,19 @@ export default {
                 }
             });
             return total;
-        }
+        },
+        isWishEmpty(){
+            if(this.wishItems.length==0){
+                return true;
+            }
+            return false;
+        },
+        isDoneEmpty(){
+            if(this.doneWishItems.length==0){
+                return true;
+            }
+            return false;
+        },
     },
     beforeRouteEnter(to, from, next){
         //비동기로 itemlist전부를 가져온다.
@@ -112,8 +137,13 @@ export default {
             }
         )
     },
-    created(){
-        // this.items = getters.myAllItemList;
+    mounted(){
+        var self = this;
+        this.$bus.$on('completeSnackbar', function(){
+            setTimeout(function(){
+            self.completeSnackbar();
+            }, 200);
+        })
     },
     methods:{
         onInsert(){
@@ -144,14 +174,17 @@ export default {
                 document.getElementById("mySidenav").children[2].children[1].style.color="transparent"
                 document.getElementById("mySidenav").children[2].children[2].style.color="transparent"
             },50)
-            
-        }
+        },
+         completeSnackbar(){
+            var x = document.getElementById("complete");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+        },
     }
 }
 </script>
 <style lang="scss" scoped>
     @import '@/styles/utils.scss';
-    @import url('/assets/KoPubDotum.min.css');
     .view{
         background: white;
         height: 100%;
@@ -243,6 +276,29 @@ export default {
         padding: 0 1.5rem 0 1.5rem;
         li{
             list-style: none;
+        }
+    }
+    .tab-content, .tab-pane{
+        height: 100%;
+    }
+    .empty-list{
+        width: 100%;
+        height: 100%;
+        @include flex-center();
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .person{
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 100%;
+        background: $green;
+        @include flex-center();
+        svg{
+            color:white;
+            width: 2.2rem;
+            height: 2.2rem;
+            @include flex-center();
         }
     }
     /* The side navigation menu */

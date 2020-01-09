@@ -38,6 +38,9 @@ router.beforeEach(async (to, from, next)=>{
   }
 });
 
+const EventBus = new Vue();
+Vue.prototype.$bus = EventBus;
+
 new Vue({
   router,
   store,
