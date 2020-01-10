@@ -18,7 +18,8 @@ export default {
       }
   },
   created(){
-    this.$socket.on('increase-noti', ()=>{
+    this.$socket.on('noti-fired', ()=>{
+      dispatch('fetchNotiList')
     })
   },
   computed: {
@@ -45,6 +46,7 @@ export default {
         right: 0;
         width: 100%;
         height: 100%;
+        background: white;
     }
     .primary-color {
       background: #907AFF

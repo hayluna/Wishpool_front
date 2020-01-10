@@ -1,30 +1,28 @@
 <template>
-    <div class="view-box">
-        <div class="view">
-            <div class="fix-top">
-                <div class="header">
-                    <div class="empty"></div>
-                    <div class="title">
-                        알림목록
-                    </div>
-                    <div class="empty"></div>
+    <div class="view">
+        <div class="fix-top">
+            <div class="header">
+                <div class="empty"></div>
+                <div class="title">
+                    알림목록
                 </div>
-                <div class="area">
-                    <div class="noti-header">
-                        <div class="text">
-                            <div class="name">안녕하세요 {{ myProfile.nickName }}님,</div>
-                        </div>
-                        <div> 안 읽은 메세지가 <span class="num">{{notiNum}}</span>개 있어요</div>
-                    </div>
-                    <div class="noti-contents">
-                        <ul>
-                            <li v-for="noti in notiList" :key="noti._id">
-                                <noti
-                                :noti="noti" />
-                            </li>
-                        </ul>
-                    </div>
+                <div class="empty"></div>
+            </div>
+        </div>
+        <div class="area">
+            <div class="noti-header">
+                <div class="text">
+                    <div class="name">안녕하세요 {{ myProfile.nickName }}님,</div>
                 </div>
+                <div> 안 읽은 메세지가 <span class="num">{{notiNum}}</span>개 있어요</div>
+            </div>
+            <div class="noti-contents">
+                <ul>
+                    <li v-for="noti in notiList" :key="noti._id">
+                        <noti
+                        :noti="noti" />
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -54,7 +52,14 @@ export default {
         )
     },
     beforeRouteLeave (to, from, next) {
-        dispatch('removeNoti');
+        (async()=>{
+            try {
+                await dispatch('notiAllRead');
+                next();
+            } catch (e) {
+                console.error(e);
+            }
+        })();
     },
     created(){
         this.$bus.$on('onClose', ()=>{
@@ -86,6 +91,7 @@ export default {
         width: 100%;
         background: white;
         z-index: 4;
+        top:0;
     }
     .header{
         display: flex;
@@ -111,7 +117,9 @@ export default {
     }
     .area{
         height: 100%;
-        overflow: scroll;
+        // overflow: scroll;
+        padding-bottom: 3rem;
+        padding-top: 5rem;
     }
     .noti-header{
         color: #A9AAB9;
@@ -127,7 +135,7 @@ export default {
     }
     .noti-contents{
         z-index: 0;
-        overflow: scroll;
+        // overflow: scroll;
         height: 100%;
     }
     .text{
@@ -142,7 +150,7 @@ export default {
         height: 100%;
         padding: 0.5rem;
         z-index: 0;
-        overflow: scroll;
+        // overflow: scroll;
     }
     li{
         list-style: none;

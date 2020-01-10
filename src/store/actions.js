@@ -95,16 +95,14 @@ export default{
     increaseNoti({ commit }){
         return commit('increaseNoti');
     },
-    removeNoti({commit}){
-        commit('removeNoti');
-        state.notiList.forEach(noti=>{noti.haveRead = true; console.log(noti)});
+    notiAllRead({commit}){
+        state.notiList.forEach(noti=>{noti.haveRead = true;});
         return (async()=>{
             try {
                 const res = await axios.patch(this._vm.$api+'/noti/toggle', state.notiList);
-                const { code, msg, notiList } = res.data;
+                const { code, msg } = res.data;
                 if(code=="200"){
-                    console.log('222', notiList)
-                    commit(FETCH_NOTI_LIST, notiList);
+                    this.dispatch('fetchNotiList');
                 }
             } catch (e) {
                 console.error(e);
@@ -112,15 +110,12 @@ export default{
         })();
     },
     removeNotiItem({commit}, nid){
-        let notis = state.notiList;
-        const index = notis.findIndex(noti=>noti._id==nid);
-        notis.splice(index, 1);
         return (async()=>{
             try {
-                const res = await axios.patch(this._vm.$api+'/remove', notis);
+                const res = await axios.delete(this._vm.$api+'/noti/remove/'+nid);
                 const { code, msg } = res.data;
                 if(code=="200"){
-                    commit('removeNotiItem', notis);
+                    this.dispatch('fetchNotiList');
                 }
             } catch (e) {
                 console.error(e);
@@ -152,9 +147,9 @@ export default{
         return (async()=>{
             try{
                 const res = await axios.patch(this._vm.$api+'/item/toggle/'+newItem._id, newItem)
-                const { code, msg, items } = res.data;
+                const { code, msg } = res.data;
                 if(code == "200"){
-                    commit(FETCH_MY_ALL_ITEM_LIST, items);
+                    this.dispatch('fetchMyAllItemList');
                 }
             } catch (e) {
                 console.error(e);
@@ -164,11 +159,11 @@ export default{
     removeItem({ commit }, item){
         return (async()=>{
             try{
-                commit('removeItem', item); //안해줘도 되지만, 이걸하면 깜박임이 사라져 UX가 좋아진다.
+                // commit('removeItem', item); //안해줘도 되지만, 이걸하면 깜박임이 사라져 UX가 좋아진다.
                 const res = await axios.patch(this._vm.$api+'/item/delete/'+item._id, item)
-                const { code, msg, items } = res.data;
+                const { code, msg } = res.data;
                 if(code == "200"){
-                    commit(FETCH_MY_ALL_ITEM_LIST, items);
+                    this.dispatch('fetchMyAllItemList');
                 }
             } catch (e) {
                 console.error(e);

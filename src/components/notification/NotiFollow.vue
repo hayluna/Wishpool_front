@@ -5,16 +5,18 @@
         </div>
         <div class="desc">
             <div class="text">
-                <span class="user-name">{{noti.from}}</span>님이 팔로우합니다. <span class="date">{{date}}</span>
+                <span class="user-name">{{noti.from}}</span>님이 팔로우합니다. <span class="date">{{date||now}}</span>
             </div>
         </div>
-        <div class="close-area">
-            <v-icon name="x" class="icon-close" @click="onClose"></v-icon>
+        <div class="close-area" @click="onClose">
+            <v-icon name="x" class="icon-close"></v-icon>
         </div>
         <!-- <div id="snackbar">{{ item.itemName }}의 링크가 복사되었습니다!<br>친구와 공유해보세요!</div> -->
     </div>
 </template>
 <script>
+import store from '../../store';
+const { dispatch } = store;
 export default {
     name: 'NotiFollow',
     props: ['noti'],
@@ -51,19 +53,21 @@ export default {
                 time += minus+"분 ";
                 return time += '전';
             }
+        },
+        now(){
+            return '방금 전';
         }
     },
     methods:{
         onClose(){
             (async()=>{
                 try {
-                    await dispatch('removeNotiItem', nid);
+                    await dispatch('removeNotiItem', this.noti._id);
                     this.$bus.$emit('onClose', this.noti._id);  
                 } catch (e) {
                     console.error(e);
                 }
             })();
-           
         }
     }
 }

@@ -37,9 +37,6 @@ export default {
     increaseNoti(state){
         state.notiNum = state.notiNum+1;
     },
-    removeNoti(state){
-        state.notiNum = 0;
-    },
     startLoading(state){
         state.loading = true;
     },
