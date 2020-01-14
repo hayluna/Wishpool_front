@@ -31,7 +31,10 @@ router.beforeEach(async (to, from, next)=>{
     if(store.getters.isLoggedIn){
         next();
       }else{
-        next('/');
+        next({name:'login'});
+      }
+      if(store.state.status == 'error'){
+        next({name:'login'})
       }
   }else{ //인증을 필요하지 않는 곳이라면 그냥 통과시켜준다.
     next(); 

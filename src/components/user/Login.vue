@@ -8,8 +8,9 @@
             <!-- <div class="logo-area">WISHPOOL</div> -->
             <div class="form-login">
                 <h3>로그인</h3>
-                <div class="input-item"><input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" /></div>
-                <div class="input-item"><input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" /></div>
+                <div class="input-item" ref="id" style="margin-top:1rem;"><input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" /></div>
+                <div class="input-item" ref="pwd" style="margin-bottom:1.5rem;"><input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" /></div>
+                <div class="error-box" v-if="isError">{{errorMsg}}</div>
                 <a @click="onSubmit">로그인</a>
             </div>
             <div class="footer"><a @click="register">회원가입</a></div>
@@ -41,7 +42,9 @@ export default {
     },
     data(){
         return {
-            user: {}
+            user: {},
+            isError: false,
+            errorMsg: '',
         }
     },
     methods:{
@@ -49,9 +52,23 @@ export default {
             this.$router.push({name:'register'});
         },
         onSubmit(){
+            if(this.$refs.id ==''){
+                //아이디를 입력해주세요 스낵바
+                this.$refs.id.focus();
+            }
+            if(this.$refs.pwd ==''){
+                //비밀번호를 입력해주세요 스택바
+                this.$refs.pwd.focus();
+            }
             (async()=>{
                 await dispatch('login', this.user);
-                this.$router.push({name:'followList', params:{userId:state.userId}})
+                if(getters.isLoggedIn){
+                    this.$router.push({name:'followList', params:{userId:state.userId}})
+                }else{
+                    this.isError = true;
+                    this.errorMsg = state.loginErrMsg
+                }
+                
             })();
             
         }
@@ -134,6 +151,7 @@ export default {
             cursor: pointer;
             &:hover{
                 background: $dark-gray;
+                text-decoration: none;
             }
         }
     }
@@ -160,11 +178,16 @@ export default {
             }
         }
     }
-
+    .error-box{
+        margin-top: 0.5rem;
+        color: $margenta;
+        font-size: 1.3rem;
+        @include flex-center();
+    }
     //desktop, tablet
-    @media (min-width:420px){
+    @media (min-width:450px){
         .white-box{
-            width: 400px;
+            width: 350px;
         }
         .logo-area{
             font-size: 1.2rem;
@@ -173,10 +196,10 @@ export default {
             h3{
                 font-size:1.3rem;
             }
-
         }
         .welcome{
-            width: 450px;
+            width: 350px;
         }
     }
+
 </style>

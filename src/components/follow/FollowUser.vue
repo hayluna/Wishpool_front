@@ -63,7 +63,7 @@ export default {
     font-size: 1.5rem;
 }
 .user-icon{
-        color: #999ca3;
-        width: 3rem;
+        color: gray;
+        width: 2.4rem;
     }
 </style>

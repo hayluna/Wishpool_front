@@ -82,7 +82,7 @@ export default{
                     me: state.myProfile,
                     other: user
                 }
-                await axios.patch(this._vm.$api+'/follow/update/'+state.userId, payload);
+                await axios.patch(this._vm.$api+'/follow/add/'+state.userId, payload);
                 const res = await axios.post(this._vm.$api+'/noti/follow/'+payload.other._id, payload);//상대방의 notiList에 저장
                 if(res.data.code==200){
                     this._vm.$socket.emit('follow-add', payload);
@@ -91,9 +91,6 @@ export default{
                 console.error(e);
             }
         })();
-    },
-    increaseNoti({ commit }){
-        return commit('increaseNoti');
     },
     notiAllRead({commit}){
         state.notiList.forEach(noti=>{noti.haveRead = true;});
@@ -134,7 +131,7 @@ export default{
                     me: state.myProfile,
                     other: user
                 }
-                await axios.patch(this._vm.$api+'/follow/update/'+state.userId, payload);
+                await axios.patch(this._vm.$api+'/follow/remove/'+state.userId, payload);
             } catch (e) {
                 console.error(e);
             }
@@ -192,6 +189,9 @@ export default{
                     const { token, newUser } = payload;
                     localStorage.setItem('wishToken', token);
                     await commit('auth_success', {token, userId:newUser._id}); // state.userId = _id; (ObjectId)
+                    this.dispatch('fetchNotiList');
+                    this.dispatch('toggleFooterShow', true);
+                    this.dispatch('tab1');
                 }else{
                     commit('register_error', msg);
                 }
@@ -209,8 +209,10 @@ export default{
                 localStorage.setItem('wishToken', token);
                 await commit('auth_success', {token, userId:user._id});
                 this.dispatch('fetchNotiList');
+                this.dispatch('toggleFooterShow', true);
+                this.dispatch('tab1');
             }else{
-                console.log(code+': '+msg);
+                commit('login_error', msg);
             }
 
         })();
@@ -227,6 +229,7 @@ export default{
                 if(code=="200"){ //서버에서 유효한 사용자라고 판단이 났다면,
                     await commit('auth_success', {token, userId:user._id});
                     await this.dispatch('fetchNotiList');
+                    this.dispatch('toggleFooterShow', true);
                     resolve(res);
                 }else{
                     await commit('auth_error');
@@ -243,7 +246,7 @@ export default{
         return (async()=>{
             try {
                 await commit('auth_success', payload);
-                this._vm.$socket.emit('uid', payload._id);
+                this._vm.$socket.emit('uid', payload._id);         
             } catch (e) {
                 console.error(e);
             }
@@ -253,6 +256,7 @@ export default{
     logout({commit}){
         localStorage.removeItem('wishToken');
         commit('logout');
+        this.dispatch('toggleFooterShow', false);
     },
     updateSid({ commit }, sid){
         commit('update_sid', sid);
@@ -269,4 +273,7 @@ export default{
     tab4({ commit }){
         commit('tab4');
     },
+    toggleFooterShow({ commit }, value){
+        commit('toggleFooterShow', value);
+    }
 }

@@ -70,6 +70,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     font-family: $font-stack;
+    cursor: pointer;
 }
 .thumb{
     width: 4.5rem;
@@ -98,7 +99,7 @@ export default {
     height: 3.5rem;
     border-radius: 100%;
     padding-left: 0.3rem;
-    
+    cursor: pointer;
     @include flex-center();
     .user-plus, .user-check{
         color:white;
@@ -108,7 +109,19 @@ export default {
     }
 }
 .user-icon{
-        color: #999ca3;
-        width: 3rem;
+    color: #999ca3;
+    width: 3rem;
+}
+
+@media (min-width: 450px) {
+    .person{
+        width: 4rem;
+        height: 4rem;
+        .user-plus, .user-check{
+        width: 1.9rem;
+        height: 1.9rem;
     }
+    }
+    
+}
 </style>

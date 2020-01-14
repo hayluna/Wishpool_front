@@ -24,9 +24,9 @@
                     </g>
                     </svg>
                 </div>
-                <div class="title">위시리스트</div>
+                <div class="title">내 위시리스트</div>
                 <div class="add-button" @click="onInsert">
-                    <span class="add-text">추가</span>
+                    <!-- <span class="add-text">추가</span> -->
                     <div class="plus-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"/></svg>
                     </div>
@@ -64,7 +64,7 @@
                     </li>
                 </ul>
                 <div v-if="isDoneEmpty" class="empty-list">
-                    <div class="person"><v-icon name="edit-3"></v-icon></div>
+                    <div class="person"><v-icon name="shopping-bag"></v-icon></div>
                     <br>아직 완료된 아이템이 없네요!
                 </div>
             </div>
@@ -209,6 +209,7 @@ export default {
     .nav{
         flex:1;
         padding-top: 0.2rem;
+        cursor: pointer;
     }
     .title{
         flex:1;
@@ -228,6 +229,12 @@ export default {
             font-size: 1.4rem;
             margin-right: 5px;
             color: #3a404a;
+            &:hover{
+                color: black;
+            }
+            &:active{
+                font-weight: 800;
+            }
         }
         .plus-button{
             border-radius: 100%;
@@ -236,9 +243,21 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0px 3px 5px lightgray;
+            border: 1px solid black;
             margin-left: 0.2rem;
-            fill: #999ca3;
+            fill: black;
+            &:hover{
+                    border-color: $margenta;
+                svg{
+                    fill: $margenta;
+                }
+            }
+            &:active{
+                    border-color: $red;
+                svg{
+                    fill: $red;
+                }
+            }
         }
     }
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
@@ -281,6 +300,7 @@ export default {
     .tab-content, .tab-pane{
         height: 100%;
     }
+    
     .empty-list{
         width: 100%;
         height: 100%;
@@ -300,6 +320,11 @@ export default {
             height: 2.2rem;
             @include flex-center();
         }
+        
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        cursor: pointer;
     }
     /* The side navigation menu */
     .sidenav {
@@ -317,12 +342,12 @@ export default {
 
     /* Position and style the close button (top right corner) */
     .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    padding-left: 5rem;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        padding-left: 5rem;
     }
     
     /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -336,22 +361,19 @@ export default {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
     }
-    @media (min-width:420px){
-        .fix-top{
-            width: 50rem;
-        }
+   @media (min-width:450px){
         .header{
-            height: 6rem;
+            height: 5.5rem;
             padding: 0 1.5rem 0 1.5rem;
         }
         .title{
-            font-size: 2rem;
+            font-size: 1.7rem;
         }
         .nav-tabs-wide{
             font-size: 1.5rem;
         }
         .add-button .add-text{
-            font-size: 1.7rem;
+            font-size: 1.5rem;
         }
     }
 </style>

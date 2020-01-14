@@ -12,17 +12,21 @@
         <div class="area">
             <div class="noti-header">
                 <div class="text">
-                    <div class="name">안녕하세요 {{ myProfile.nickName }}님,</div>
+                    <div class="name">안녕하세요 {{ myProfile.nickname }}님,</div>
                 </div>
-                <div> 안 읽은 메세지가 <span class="num">{{notiNum}}</span>개 있어요</div>
+                <div style="font-weight:200; color:black;"> 안 읽은 메세지가 <span class="num">{{notiNum}}</span>개 있어요</div>
             </div>
             <div class="noti-contents">
-                <ul>
+                <ul v-if="!isListEmpty">
                     <li v-for="noti in notiList" :key="noti._id">
                         <noti
                         :noti="noti" />
                     </li>
                 </ul>
+                <div v-if="isListEmpty" class="empty-list">
+                    <div class="person"><v-icon name="check"></v-icon></div>
+                    <br>모든 알림을 확인하셨네요!
+                </div>
             </div>
         </div>
     </div>
@@ -75,6 +79,12 @@ export default {
         },
         notiNum(){
             return getters.notiNum;
+        },
+        isListEmpty(){
+            if(this.notiList.length == 0){
+                return true;
+            }
+            return false;
         }
     },
 }
@@ -85,6 +95,7 @@ export default {
         background: white;
         height: 100%;
         font-family: $font-stack;
+        color: black;
     }
     .fix-top{
         position: fixed;
@@ -115,6 +126,10 @@ export default {
         font-weight: bolder;
         font-size: 1.6rem;
     }
+    .name{
+        color: black;
+        font-weight: 800;
+    }
     .area{
         height: 100%;
         // overflow: scroll;
@@ -126,11 +141,10 @@ export default {
         font-weight: bold;
         font-size: 1.6rem;
         display: flex;
-        justify-content: center;
-        height: 10rem;
+        justify-content: flex-start;
         flex-direction: column;
         border-bottom: 1px solid lightgray;
-        padding: 4rem;
+        padding: 2rem 4rem;
         margin-bottom: 1rem;
     }
     .noti-contents{
@@ -139,7 +153,7 @@ export default {
         height: 100%;
     }
     .text{
-        color: $dark-gray;
+        color: black;
         font-weight: bold;
     }
     .num{
@@ -147,12 +161,47 @@ export default {
         font-weight: bold;
     }
     ul{
-        height: 100%;
         padding: 0.5rem;
         z-index: 0;
         // overflow: scroll;
     }
     li{
         list-style: none;
+    }
+    .empty-list{
+        width: 100%;
+        height: 100%;
+        @include flex-center();
+        font-size: 1.5rem;
+        text-align: center;
+        margin-top: -8rem;
+    }
+    .person{
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 100%;
+        background: $green;
+        @include flex-center();
+        svg{
+            color:white;
+            width: 2.2rem;
+            height: 2.2rem;
+            @include flex-center();
+        }
+    }
+    @media (min-width:450px){
+        .header{
+            height: 5.5rem;
+            padding: 0 1.5rem 0 1.5rem;
+        }
+        .title{
+            font-size: 1.7rem;
+        }
+        .nav-tabs-wide{
+            font-size: 1.5rem;
+        }
+        .area{
+            padding-top: 5.5rem;
+        }
     }
 </style>

@@ -215,7 +215,12 @@ export default {
         width: 5rem;
         height: 5rem;
         border-radius: 100%;
-        
+        &:hover{
+            opacity: 0.7;
+        }
+        &:active{
+            opacity: 1;
+        }
         @include flex-center();
         .user-plus, .user-check{
             color:white;

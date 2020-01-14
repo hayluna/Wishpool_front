@@ -8,18 +8,18 @@
             <!-- <div class="logo-area">WISHPOOL</div> -->
             <div class="form">
                 <!-- <h3>회원가입</h3> -->
-                <div class="input-box"><span class="border-middle"></span><span>필수 입력</span><span class="border-middle"></span></div>
+                <div class="input-box" style="margin-top:0.5rem;"><span>필수 입력</span><span class="border-middle"></span></div>
                 <div class="input-item"><input type="text" ref="id" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" /><div @click="clearId" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 <div class="input-item"><input type="password" ref="pwd" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" /><div @click="clearPwd" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 <div class="input-item"><input type="password" ref="confirmPwd" v-model="confirmPassword" style="margin-top: 1.5rem;" placeholder="비밀번호 확인" /><div @click="clearPwdConfirm" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
-                <div class="input-item"><input type="text" ref="phone" class="phoneNumber" @keydown="regex" v-model="user.phone" style="margin-top: 1.5rem;" placeholder="'-'없이 전화번호만 입력" /><div @click="clearPhone" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
+                <div class="input-item"><input type="text" ref="nickname" v-model="user.nickname" style="margin-top: 1.5rem;" placeholder="이름 혹은 닉네임 입력" /><div @click="clearNickname" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
+                <div class="input-item"><input type="text" ref="phone" class="phoneNumber" v-model="user.phone" style="margin-top: 1.5rem;" placeholder="전화번호 입력 : '-'없이 숫자만 입력" /><div @click="clearPhone" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 
-                <div class="input-box" style="margin-top:2rem;"><span class="border-middle"></span><span>선택 입력</span><span class="border-middle"></span></div>
-                <div class="input-item"><input type="text" ref="nickname" v-model="user.nickname" style="margin-top: 1.5rem;" placeholder="닉네임" /><div @click="clearNickname" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
+                <div class="input-box" style="margin-top:4rem;"><span>선택 입력</span><span class="border-middle"></span></div>
                 <div class="input-item"><input type="text" ref="address" v-model="user.address" style="margin-top: 1.5rem;" placeholder="주소" /><div @click="clearAddress" class="x-circle"><v-icon name="x-circle"></v-icon></div></div>
                 <!-- <input type="checkbox" v-model="isChecked"> 입력한 내용은 테스트용데이터이며, 실제정보를 입력하지 않아야합니다. -->
                 <div class="error-box" v-if="isError">{{errorMsg}}</div>
-                <a @click="onSubmit">회원가입</a>
+                <a @click="onSubmit" style="margin-top:3rem;">회원가입</a>
             </div>
             <div class="footer"><a @click="login">로그인</a></div>
         </div>
@@ -38,7 +38,13 @@ export default {
                 phone: '',
                 nickname: '',
                 address:'',
-                entryType: 't' //테스트용 사용자
+                entryType: 't', //테스트용 사용자
+                profileImgPath: '',
+                profileImgName: '',
+                profileMsg:'',
+                followingId: [],
+                followerId: [],
+                email:''
             },
             confirmPassword:'',
             isError: false,
@@ -48,10 +54,12 @@ export default {
     created(){
         // $(document).on("keyup", ".phoneNumber", function() { $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-") ); });
     },
+    filters:{
+        // regex(val){
+        //     return val.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-");
+        // }
+    },
      methods:{
-        regex(){
-            this.user.phone = this.user.phone.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{3})/,"$1-$2-$3").replace("--", "-");
-        },
         login(){
             this.$router.push({name:'login'});
         },
@@ -121,7 +129,7 @@ export default {
             (async()=>{
                 await dispatch('register', this.user);
                 if(getters.isLoggedIn){
-                    alert('회원가입에 성공하였습니다.');
+                    this.$bus.$emit('globlaMsg', '회원가입에 성공하였습니다.');
                     return this.$router.push({name:'followList', params:{userId:state.userId}});
                 }else{
                     this.isError = true;
@@ -195,6 +203,9 @@ export default {
             border-bottom: 1px solid #adb5bd;
             padding-bottom: 0.5rem;
             font-family: inherit;
+            &::placeholder{
+                color: darkgray;
+            }
             &:focus{
                 border-bottom: 1px solid $dark-gray;
                 color: $dark-gray;
@@ -235,14 +246,15 @@ export default {
         width: 100%;
         flex-direction: row;
         span{
-            font-size: 1.3rem;
-            color: darkgray;
+            font-size: 1.6rem;
+            color: gray;
+            font-weight: 800;
         }
     }
     .border-middle{
-        height: 50%;
-        width: 30%;
-        border-top: 1px solid lightgray;
+        // height: 50%;
+        // width: 30%;
+        // border-top: 1px solid lightgray;
     }
     .error-box{
         margin-top: 1.5rem;
@@ -258,6 +270,7 @@ export default {
         &:focus-within, &:active{
          .x-circle{
             visibility: visible;
+            cursor: pointer;
             //  svg{
             //  }
          }   
@@ -283,9 +296,9 @@ export default {
         }
     }
     //desktop, tablet
-    @media (min-width:420px){
+    @media (min-width:450px){
         .white-box{
-            width: 400px;
+            width: 350px;
         }
         .logo-area{
             font-size: 1.2rem;
@@ -296,7 +309,7 @@ export default {
             }
         }
         .welcome{
-            width: 450px;
+            width: 350px;
         }
     }
 </style>

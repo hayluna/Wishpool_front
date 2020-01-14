@@ -5,9 +5,13 @@
             <div class="header">
                 <div class="empty"></div>
                 <div class="title">
-                    친구목록
+                    내 친구목록
                 </div>
-                <span @click="findFollow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+                <span @click="findFollow" class="search-icon">
+                    <div class="plus-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"/></svg>
+                    </div>
+                </span>
             </div>
             <div class="user-me" @click="getMyProfile" data-toggle="modal" data-target="#profile">
                 <div class="thumb">
@@ -38,7 +42,7 @@
                     </li>
                 </ul>
                 <div v-if="isFollowEmpty" class="empty-list">
-                    <div class="person"><v-icon name="user-plus"></v-icon></div>
+                    <div class="person" @click="findFollow"><v-icon name="user-plus"></v-icon></div>
                     <br>팔로우 할 친구를 찾아보세요!
                 </div>
             </div>
@@ -162,6 +166,9 @@ export default {
     }
     .empty{
         flex:1;
+        display:flex;
+        align-items: center;
+        justify-content: center;
     }
     .title{
         flex:1;
@@ -169,6 +176,11 @@ export default {
         text-align: center;
         font-weight: bolder;
         font-size: 1.6rem;
+    }
+    .search-icon{
+        cursor: pointer; 
+        display: flex;
+        justify-content: flex-end;
     }
     .user-icon{
         color: #999ca3;
@@ -207,6 +219,14 @@ export default {
     }
     .ul-item{
         padding: 0 1rem;
+        li{
+            list-style: none;
+            cursor: pointer;
+            &:hover{
+                background: rgba(0,0,0, 0.1);
+            }
+        }
+        
     }
     .user-me{
         display: flex;
@@ -215,6 +235,7 @@ export default {
         border-bottom: 1px solid lightgray;
         padding: 2.3rem 1.7rem;
         margin: 0 1.5rem;
+        cursor: pointer;
     }
     .thumb{
         width: 4.5rem;
@@ -232,6 +253,10 @@ export default {
             object-fit: cover;
             border-radius: 100%;
         }
+        svg{
+            color: gray;
+            width: 2.4rem;
+        }
     }
     .name{
         font-size: 1.5rem;
@@ -245,6 +270,7 @@ export default {
         @include flex-center();
         font-size: 1.5rem;
         text-align: center;
+        margin-top: -3rem;
     }
     .person{
         width: 4.5rem;
@@ -252,6 +278,10 @@ export default {
         border-radius: 100%;
         background: $green;
         @include flex-center();
+        cursor: pointer;
+        &:active{
+            background: gray;
+        }
         svg{
             color:white;
             width: 2.2rem;
@@ -259,23 +289,37 @@ export default {
             @include flex-center();
         }
     }
-    @media (min-width:420px){
-        
-        .fix-top{
-            width: 50rem;
+    .plus-button{
+        border-radius: 100%;
+        width:2rem;
+        height:2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        margin-left: 0.2rem;
+        fill: black;
+        &:hover{
+            fill: $primary-color;
+            border-color: $primary-color;
+            opacity: 0.8;
         }
+        &:active{
+            opacity: 1;
+        }
+    }
+    @media (min-width:450px){
         .header{
-            height: 6rem;
+            height: 5.5rem;
             padding: 0 1.5rem 0 1.5rem;
         }
         .title{
-            font-size: 2rem;
+            font-size: 1.7rem;
         }
         .nav-tabs-wide{
             font-size: 1.5rem;
         }
     }
-    li{
-        list-style: none;
-    }
+    
+    
 </style>

@@ -2,8 +2,8 @@
     <div class="view">
         <div class="header">
             <div class="nav">
-                <div class="back" @click="onBack">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+                <div class="back">
+                    <svg @click="onBack" style="z-index:5;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@ export default {
     name: 'FollowSearch',
     beforeRouteEnter(to, from, next){
         next( vm =>{
-            console.log(getters.myProfile);
+            dispatch('toggleFooterShow', false);
             vm.user = getters.myProfile;
         });
     },
@@ -55,6 +55,7 @@ export default {
     methods:{
         onBack(){
             this.$router.go(-1);
+            dispatch('toggleFooterShow', true);
         },
         clear(){
             this.query = '';
@@ -66,11 +67,6 @@ export default {
                 this.$refs.inputBox.focus();
                 return false;
             }
-            // this.$refs.text.style.display = 'none';
-            // this.$refs.contents.style.justifyContent = 'flex-start';
-            // this.$refs.contents.style.marginTop = '0';
-            // this.hasSearched = true;
-            // const data = 
             (async()=>{
                  try {
                     await dispatch('fetchQuery', {query : this.query, _id : this.user._id });
@@ -93,6 +89,7 @@ export default {
         flex-direction: column;
         justify-self: flex-start;
         font-family: $font-stack;
+        background: $primary-color;
     }
     .header{
         display: flex;
@@ -113,7 +110,12 @@ export default {
         border-radius: 5px;
         width: 2.5rem;
         height: 2.5rem;
+        cursor: pointer;
         @include flex-center();
+         &:hover{
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.1);
+        }
     }
     .contents{
         display: flex;
@@ -175,6 +177,14 @@ export default {
         border-left: 1px solid lightgray;
         @include flex-center();
         background: transparent;
+        cursor: pointer;
+        &:hover{
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0 10px 10px 0;
+            svg{
+                fill: white;
+            }
+        }
     }
     .result-box{
         margin-bottom: 10rem;
@@ -191,5 +201,17 @@ export default {
     .user-icon{
         color: #999ca3;
         width: 3rem;
+    }
+    @media (min-width:450px) {
+        .search-box{
+            height: 5.5rem;
+            .input-box{
+               height: 100%; 
+            }
+            input{
+               height: 100%; 
+               font-size: 1.7rem;
+            }
+        }
     }
 </style>

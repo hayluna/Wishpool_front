@@ -1,9 +1,13 @@
 <template>
-     <div id="complete" ref="complete"><div><v-icon name="check"></v-icon></div></div>
+     <div id="customSnackbar" ref="customSnackbar">
+         <div><v-icon name="check"></v-icon></div>
+         {{msg}}
+    </div>
 </template>
 <script>
 export default {
-    name: 'CompleteSnackbar'
+    name: 'CustomSnackbar',
+    props: ['msg']
 }
 </script>
 <style lang="scss" scoped>

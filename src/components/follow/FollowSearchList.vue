@@ -111,6 +111,10 @@ export default {
         border-radius: 5px;
         width: 2.5rem;
         height: 2.5rem;
+        cursor: pointer;
+        &:hover{
+            background:rgba(0, 0, 0, 0.1);
+        }
     }
     .title{
         text-align: center;
@@ -152,6 +156,9 @@ export default {
         width: 100%;
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #E7E7EB;
+        &:hover{
+            background: rgba(0, 0, 0, 0.1);
+        }
     }
     .empty-result{
         width: 100%;
@@ -171,6 +178,18 @@ export default {
             width: 2.5rem;
             height: 2.5rem;
             @include flex-center();
+        }
+    }
+    @media (min-width:450px){
+        .header{
+            height: 5.5rem;
+            padding: 0 1.5rem 0 1.5rem;
+        }
+        .title{
+            font-size: 1.7rem;
+        }
+        .nav-tabs-wide{
+            font-size: 1.5rem;
         }
     }
 </style>

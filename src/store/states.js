@@ -4,6 +4,7 @@ export default {
     status:'',
     sid:'',
     registerErrMsg : '',
+    loginErrMsg : '',
     query: '',
     myProfile:{}, //내 프로필의 followingId, followerId는 id목록이 아닌 populated된 객체임.
     myAllItemList: [],
@@ -30,4 +31,5 @@ export default {
         haveRead: false
     },
     notiNum: 0,
+    footerShow: false,
 }

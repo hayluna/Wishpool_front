@@ -4,22 +4,27 @@
             <router-view></router-view>
         </div>
         <div class="footer-nav">
-            <Footer v-if="isLogged" />
+            <Footer v-if="isLogged&&showFooter" />
         </div>
     </div>
 </template>
 <script>
 import Footer from './Footer.vue';
+import store from '../store';
+const { getters, state } = store;
 export default {
     name: 'PageTemplate',
     components:{
         'Footer': Footer,
     },
-    data(){
-        return{
-            isLogged: true
+    computed:{
+        isLogged(){
+            return getters.isLoggedIn;
+        },
+        showFooter(){
+            return state.footerShow;
         }
-    },
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -31,52 +36,24 @@ export default {
         background: $primary-color;
         position: sticky;
         font-family: $font-stack;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background: white;
     }
-
-    //desktop, tablet
-    @media (min-width:420px) {
-        .page-template{
-            width: 50rem;
-            height: 90rem;
-            margin: 0;
-            padding: 0;
-            overflow-y: scroll;
-            overflow-x: hidden;
-        }
-        .content{
-            flex: 1;
-        }
-        .footer-nav{
-            width: 50rem;;
-            height: 5rem;
-            position: fixed;
-            z-index: 1000;
-            margin-top: 85rem;
-            overflow: hidden;
-        }
+    .content{
+        flex:1;
     }
-
-    //mobile
-    @media (max-width: 420px){
-        .page-template{
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            background: white;
-        }
-        .content{
-            flex:1;
-        }
-        .footer-nav{
-            width: 100%;
-            height: 5rem;
-            position: fixed;
-            left:0;
-            bottom:0;
-            z-index:1000;
-        }
-
+    .footer-nav{
+        width: 100%;
+        height: 5rem;
+        position: fixed;
+        left:0;
+        bottom:0;
+        z-index:1000;
     }
+   
+
 </style>

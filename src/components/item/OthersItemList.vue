@@ -7,7 +7,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
                 </div>
             </div>
-            <div class="title">위시리스트</div>
+            <div class="title">{{currentUser.nickname}}님의 위시리스트</div>
             <div class="empty"></div>
         </div>
             <ul class="nav nav-tabs nav-tabs-wide">
@@ -18,30 +18,38 @@
         <div class="tab-content">
             <!-- 아이템 목록 -->
             <div class="tab-pane active" id="wish">
-                <ul class="ul-item">
+                <ul v-if="!isWishEmpty" class="ul-item">
                     <li v-for="item in wishItems" :key="item._id">
                         <item 
                         :item="item"
                         @onClick="handleClick" />
                     </li>
                 </ul>
+                <div v-if="isWishEmpty" class="empty-list">
+                    <div class="person"><v-icon name="heart"></v-icon></div>
+                    <br>아직 추가된 아이템이 없네요!
+                </div>
             </div>
             <!-- 완료 목록 -->
             <div class="tab-pane" id="done">
-                <ul class="ul-item">
+                <ul class="ul-item" v-if="!isDoneEmpty">
                      <li v-for="item in doneWishItems" :key="item._id">
                         <item 
                         :item="item"
                         @onClick="handleClick" />
                     </li>
                 </ul>
+                <div v-if="isDoneEmpty" class="empty-list">
+                    <div class="person"><v-icon name="heart"></v-icon></div>
+                    <br>아직 완료된 아이템이 없네요!
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
 import store from '../../store';
-const { getters, dispatch } = store;
+const { getters, dispatch, state } = store;
 import OthersItem from './OthersItem.vue';
 export default {
     name: 'OthersItemList',
@@ -54,6 +62,21 @@ export default {
         },
         doneWishItems(){
             return getters.othersDoneList;
+        },
+        currentUser(){
+            return state.currentUser;
+        },
+        isWishEmpty(){
+            if(this.wishItems.length == 0){
+                return true;
+            }
+            return false;
+        },
+        isDoneEmpty(){
+            if(this.doneWishItems.length == 0){
+                return true;
+            }
+            return false;
         },
     },
     beforeRouteEnter(to, from, next){
@@ -113,6 +136,7 @@ export default {
         border-radius: 5px;
         width: 2.5rem;
         height: 2.5rem;
+        cursor: pointer;
     }
     .empty{
         flex:1;
@@ -185,6 +209,29 @@ export default {
             list-style: none;
         }
     }
+    .tab-content, .tab-pane{
+        height: 100%;
+    }
+    .empty-list{
+        width: 100%;
+        height: 100%;
+        @include flex-center();
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .person{
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 100%;
+        background: $link-blue;
+        @include flex-center();
+        svg{
+            color:white;
+            width: 2.2rem;
+            height: 2.2rem;
+            @include flex-center();
+        }
+    }
     /* The side navigation menu */
     .sidenav {
     height: 100%; /* 100% Full-height */
@@ -220,22 +267,16 @@ export default {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
     }
-    @media (min-width:420px){
-        .fix-top{
-            width: 50rem;
-        }
+   @media (min-width:450px){
         .header{
-            height: 6rem;
+            height: 5.5rem;
             padding: 0 1.5rem 0 1.5rem;
         }
         .title{
-            font-size: 2rem;
+            font-size: 1.7rem;
         }
         .nav-tabs-wide{
             font-size: 1.5rem;
-        }
-        .add-button .add-text{
-            font-size: 1.7rem;
         }
     }
 </style>

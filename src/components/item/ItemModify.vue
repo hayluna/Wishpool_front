@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">아이템 가격</span>
+                <span class="small-title"><v-icon name="dollar-sign"></v-icon>아이템 가격</span>
                 <div class="input-item" style="font-weight: bold;">
                     <input type="text" ref="price" v-model="item.itemPrice" style="width:80%; margin-right:1rem; font-weight: normal; display:inline;" placeholder="숫자만 입력해주세요"/>
                     <svg @click="clearPrice" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
@@ -26,14 +26,14 @@
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">링크</span>
+                <span class="small-title"><v-icon name="link"></v-icon>링크</span>
                 <div class="input-item">
                     <input type="text" ref="link" v-model="item.itemLink" placeholder="링크를 입력해주세요"/>
                     <svg @click="clearLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">공개설정</span>
+                <span class="small-title"><v-icon name="user"></v-icon>공개설정</span>
                 <div class="btn-group btn-group-toggle" style="width:100%; display:flex; margin-top:1.5rem; border-radius:10px; box-shadow: 0 3px 6px lightgray;" data-toggle="buttons">
                     <label :class="[btnClass, {active:isActive}]" @click="toggleVisibility">
                         <input type="radio" name="jb-radio" id="public" value="public"> 공개
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">사진 수정하기</span>
+                <span class="small-title"><v-icon name="image"></v-icon>사진 수정하기</span>
                 <!-- <div class="pic">
                     <svg style="margin-right:1rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><circle cx="12" cy="12" r="3"/><path d="M20 4h-3.17l-1.24-1.35c-.37-.41-.91-.65-1.47-.65H9.88c-.56 0-1.1.24-1.48.65L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
                     사진 추가하기
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">메모</span>
+                <span class="small-title"><v-icon name="edit-3"></v-icon>메모</span>
                 <textarea v-model="item.itemMemo"></textarea>
             </div>
             <div class="btn-area">
@@ -207,6 +207,15 @@ export default {
         border-radius: 5px;
         width: 2.5rem;
         height: 2.5rem;
+        cursor: pointer;
+        &:hover{
+            border-color: lightgray;
+            fill: lightgray;
+        }
+        &:active{
+            border-color: black;
+            fill: black;
+        }
     }
     .title{
         text-align: center;
@@ -216,6 +225,11 @@ export default {
     }
     .empty{
         flex:1;
+        display: flex;
+        justify-content: flex-end;
+        &:hover, &:active{
+            color: $margenta;
+        }
     }
     .contents{
         padding: 3rem;
@@ -225,6 +239,13 @@ export default {
         display: block;
         color: #999CA3;
         font-size: 1.7rem;
+        display:flex;
+        align-items: center;
+        svg{
+            width: 1.7rem;
+            height: 1.7rem;
+            margin-right: 0.6rem;
+        }
     }
     .cont {
         margin-top: 5rem;
@@ -248,6 +269,7 @@ export default {
         }
         input{
             outline: none;
+            border: none;
             margin-top: 0.5rem;
             width: 90%;
             background: transparent;
@@ -271,6 +293,7 @@ export default {
         color: #333333;
         border-radius: 5px;
         padding: 1rem;
+        width: 100%;
     }
     label{
         flex:1;
@@ -346,6 +369,9 @@ export default {
         width:100%;
         height: 15rem;
         padding: 1rem;
+        &::placeholder{
+            color: lightgray;
+        }
     }
     .btn-area{
         width: 100%;
@@ -375,13 +401,13 @@ export default {
             }
         }
     }
-    @media (min-width: 420px){
+      @media (min-width:450px){
         .header{
-            width: 50rem;
+            height: 5.5rem;
+            padding: 0 1.5rem 0 1.5rem;
         }
-        label{
-            height: 4.5rem;
-            @include flex-center();
+        .title{
+            font-size: 1.7rem;
         }
     }
 </style>

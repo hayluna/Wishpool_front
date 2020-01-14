@@ -167,6 +167,7 @@ export default {
         border-radius: 5px;
         width: 2.5rem;
         height: 2.5rem;
+        cursor: pointer;
     }
     .title{
         text-align: center;

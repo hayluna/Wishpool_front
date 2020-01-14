@@ -34,9 +34,6 @@ export default {
     [FETCH_NOTI_LIST](state, notis){
         state.notiList = notis;
     },
-    increaseNoti(state){
-        state.notiNum = state.notiNum+1;
-    },
     startLoading(state){
         state.loading = true;
     },
@@ -71,6 +68,9 @@ export default {
     register_error(state, msg){
         state.registerErrMsg = msg;
     },
+    login_error(state, msg){
+        state.loginErrMsg = msg;
+    },
     logout(state){
         state.status = ''
         state.token = '';
@@ -103,4 +103,7 @@ export default {
         state.tab3 = false;
         state.tab4 = true;
     },
+    toggleFooterShow(state, value){
+        state.footerShow = value;
+    }
 }

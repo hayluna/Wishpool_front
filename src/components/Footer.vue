@@ -70,6 +70,7 @@ export default {
         display:flex;
         justify-content: center;
         color: $sky-gray;
+        fill: $sky-gray;
         cursor: pointer;
         svg{
             width: 2.3rem;
@@ -145,5 +146,12 @@ export default {
         height: 1.6rem;
         margin-left: 1.35rem;
         margin-top: -0.6rem;
+    }
+    //desktop, tablet
+    @media (min-width:450px) {
+        .selected1, .selected2, .selected3{
+            width: 4rem;
+            height: 4rem;
+        }
     }
 </style>

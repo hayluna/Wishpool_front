@@ -13,7 +13,9 @@ import FollowList from '@/components/follow/FollowList.vue'
 import FollowSearch from '@/components/follow/FollowSearch.vue'
 import FollowSearchList from '@/components/follow/FollowSearchList.vue'
 import NotiList from '@/components/notification/NotiList.vue'
+import ProfileModify from '@/components/profile/ProfileModify.vue'
 import More from '@/components/setting/More.vue'
+import PageNotFound from '@/components/PageNotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -32,7 +34,9 @@ const routes = [
   { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch', meta: { requiresAuth: true } },
   { path:'/follow/searchList', component:FollowSearchList, name:'followSearchList', meta: { requiresAuth: true } },
   { path:'/noti/list/:userId', component:NotiList, name:'notiList', meta: { requiresAuth: true } },
+  { path:'/profile/modify/:userId', component:ProfileModify, name:'profileModify', meta: { requiresAuth: true } },
   { path:'/more/:userId', component:More, name:'more', meta: { requiresAuth: true } },
+  { path: '*', component: PageNotFound, name:'404'}
 ]
 
 const router = new VueRouter({
