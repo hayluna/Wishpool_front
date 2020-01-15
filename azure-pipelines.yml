@@ -23,10 +23,3 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs: 
     pathtoPublish: $(build.artifactstagingdirectory) # dist or build files
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: '<Azure service connections>'
-    appName: '<Name of web app>'
-    package: '$(System.DefaultWorkingDirectory)'
-    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
