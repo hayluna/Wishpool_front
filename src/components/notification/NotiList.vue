@@ -18,7 +18,7 @@
             </div>
             <div class="noti-contents">
                 <ul v-if="!isListEmpty">
-                    <li v-for="noti in notiList" :key="noti._id">
+                    <li v-for="noti in notiList" :key="noti._id" :class="{unread : !noti.haveRead}">
                         <noti
                         :noti="noti" />
                     </li>
@@ -145,7 +145,6 @@ export default {
         flex-direction: column;
         border-bottom: 1px solid lightgray;
         padding: 2rem 4rem;
-        margin-bottom: 1rem;
     }
     .noti-contents{
         z-index: 0;
@@ -157,16 +156,21 @@ export default {
         font-weight: bold;
     }
     .num{
-        color: $dark-gray;
+        color: $green;
         font-weight: bold;
     }
     ul{
-        padding: 0.5rem;
+        padding: 1rem;
         z-index: 0;
         // overflow: scroll;
     }
     li{
         list-style: none;
+        padding: 0.3rem;
+        margin-top: 0.5rem;
+        &:hover, &:active{
+            background-color: rgba(100, 100, 100, 0.05);
+        }
     }
     .empty-list{
         width: 100%;
@@ -188,6 +192,10 @@ export default {
             height: 2.2rem;
             @include flex-center();
         }
+    }
+    .unread{
+        background: rgba(100, 100, 100, 0.05);
+        border-radius: 10px;
     }
     @media (min-width:450px){
         .header{

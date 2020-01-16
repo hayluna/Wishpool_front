@@ -1,5 +1,5 @@
 <template>
-    <div class="template-block">
+    <div class="template-block" @keydown.enter="onSubmit">
         <div class="welcome">
         <h1>안녕하세요,</h1>
         <p>Wishpool에 로그인을 해주세요!</p>
@@ -9,7 +9,7 @@
             <div class="form-login">
                 <h3>로그인</h3>
                 <div class="input-item" ref="id" style="margin-top:1rem;"><input type="text" v-model="user.userId" style="margin-top: 1.3rem;" placeholder="아이디" /></div>
-                <div class="input-item" ref="pwd" style="margin-bottom:1.5rem;"><input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호" /></div>
+                <div class="input-item" ref="pwd" style="margin-bottom:1.5rem;"><input type="password" v-model="user.password" style="margin-top: 1.5rem;" placeholder="비밀번호"/></div>
                 <div class="error-box" v-if="isError">{{errorMsg}}</div>
                 <a @click="onSubmit">로그인</a>
             </div>
@@ -90,7 +90,7 @@ export default {
 
     }
     .welcome{
-        width: 25rem;
+        width: 27rem;
         text-align: left;
         margin-top: -2rem;
         h1{
@@ -117,7 +117,7 @@ export default {
         border-radius: 7px;
         @include flex-center();
         flex-direction: column;
-        width: 25rem; //mobile;
+        width: 27rem; //mobile;
         color:black;
         margin-top: 0.5rem;
         font-size: 1.5rem;
@@ -187,7 +187,7 @@ export default {
     //desktop, tablet
     @media (min-width:450px){
         .white-box{
-            width: 350px;
+            width: 300px;
         }
         .logo-area{
             font-size: 1.2rem;
@@ -198,7 +198,7 @@ export default {
             }
         }
         .welcome{
-            width: 350px;
+            width: 300px;
         }
     }
 

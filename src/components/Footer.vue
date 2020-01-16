@@ -67,10 +67,10 @@ export default {
     }
     .footer-item{
         flex:1;
-        display:flex;
-        justify-content: center;
+        @include flex-center();
         color: $sky-gray;
         fill: $sky-gray;
+        height: 100%;
         cursor: pointer;
         svg{
             width: 2.3rem;

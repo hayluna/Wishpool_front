@@ -84,8 +84,8 @@ export default {
     }
 }
 .msg{
-        color: #bebebe;
-    }
+    color: #bebebe;
+}
 .name{
     color: black;
     font-weight: bold;
@@ -118,10 +118,9 @@ export default {
         width: 4rem;
         height: 4rem;
         .user-plus, .user-check{
-        width: 1.9rem;
-        height: 1.9rem;
+            width: 1.9rem;
+            height: 1.9rem;
+        }
     }
-    }
-    
 }
 </style>

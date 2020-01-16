@@ -105,5 +105,8 @@ export default {
     },
     toggleFooterShow(state, value){
         state.footerShow = value;
+    },
+    notiAllRead(state){
+        state.notiList.forEach(noti=>{noti.haveRead = true;});
     }
 }

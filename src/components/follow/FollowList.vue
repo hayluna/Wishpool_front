@@ -9,20 +9,25 @@
                 </div>
                 <span @click="findFollow" class="search-icon">
                     <div class="plus-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"/></svg>
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"/></svg> -->
+                        <!-- <v-icon name="search"></v-icon> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <span>+</span>
                     </div>
                 </span>
             </div>
             <div class="user-me" @click="getMyProfile" data-toggle="modal" data-target="#profile">
-                <div class="thumb">
-                    <img :src="myProfile.profileImgPath" v-if="!isError" @error="imgLoadError">
-                    <v-icon v-if="isError" name="user" class="user-icon"></v-icon>
-                </div>
-                <div class="desc">
-                    <div class="text">
-                        <span class="name">{{ myProfile.nickname }}</span>
+                <div class="user-con">
+                    <div class="thumb">
+                        <img :src="myProfile.profileImgPath" v-if="!isError" @error="imgLoadError">
+                        <v-icon v-if="isError" name="user" class="user-icon"></v-icon>
                     </div>
-                    <span class="msg">{{ myProfile.profileMsg }}</span>
+                    <div class="desc">
+                        <div class="text">
+                            <span class="name">{{ myProfile.nickname }}</span>
+                        </div>
+                        <span class="msg">{{ myProfile.profileMsg }}</span>
+                    </div>
                 </div>
             </div>
             <ul class="nav nav-tabs nav-tabs-wide">
@@ -181,6 +186,7 @@ export default {
         cursor: pointer; 
         display: flex;
         justify-content: flex-end;
+            margin-right: 0.5rem;
     }
     .user-icon{
         color: #999ca3;
@@ -222,20 +228,27 @@ export default {
         li{
             list-style: none;
             cursor: pointer;
-            &:hover{
-                background: rgba(0,0,0, 0.1);
-            }
+            border-bottom: 1px solid lightgray;
+            
         }
         
     }
     .user-me{
+        margin: 0 1.3rem;
+        height: 8rem;
+        border-bottom: 1px solid lightgray;
+    }
+    .user-con{
         display: flex;
         flex-direction: row;
         align-items: center;
-        border-bottom: 1px solid lightgray;
-        padding: 2.3rem 1.7rem;
-        margin: 0 1.5rem;
+        padding: 1.5rem 1.5rem;
+        margin: 1rem 0rem;
         cursor: pointer;
+         &:hover{
+            background-color: rgba(100, 100, 100, 0.05);
+            border-radius: 10px;
+        }
     }
     .thumb{
         width: 4.5rem;
@@ -291,21 +304,38 @@ export default {
     }
     .plus-button{
         border-radius: 100%;
-        width:2rem;
-        height:2rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid black;
         margin-left: 0.2rem;
-        fill: black;
-        &:hover{
-            fill: $primary-color;
-            border-color: $primary-color;
-            opacity: 0.8;
+            &:hover{
+                svg{
+                    fill: $green;
+                }
+                span{
+                    color: $green;
+                }
+                opacity: 0.8;
+            }
+            &:active{
+                opacity: 1;
+            }
+        
+        svg{
+            width:2.5rem;
+            height:2.5rem;
+            fill: black;
+            color: black;
+            border-color: black;
         }
-        &:active{
-            opacity: 1;
+        
+        span{
+            align-self: flex-start;
+            margin:0;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-weight: bold;
         }
     }
     @media (min-width:450px){

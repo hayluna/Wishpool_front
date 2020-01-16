@@ -157,7 +157,7 @@ export default {
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #E7E7EB;
         &:hover{
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(100, 100, 100, 0.05);
         }
     }
     .empty-result{

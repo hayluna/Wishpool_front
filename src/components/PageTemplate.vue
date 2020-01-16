@@ -48,7 +48,7 @@ export default {
     }
     .footer-nav{
         width: 100%;
-        height: 5rem;
+        height: 6rem;
         position: fixed;
         left:0;
         bottom:0;

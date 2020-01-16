@@ -163,9 +163,9 @@ export default {
         letter-spacing: 2px;
     }
     .welcome{
-       width: 25rem;
+       width: 27rem;
         text-align: left;
-        margin-top: -5rem;
+        margin-top: -1rem;
         h1{
             margin-bottom:0.5rem;
             font-size: 2.5rem;
@@ -183,7 +183,7 @@ export default {
         border-radius: 7px;
         @include flex-center();
         flex-direction: column;
-        width: 25rem; //mobile;
+        width: 27rem; //mobile;
         color:black;
         margin-top: 0.5rem;
         font-size: 1.5rem;
@@ -298,7 +298,7 @@ export default {
     //desktop, tablet
     @media (min-width:450px){
         .white-box{
-            width: 350px;
+            width: 300px;
         }
         .logo-area{
             font-size: 1.2rem;
@@ -309,7 +309,7 @@ export default {
             }
         }
         .welcome{
-            width: 350px;
+            width: 300px;
         }
     }
 </style>

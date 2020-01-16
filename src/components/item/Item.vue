@@ -107,9 +107,13 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 1px solid lightgray;
-    padding: 2rem 0.2rem 2rem 1.5rem;
+    padding: 1.2rem 0.2rem 1.2rem 1.5rem;
+    margin-bottom: 0.5rem;
     font-family: $font-stack;
+    &:hover, &:active{
+        background-color: rgba(100, 100, 100, 0.05);
+        border-radius: 10px;
+    }
 }
 .desc{
     flex:1;
@@ -152,6 +156,9 @@ svg{
     color: #A9AAB9;
     font-size: 1.2rem;
     font-weight: normal;
+}
+.dropdown a{
+    @include flex-center();
 }
 .dropdown-menu{
     left: unset;

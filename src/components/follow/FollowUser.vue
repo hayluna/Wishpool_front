@@ -34,9 +34,12 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 1px solid lightgray;
-    padding: 1.7rem 2rem;
+    padding: 1.5rem 2rem;
     font-family: $font-stack;
+    margin-bottom: 0.5rem;
+    &:hover, &:active{
+        background-color: rgba(100, 100, 100, 0.05);
+    }
 }
 .thumb{
     width: 4.5rem;

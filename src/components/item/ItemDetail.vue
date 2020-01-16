@@ -6,8 +6,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
                 </div>
             </div>
-            <div class="empty"></div>
-            <div class="dropdown">
+            <div class="title">아이템 상세보기</div>
+            <div class="empty" style="display:flex; justify-content:flex-end; padding-right:1rem;"><div class="dropdown"></div>
                 <a data-toggle="dropdown">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 </a>
@@ -20,26 +20,37 @@
         </div>
         <div class="contents">
             <div class="contents-header">
-                <div class="item-name">{{item.itemName}}
-                    <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
-                </div>
-                <!-- <div class="badge-area"><span class="badge">{{item.visibleTo}}</span></div> -->
-                <div class="item-price">&#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
-            </div>
-            <div class="thumbnail" v-if="preview">
-                <img :src="preview" @error="imgLoadError" />
-            </div>
-            <div class="cont">
-                <h5>LINK</h5>
-                <div class="item-link">
-                    <a :href="item.itemLink" v-if="!voidLink" >{{item.itemLink|filterLink}}</a>
-                    <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">링크 없음</a>
-                    <svg @click="onCopyLink" v-if="!voidLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M17 7h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c1.65 0 3 1.35 3 3s-1.35 3-3 3h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c2.76 0 5-2.24 5-5s-2.24-5-5-5zm-9 5c0 .55.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1H9c-.55 0-1 .45-1 1zm2 3H7c-1.65 0-3-1.35-3-3s1.35-3 3-3h3c.55 0 1-.45 1-1s-.45-1-1-1H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h3c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>
+                <div class="thumbnail" v-if="preview">
+                    <div class="pic"><img :src="preview" @error="imgLoadError" /></div>
                 </div>
             </div>
+                <div class="cont">
+                    <div>
+                        <h5><v-icon name="package"></v-icon>아이템 명</h5>
+                        <div class="item-name">{{item.itemName}}
+                            <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cont">
+                    <div>
+                        <h5><v-icon name="dollar-sign"></v-icon>아이템 가격 </h5>
+                        <div class="item-price">&#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
+                    </div>
+                </div>
             <div class="cont">
-                <h5>MEMO</h5>
-                <div>{{item.itemMemo|filterMemo}}</div>
+                <div>
+                    <h5><v-icon name="link"></v-icon>아이템 링크</h5>
+                    <div class="item-link">
+                        <a :href="item.itemLink" v-if="!voidLink" >{{item.itemLink|filterLink}}</a>
+                        <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">링크 없음</a>
+                        <div class="share" @click="onCopyLink" v-if="!voidLink"><v-icon name="copy" style="margin:0;"></v-icon></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cont">
+                <h5><v-icon name="edit-3"></v-icon>MEMO</h5>
+                <div class="memo-area">{{item.itemMemo|filterMemo}}</div>
             </div>
             <div class="btn-area">
                 <a @click="onShare">아이템 공유하기<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M24 24H0V0h24v24z"/><path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z"/></svg></a>
@@ -167,8 +178,8 @@ export default {
         justify-content: center;
         background: white;
         padding: 0 2rem 0 2rem;
-        height: 7rem;
-        // box-shadow: 0px 3px 6px lightgray;
+        height: 6rem;
+        box-shadow: 0px 3px 6px lightgray;
         position:fixed;
         width: 100%;
         z-index: 3;
@@ -199,17 +210,23 @@ export default {
     }
     .thumbnail{
         width: 100%;
-        height: 16rem;
+        height: 20rem;
         object-fit: cover;
         margin-top: 2rem;
-        border-radius: 5px;
         text-align: right;
         padding: 0.2rem;
-        border: 1px solid lightgray;
+        border: none;
+        @include flex-center();
+        .pic{
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+        }
         img{
             width:100%;
             height:100%;
-            object-fit: cover;
+            object-fit: contain;
         }
        
         svg{
@@ -218,73 +235,104 @@ export default {
     }
     .contents{
         @include flex-center();
-        padding:7.5rem 5rem 2rem 5rem;
+        padding:7.5rem 4rem 2rem 4rem;
     }
     .contents-header{
         display: flex;
         flex-direction: column;
         width: 100%;
         justify-content: flex-start;
-        .item-name{
-            display:flex;
-            justify-content: flex-start;
-            font-size: 1.5rem;
-            font-weight: bold;
-            // flex: 0.7;
-            padding:0;
-            word-break: break-all;
-            span{
-                width: fit-content;
-                min-width: fit-content;
-                margin-left: 1rem;
-            }
+    }
+    .item-name{
+        display:inline-flex;
+        justify-content: flex-start;
+        padding:0;
+        color: black;
+        word-break: break-all;
+        span{
+            width: fit-content;
+            min-width: fit-content;
+            margin-left: 1rem;
         }
-        .badge-area{
-            padding:0;
-            flex: 0.3;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            
-        }
-        .badge{
-            height: 2rem;
-            width: 10rem;
-            background : transparent;
-            border: 1px solid $margenta;
-            color: $margenta;
-        }
-        .blue-badge{
-            border: 1px solid $light-blue;
-            color: $light-blue;
-        }
-        .item-price{
-            font-size:1.5rem;
-            color: black;
-            flex: 0.3;
-            display: flex;
-            justify-content: flex-end;
-            padding-left:1rem;
-            word-break: break-all;
-        }
+    }
+    .item-price{
+        display:inline-flex;
+        color: black;
+        display: flex;
+        justify-content: flex-start;
+        word-break: break-all;
+    }
+    .badge-area{
+        padding:0;
+        flex: 0.3;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .badge{
+        border-radius: 9px;
+        display: inline-flex;
+        height: 2rem;
+        width: 7rem;
+        font-size: 0.9rem;
+        @include flex-center();
+        color : $margenta;
+        border: 1px solid $margenta;
+        background: transparent;
+
+    }
+    .blue-badge{
+        width: 7rem;
+        color : $green;
+        border: 1px solid $green;
+        background: transparent;
     }
     .cont{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         width:100%;
-        font-size: 1.5rem;
-        margin-bottom: 3rem;
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
         h5{
-            font-weight: bold;
+            background: $dark-gray;
+            border-radius: 5px;
+            padding: 0.5rem 0.7rem;
+            color:white;
+           display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 300;
         }
         a{
             display: block;
             color: #49B7F5
         }
         svg{
-            fill: #49B7F5;
+            width: 1.5rem;
+            height: 1.6rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.2rem;
+            padding:0;
+            fill: none;
         }
+    }
+    .share{
+        @include flex-center();
+        width: 3rem;
+        height: 3rem;
+        &:hover, &:active{
+            background: rgba(100, 100, 100, 0.1);
+            border-radius: 100%;
+        }
+        svg{
+            color: $link-blue;
+        }
+    }
+    .memo-area{
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        padding: 1rem;
     }
     .item-link{
         display: flex;
@@ -298,27 +346,31 @@ export default {
         @include flex-center();
         margin-top: 2rem;
         margin-bottom: 5rem;
-        a{
-            height: 6rem;
-            border-radius: 10px;
-            width: 20rem;
-            background: #F6F6FE;
-            color: black;
-            font-size: 1.6rem;
-            font-weight: bold;
+       a{
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-decoration:none;
+            width: 18rem;
+            height: 5rem;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            color: white;
+            background: gray;
+            margin-top: 1.5rem;
+            border: 1px solid gray;
+            fill: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            &:active{
-                background: #bebebe;
+            &:hover{
+                background: $dark-gray;
+                text-decoration: none;
                 color: white;
                 fill: white;
             }
             svg{
                 display:inline;
                 width: 1.6rem;
+                margin-left: 2rem;
             }
         }
     }
@@ -328,7 +380,7 @@ export default {
     }
     .dropdown-menu{
     left: unset;
-    right: 0;
+    right: 15px;
     background-color: rgba(51,51,51,0.8);
     border-radius: 10px;
     min-width: 5rem;
@@ -341,6 +393,7 @@ export default {
         }
     }
 }
+
     /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
@@ -384,5 +437,14 @@ export default {
 @keyframes fadeout {
   from {bottom: 10rem; opacity: 1;}
   to {bottom: 10rem; opacity: 0;}
+}
+@media (min-width:450px){
+    .header{
+        height: 5.5rem;
+        padding: 0 1.5rem 0 1.5rem;
+    }
+    .title{
+        font-size: 1.7rem;
+    }
 }
 </style>

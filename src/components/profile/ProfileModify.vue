@@ -18,39 +18,39 @@
                 <div class="delete-pic" v-if="preview||!isError">
                     <a @click="deletePreview"><v-icon name="x"></v-icon>프로필 사진 삭제</a>
                 </div>
-                <span class="small-title">프로필 사진 수정하기</span>
+                <span class="small-title"><v-icon name="image"></v-icon>프로필 사진 수정하기</span>
                 <input type="file" id="photo" style="margin-top: 1.2rem;" class="file-upload" accept="image/*" v-on:change="onFileUpload" ref="thumbnail">
             </div>
             <div class="cont">
-                <span class="small-title">닉네임 수정(*)</span>
+                <span class="small-title"><v-icon name="user"></v-icon>닉네임 수정(*)</span>
                 <div class="input-item">
                     <input type="text" ref="name" v-model="profile.nickname" placeholder="이름 혹은 닉네임을 입력해주세요"/>
                     <svg @click="clearName" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">이메일 주소</span>
+                <span class="small-title"><v-icon name="mail"></v-icon>이메일 주소</span>
                 <div class="input-item" style="font-weight: bold;">
                     <input type="text" ref="email" v-model="profile.email" style="width:80%; margin-right:1rem; font-weight: normal; display:inline;" placeholder="이메일 주소를 입력해주세요"/>
                     <svg @click="clearEmail" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">전화번호</span>
+                <span class="small-title"><v-icon name="phone"></v-icon>전화번호</span>
                 <div class="input-item">
                     <input type="text" ref="phone" v-model="profile.phone" placeholder="'-'없이 숫자만 입력해주세요"/>
                     <svg @click="clearPhone" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">주소</span>
+                <span class="small-title"><v-icon name="map-pin"></v-icon>주소</span>
                 <div class="input-item">
                     <input type="text" ref="address" v-model="profile.address" placeholder="주소를 입력해주세요"/>
                     <svg @click="clearAddress" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
                 </div>
             </div>
             <div class="cont">
-                <span class="small-title">생일</span>
+                <span class="small-title"><v-icon name="calendar"></v-icon>생일</span>
                 <div class="input-item">
                     <input type="text" ref="birth" v-model="profile.birth" placeholder="숫자 6자리로 입력해주세요"/>
                     <svg @click="clearBirth" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
@@ -247,6 +247,13 @@ export default {
         display: block;
         color: #999CA3;
         font-size: 1.7rem;
+        display: flex;
+        align-items: center;
+        svg{
+            width: 2rem;
+            height: 2rem;
+            margin-right: 0.8rem;
+        }
     }
     .cont {
         margin-top: 4rem;

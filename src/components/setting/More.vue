@@ -14,7 +14,7 @@
                 <a class="setting-item" @click="profileModify">프로필 수정</a>
                 <v-icon name="chevron-right"></v-icon>
             </div>
-            <div class="btn-area" style="margin-top:6rem;">
+            <div class="btn-area" style="margin-top:33rem;">
                 <a @click="logout">로그아웃 하기<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M24 24H0V0h24v24z"/><path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z"/></svg></a>
             </div>
         </div>
@@ -106,45 +106,46 @@ export default {
         height: 7rem;
         padding: 0 2.5rem;
         border-bottom: 1px solid lightgray;
+        &:hover, &:active{
+            background-color: rgba(100, 100, 100, 0.05);
+        }
          svg{
             justify-self: flex-end;
             width: 2.5rem;
             height: 2.5rem;
-            &:hover, &:active{
-                color: $primary-color;
-            }
         }
          
     }
     .setting-item{
-        color: black;
         font-size: 1.5rem;
         display: flex;
         align-items: center;
         height: 100%;
         width: 100%;
         cursor: pointer;
+        color: black;
     }
     .btn-area{
         width: 100%;
         @include flex-center();
         margin-top: 2rem;
-        a{
-            height: 6rem;
-            border-radius: 10px;
-            width: 20rem;
-            background: #F6F6FE;
-            color: black;
-            font-size: 1.6rem;
-            font-weight: bold;
+         a{
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-decoration:none;
+            width: 18rem;
+            height: 5rem;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            color: $dark-gray;
+            background: transparent;
+            margin-top: 1.5rem;
+            border: 1px solid gray;
+            fill: $dark-gray;
             cursor: pointer;
-            
-            &:active{
-                background: #bebebe;
+            &:hover{
+                background: gray;
+                text-decoration: none;
                 color: white;
                 fill: white;
             }
@@ -154,6 +155,23 @@ export default {
                 margin-left: 2rem;
             }
         }
+        // a{
+        //     height: 6rem;
+        //     border-radius: 10px;
+        //     width: 20rem;
+        //     background: #F6F6FE;
+        //     color: black;
+        //     font-size: 1.6rem;
+        //     font-weight: bold;
+        //     text-decoration:none;
+        //     cursor: pointer;
+        //     &:hover{
+        //        background:$primary-color;
+        //        color: white;
+        //        fill: white;
+        //     }
+            
+        // }
     }
     a:hover, a:focus{
         text-decoration: none;
@@ -172,9 +190,6 @@ export default {
         }
         .setting{
             margin-top: 6rem;
-        }
-        .setting-item{
-            font-size: 1.6rem;
         }
     }
 </style>

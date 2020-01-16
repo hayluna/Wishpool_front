@@ -191,6 +191,10 @@ export default {
         overflow: hidden;
         font-family: $font-stack;
     }
+    #mySidenav{
+        box-shadow: 0px 3px 6px lightgray;
+        z-index: 2000;
+    }
     .fix-top{
         position: fixed;
         width: 100%;
@@ -238,18 +242,18 @@ export default {
         }
         .plus-button{
             border-radius: 100%;
-            width:2rem;
-            height:2rem;
+            width:2.3rem;
+            height:2.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid black;
-            margin-left: 0.2rem;
+            margin-right: 0.5rem;
             fill: black;
             &:hover{
-                    border-color: $margenta;
+                    border-color: $green;
                 svg{
-                    fill: $margenta;
+                    fill: $green;
                 }
             }
             &:active{
@@ -275,26 +279,30 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 6rem;
+        height: 5.8rem;
         padding: 0 1.5rem 0 1.5rem;
         li{
             border: none;
             width: 100%;
             text-align: center;
             border-bottom: 1px solid #E7E7EB;
-            
+            height: 100%;
         }
         a{
             color: black;
-            padding: 1rem 1rem 1.5rem 1rem;
+            height: 100%;
+            @include flex-center();
         }
     }
     .ul-item{
-        margin-top: 10rem;
+        margin-top: 12rem;
         margin-bottom: 10rem;
         padding: 0 1.5rem 0 1.5rem;
         li{
             list-style: none;
+            cursor: pointer;
+            padding:0;
+            border-bottom: 1px solid lightgray;
         }
     }
     .tab-content, .tab-pane{

@@ -20,7 +20,7 @@ import PageNotFound from '@/components/PageNotFound.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // { path:'/', component:Login, name:'login', meta: {requiresAuth:true} },
+  // { path:'/', component:Login, name:'login'},
   { path:'/', component:Login, name:'login' },
   { path:'/item/list/:userId', component:ItemList, name:'itemList', meta: { requiresAuth: true } },
   { path:'/item/othersList/:userId', component:OthersItemList, name:'othersItemList', meta: { requiresAuth: true } },
@@ -28,7 +28,7 @@ const routes = [
   { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify', meta: { requiresAuth: true } },
   { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail', meta: { requiresAuth: true } },
   { path:'/item/othersDetail/:itemId', component:OthersItemDetail, name:'othersItemDetail', meta: { requiresAuth: true } },
-  // { path:'/user/login', component:Login, name:'login' },
+  { path:'/user/login', component:Login, name:'login' },
   { path:'/user/register', component:Register, name:'register' },    
   { path:'/follow/list/:userId', component:FollowList, name:'followList', meta: { requiresAuth: true } },
   { path:'/follow/search/:userId', component:FollowSearch, name:'followSearch', meta: { requiresAuth: true } },

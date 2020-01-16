@@ -11,7 +11,7 @@
         </div>
         <div class="contents">
             <div class="cont">
-                <span class="small-title">아이템 이름(*)</span>
+                <span class="small-title"><v-icon name="package"></v-icon>아이템 이름(*)</span>
                 <div class="input-item">
                     <input type="text" ref="name" v-model="item.itemName" placeholder="아이템 이름을 입력해주세요"/>
                     <svg @click="clearName" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path opacity=".87" fill="none" d="M0 0h24v24H0V0z"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
@@ -378,26 +378,30 @@ export default {
         @include flex-center();
         margin-bottom: 5rem;
         a{
-            height: 6rem;
-            border-radius: 10px;
-            width: 20rem;
-            background: #F6F6FE;
-            color: black;
-            font-size: 1.6rem;
-            font-weight: bold;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-decoration:none;
+            width: 18rem;
+            height: 5rem;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            color: white;
+            background: gray;
+            margin-top: 1.5rem;
+            border: 1px solid gray;
+            fill: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            &:active{
-                background: #bebebe;
+            &:hover{
+                background: $dark-gray;
+                text-decoration: none;
                 color: white;
                 fill: white;
             }
             svg{
                 display:inline;
                 width: 1.6rem;
+                margin-left: 2rem;
             }
         }
     }

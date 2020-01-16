@@ -275,5 +275,5 @@ export default{
     },
     toggleFooterShow({ commit }, value){
         commit('toggleFooterShow', value);
-    }
+    },
 }
