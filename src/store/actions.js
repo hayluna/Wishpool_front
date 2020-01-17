@@ -51,6 +51,9 @@ export default{
                 if(code=="200"){
                     commit('saveQuery', payload.query);
                     commit(FETCH_SEARCH_USER_LIST, matchUsers);
+                }else if(code=="503"){
+                    commit('saveQuery', '');
+                    commit(FETCH_SEARCH_USER_LIST, []);
                 }
             } catch (e) {
                 console.error(e);
@@ -94,6 +97,7 @@ export default{
     },
     notiAllRead({commit}){
         state.notiList.forEach(noti=>{noti.haveRead = true;});
+        commit('notiAllRead');
         return (async()=>{
             try {
                 const res = await axios.patch(this._vm.$api+'/noti/toggle', state.notiList);

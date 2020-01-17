@@ -144,6 +144,10 @@ export default {
         background: white;
         height: 100%;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     .header{
         display: flex;

@@ -27,7 +27,7 @@
                 <div class="cont">
                     <div>
                         <h5><v-icon name="package"></v-icon>아이템 명</h5>
-                        <div class="item-name">{{item.itemName}}
+                        <div class="item-name">: {{item.itemName}}
                             <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
                         </div>
                     </div>
@@ -35,15 +35,15 @@
                 <div class="cont">
                     <div>
                         <h5><v-icon name="dollar-sign"></v-icon>아이템 가격 </h5>
-                        <div class="item-price">&#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
+                        <div class="item-price">: &#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
                     </div>
                 </div>
             <div class="cont">
                 <div>
                     <h5><v-icon name="link"></v-icon>아이템 링크</h5>
                     <div class="item-link">
-                        <a :href="item.itemLink" v-if="!voidLink" >{{item.itemLink|filterLink}}</a>
-                        <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">링크 없음</a>
+                        <a :href="item.itemLink" v-if="!voidLink" >: {{item.itemLink|filterLink}}</a>
+                        <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">: 링크 없음</a>
                         <div class="share" @click="onCopyLink" v-if="!voidLink"><v-icon name="copy" style="margin:0;"></v-icon></div>
                     </div>
                 </div>
@@ -171,6 +171,10 @@ export default {
         background: white;
         height: 100%;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     .header{
         display: flex;
@@ -205,12 +209,17 @@ export default {
         flex:1;
     }
     .contents{
-        padding: 3rem;
+        padding:7.5rem 4rem 2rem 4rem;
         font-size: 2rem;
+        width:100%; 
+        height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
     }
     .thumbnail{
-        width: 100%;
-        height: 20rem;
+        width: 85%;
+        height: 16rem;
         object-fit: cover;
         margin-top: 2rem;
         text-align: right;
@@ -233,15 +242,12 @@ export default {
             width: 2rem;
         }
     }
-    .contents{
-        @include flex-center();
-        padding:7.5rem 4rem 2rem 4rem;
-    }
     .contents-header{
         display: flex;
         flex-direction: column;
         width: 100%;
         justify-content: flex-start;
+        @include flex-center();
     }
     .item-name{
         display:inline-flex;
@@ -293,24 +299,32 @@ export default {
         justify-content: space-between;
         width:100%;
         font-size: 1.4rem;
-        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        // border-bottom: 1px solid lightgray;
+        div{
+            div{
+                padding-left: 1.5rem;
+                color: $dark-gray;
+                font-size: 1.2rem;
+            }
+        }
         h5{
-            background: $dark-gray;
-            border-radius: 5px;
-            padding: 0.5rem 0.7rem;
-            color:white;
-           display: flex;
+            // border-radius: 5px;
+            padding: 0rem 0.7rem;
+            color:$dark-gray;
+            display: flex;
             align-items: center;
-            font-size: 1.3rem;
-            font-weight: 300;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
         a{
             display: block;
             color: #49B7F5
         }
         svg{
-            width: 1.5rem;
-            height: 1.6rem;
+            width: 1.2rem;
+            height: 1.2rem;
             margin-right: 0.5rem;
             margin-bottom: 0.2rem;
             padding:0;
@@ -333,6 +347,7 @@ export default {
         border: 1px solid lightgray;
         border-radius: 5px;
         padding: 1rem;
+        font-size: 1.2rem;
     }
     .item-link{
         display: flex;
@@ -345,7 +360,7 @@ export default {
         width: 100%;
         @include flex-center();
         margin-top: 2rem;
-        margin-bottom: 5rem;
+        margin-bottom: 10rem;
        a{
             display: inline-flex;
             align-items: center;

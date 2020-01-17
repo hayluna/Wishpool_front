@@ -1,13 +1,15 @@
 <template>
     <div class="view">
-        <div class="header">
-            <div class="nav">
-                <div class="back" @click="onBack">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+        <div class="fix-top">
+            <div class="header">
+                <div class="nav">
+                    <div class="back" @click="onBack">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+                    </div>
                 </div>
+                <div class="title">아이템 수정</div>
+                <div class="empty"></div>
             </div>
-            <div class="title">아이템 수정</div>
-            <div class="empty"></div>
         </div>
         <div class="contents">
             <div class="cont">
@@ -185,6 +187,10 @@ export default {
         background: white;
         height: 100%;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     .header{
         display: flex;
@@ -201,6 +207,14 @@ export default {
     .nav{
         justify-self: flex-start;
         flex:1;
+    }
+    .fix-top{
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:10;
     }
     .back{
         border: 1px solid $dark-gray;

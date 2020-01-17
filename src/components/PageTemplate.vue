@@ -47,12 +47,12 @@ export default {
         flex:1;
     }
     .footer-nav{
-        width: 100%;
+        position: absolute; 
+        bottom:0; 
+        left:0; 
+        width:100%; 
+        z-index:11;
         height: 6rem;
-        position: fixed;
-        left:0;
-        bottom:0;
-        z-index:1000;
     }
    
 

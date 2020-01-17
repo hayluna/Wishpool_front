@@ -89,6 +89,10 @@ export default {
         display: flex;
         flex-direction: column;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     .header{
         display: flex;

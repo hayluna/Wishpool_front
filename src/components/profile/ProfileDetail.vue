@@ -129,6 +129,10 @@ export default {
         align-items: center;
         justify-content: center;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     .modal-header{
         width: 100%;

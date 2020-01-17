@@ -150,12 +150,18 @@ export default {
         background: white;
         height: 100%;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     .fix-top{
-        position: fixed;
-        width: 100%;
-        background: white;
-        z-index: 4;
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:10;
     }
     .header{
         display: flex;

@@ -190,16 +190,22 @@ export default {
         height: 100%;
         overflow: hidden;
         font-family: $font-stack;
+        position: fixed; 
+        width:100%; 
+        top:0; 
+        left:0;
     }
     #mySidenav{
         box-shadow: 0px 3px 6px lightgray;
         z-index: 2000;
     }
     .fix-top{
-        position: fixed;
-        width: 100%;
-        background: white;
-        z-index: 4;
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:10;
     }
     .header{
         display: flex;
@@ -216,7 +222,6 @@ export default {
         cursor: pointer;
     }
     .title{
-        flex:1;
         text-align: center;
         font-weight: bolder;
         font-size: 1.6rem;
