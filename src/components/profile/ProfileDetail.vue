@@ -4,10 +4,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" style="position:absolute; right: 1rem; top:1rem;">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute; right: 1rem; top:1rem; z-index:10;">
+                    <span aria-hidden="true">&times;</span>
                 </button>
-                <img :src="user.profileImgPath" v-if="!isProfileError" @error="profileImgLoadError">
+                <div class="img-header">
+                    <img :src="user.profileImgPath" v-if="!isProfileError" @error="profileImgLoadError">
+                </div>
             </div>
             <div class="thumb">
                 <img :src="user.profileImgPath" v-if="!isError" @error="imgLoadError">
@@ -136,12 +138,18 @@ export default {
     }
     .modal-header{
         width: 100%;
-        height: 15rem;
         align-self: flex-end;
-        background: lightgray;
         border-radius: 5px 5px 0 0;
         border: none;
         padding: 0;
+        button{
+            opacity: 1;
+            color: $dark-gray;
+            outline-color: transparent;
+            &:hover{
+                color: gray;
+            }
+        }
         img{
             background: white;
             border-radius: 5px 5px 0 0;
@@ -149,6 +157,14 @@ export default {
             height: 100%;
             object-fit: cover;
         }
+    }
+    .close{
+        text-shadow: unset;
+    }
+    .img-header{
+        background: $sky-gray;
+        opacity: 0.2;
+        height: 15rem;
     }
     .modal-content{
         display:flex;

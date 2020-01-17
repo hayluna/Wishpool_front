@@ -20,8 +20,11 @@
         </div>
         <div class="contents">
             <div class="contents-header">
-                <div class="thumbnail" v-if="preview">
-                    <div class="pic"><img :src="preview" @error="imgLoadError" /></div>
+                <div class="thumbnail">
+                    <div class="pic">
+                        <img :src="preview" v-if="preview&&!isError" @error="imgLoadError" />
+                        <v-icon name="package" v-if="isError"></v-icon>
+                    </div>
                 </div>
             </div>
                 <div class="cont">
@@ -91,6 +94,7 @@ export default {
             thumbnail:'',
             preview:'',
             badgeClass: 'badge',
+            isError: false,
         }
     },
     filters:{
@@ -134,7 +138,8 @@ export default {
     },
     methods:{
         imgLoadError(){
-            this.item.itemImgPath='/assets/images/data_usage.svg';
+            // this.item.itemImgPath='/assets/images/data_usage.svg';
+            this.isError = true;
         },
         onBack(){
             this.$router.go(-1);
@@ -231,6 +236,12 @@ export default {
             height: 100%;
             border-radius: 5px;
             border: 1px solid lightgray;
+            @include flex-center();
+            svg{
+                width: 10rem;
+                height: 10rem;
+                color: lightgray;
+            }
         }
         img{
             width:100%;

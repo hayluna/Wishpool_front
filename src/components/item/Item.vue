@@ -1,7 +1,8 @@
 <template>
     <div class="item">
         <div class="thumb" @click="onClick">
-            <img :src="item.itemImgPath" @error="imgLoadError">
+            <img :src="item.itemImgPath" @error="imgLoadError" v-if="!isError">
+            <v-icon v-if="isError" name="package"></v-icon>
         </div>
         <div class="desc" @click="onClick">
             <div class="text">
@@ -40,7 +41,7 @@ export default {
     },
     data(){
         return{
-            isError: true
+            isError: false
         }
     },
     methods:{
@@ -70,7 +71,8 @@ export default {
             this.$emit('onChange');
         },
         imgLoadError(){
-            this.item.itemImgPath='/assets/images/data_usage.svg';
+            // this.item.itemImgPath='/assets/images/data_usage.svg';
+            this.isError = true;
         },
         onClick(){
             this.$emit('onClick', this.item);
@@ -135,6 +137,12 @@ export default {
         height: 95%;
         object-fit: cover;
         border-radius: 10px;
+    }
+    svg{
+        width: 2rem;
+        height: 2rem;
+        color: $dark-gray;
+        fill: transparent;
     }
 }
 .badge{
