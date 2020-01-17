@@ -88,6 +88,7 @@ export default {
     beforeRouteEnter(to, from, next){
         dispatch('pending');
         dispatch('fetchMyProfile'); //내 프로필 정보를 가져온다.
+        dispatch('toggleFooterShow', true);
         //loading==false가 될 때 라우터 이동을 허용한다.
         store.watch(
             (state, getters) => state.loading,
@@ -150,7 +151,7 @@ export default {
         background: white;
         height: 100%;
         font-family: $font-stack;
-        position: fixed; 
+        position: absolute; 
         width:100%; 
         top:0; 
         left:0;

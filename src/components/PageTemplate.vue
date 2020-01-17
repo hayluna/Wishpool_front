@@ -51,7 +51,7 @@ export default {
         bottom:0; 
         left:0; 
         width:100%; 
-        z-index:11;
+        z-index:5;
         height: 6rem;
     }
    

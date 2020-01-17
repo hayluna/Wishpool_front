@@ -13,7 +13,7 @@
             <div class="cont" style="margin-bottom:0; display:flex; flex-direction:column;">
                 <div class="thumbnail" style="align-self:center;">
                     <img :src="preview" v-if="preview||!isError" @error="imgLoadError"/>
-                    <v-icon v-if="isError" name="user" class="user-icon"></v-icon>
+                    <v-icon v-if="!preview&&isError" name="user" class="user-icon"></v-icon>
                 </div>
                 <div class="delete-pic" v-if="preview||!isError">
                     <a @click="deletePreview"><v-icon name="x"></v-icon>프로필 사진 삭제</a>
@@ -176,7 +176,7 @@ export default {
             })();
         },
         deletePreview(){
-            if(confirm('아이템을 삭제하시겠습니까?')){
+            if(confirm('프로필 사진을 삭제하시겠습니까?')){
                 this.prevImgName = this.profile.profileImgName;
                 this.profile.profileImgPath = '';
                 this.profile.profileImgName = '';
@@ -246,6 +246,11 @@ export default {
     .contents{
         padding: 3rem;
         font-size: 2rem;
+        width:100%; 
+        height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
     }
     .small-title{
         display: block;
@@ -364,26 +369,30 @@ export default {
         @include flex-center();
         margin-bottom: 5rem;
         a{
-            height: 6rem;
-            border-radius: 10px;
-            width: 20rem;
-            background: #F6F6FE;
-            color: black;
-            font-size: 1.6rem;
-            font-weight: bold;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-decoration:none;
+            width: 18rem;
+            height: 5rem;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            color: white;
+            background: gray;
+            margin-top: 1.5rem;
+            border: 1px solid gray;
+            fill: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            &:active{
-                background: #bebebe;
+            &:hover{
+                background: $dark-gray;
+                text-decoration: none;
                 color: white;
                 fill: white;
             }
             svg{
                 display:inline;
                 width: 1.6rem;
+                margin-left: 2rem;
             }
         }
     }
