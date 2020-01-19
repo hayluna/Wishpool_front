@@ -46,13 +46,11 @@ export default {
     },
     methods:{
         onCopy(){
-            //url copy
-            navigator.clipboard.writeText(this.$url+'/item/detail/'+this.item._id);
             //toast
             var x = document.getElementById("snackbar");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
-            navigator.clipboard.writeText(this.$url+'/item/detail/'+this.item._id);
+            navigator.clipboard.writeText(this.$url+'/item/othersDetail/'+this.item._id);
         },
         onEdit(){
             this.$router.push({name:'itemModify', params:{itemId:this.item._id}});

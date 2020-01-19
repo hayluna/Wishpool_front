@@ -48,7 +48,7 @@ export default {
     methods:{
         onCopy(){
             //url copy
-            navigator.clipboard.writeText(this.$url+this.$route.fullPath);
+            navigator.clipboard.writeText(this.$url+'/item/othersDetail/'+this.item._id);
             //toast
             var x = document.getElementById("snackbarLink");
             x.className = "show";
@@ -110,9 +110,13 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 1px solid lightgray;
-    padding: 2rem 0.2rem 2rem 1.5rem;
+    padding: 1.2rem 0.2rem 1.2rem 1.5rem;
+    margin-bottom: 0.5rem;
     font-family: $font-stack;
+    &:hover, &:active{
+        background-color: rgba(100, 100, 100, 0.05);
+        border-radius: 10px;
+    }
 }
 .desc{
     flex:1;

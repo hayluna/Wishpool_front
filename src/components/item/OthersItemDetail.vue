@@ -1,12 +1,15 @@
 <template>
      <div class="view">
-        <div class="header">
-            <div class="nav">
-                <div class="back" @click="onBack">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+        <div class="fix-top">
+            <div class="header">
+                <div class="nav">
+                    <div class="back" @click="onBack">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+                    </div>
                 </div>
+                <div class="title">아이템 상세보기</div>
+                <div class="empty"></div>
             </div>
-            <div class="empty"></div>
         </div>
         <div class="contents">
             <div class="contents-header">
@@ -111,13 +114,11 @@ export default {
             if(this.item.itemPrice ==''||this.item.itemPrice == 'undefined'){
                 alert('복사할 링크가 없습니다.');
             }
-            //url copy
-            navigator.clipboard.writeText(this.$route.fullPath);
             //toast
             var x = document.getElementById("snackbarLink");
             x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2500);
-            navigator.clipboard.writeText(this.$url+'/item/detail/'+this.item._id);
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2500); 
+            navigator.clipboard.writeText(this.$url+'/item/othersDetail/'+this.item._id);
         },
         reserveItem(){
             //toast
@@ -155,11 +156,19 @@ export default {
         justify-content: center;
         background: white;
         padding: 0 2rem 0 2rem;
-        height: 7rem;
-        // box-shadow: 0px 3px 6px lightgray;
+        height: 6rem;
+        box-shadow: 0px 3px 6px lightgray;
         position:fixed;
         width: 100%;
         z-index: 3;
+    }
+    .fix-top{
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:10;
     }
     .nav{
         justify-self: flex-start;
@@ -183,8 +192,15 @@ export default {
         flex:1;
     }
     .contents{
-        padding: 3rem;
+        // @include flex-center();
+        margin-top: 2rem;
+        padding:7.5rem 5rem 2rem 5rem;
         font-size: 2rem;
+        width:100%; 
+        height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
     }
     .thumbnail{
         width: 100%;
@@ -204,10 +220,6 @@ export default {
         svg{
             width: 2rem;
         }
-    }
-    .contents{
-        @include flex-center();
-        padding:7.5rem 5rem 2rem 5rem;
     }
     .contents-header{
         display: flex;
@@ -285,7 +297,7 @@ export default {
         justify-content: space-between;
         flex-direction: column;
         margin-top: 2rem;
-        margin-bottom: 6.5rem;
+        margin-bottom: 10rem;
         a{
             height: 5rem;
             border-radius: 10px;

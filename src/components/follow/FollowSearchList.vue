@@ -168,6 +168,7 @@ export default {
         width: 100%;
         height: 100%;
         @include flex-center();
+        margin-top: -8rem;
         font-size: 1.5rem;
         text-align: center;
     }

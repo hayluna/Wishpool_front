@@ -207,11 +207,14 @@ export default {
         }
     }
     .ul-item{
-        margin-top: 10rem;
+        margin-top: 12rem;
         margin-bottom: 10rem;
         padding: 0 1.5rem 0 1.5rem;
         li{
             list-style: none;
+            cursor: pointer;
+            padding:0;
+            border-bottom: 1px solid lightgray;
         }
     }
     .tab-content, .tab-pane{

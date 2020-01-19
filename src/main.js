@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = axios; //axios 전역객체에 달기
 Vue.prototype.$socket = socket; //웹소켓 전역객체에 달기
-Vue.prototype.$url = 'http://localhost:8080'; //개발용 webpack server 주소
+Vue.prototype.$url = 'https://wish.codeplot.co.kr'; //개발용 webpack server 주소
 // Vue.prototype.$api = 'http://localhost:3000';  //개발용 REST API주소
 Vue.prototype.$api = 'https://api-wish.codeplot.co.kr';  //실제 REST API주소
 

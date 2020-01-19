@@ -249,7 +249,10 @@ export default {
     .contents{
         padding: 3rem;
         font-size: 2rem;
-        height:calc(100% - 1px); width:100%; z-index: 1; overflow-y: scroll; -webkit-overflow-scrolling: touch;
+        height:calc(100% - 1px); 
+        width:100%; z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
     }
     .small-title{
         display: block;

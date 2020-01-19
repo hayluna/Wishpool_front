@@ -52,7 +52,7 @@ export default{
                     commit('saveQuery', payload.query);
                     commit(FETCH_SEARCH_USER_LIST, matchUsers);
                 }else if(code=="503"){
-                    commit('saveQuery', '');
+                    commit('saveQuery', payload.query);
                     commit(FETCH_SEARCH_USER_LIST, []);
                 }
             } catch (e) {

@@ -248,6 +248,11 @@ export default {
     .contents{
         padding: 3rem;
         font-size: 2rem;
+        width:100%; 
+        height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
     }
     .small-title{
         display: block;
@@ -390,7 +395,7 @@ export default {
     .btn-area{
         width: 100%;
         @include flex-center();
-        margin-bottom: 5rem;
+        margin-bottom: 8rem;
         a{
             display: inline-flex;
             align-items: center;

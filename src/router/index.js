@@ -27,7 +27,7 @@ const routes = [
   { path:'/item/insert', component:ItemInsert, name:'itemInsert', meta: { requiresAuth: true } },
   { path:'/item/modify/:itemId', component:ItemModify, name:'itemModify', meta: { requiresAuth: true } },
   { path:'/item/detail/:itemId', component:ItemDetail, name:'itemDetail', meta: { requiresAuth: true } },
-  { path:'/item/othersDetail/:itemId', component:OthersItemDetail, name:'othersItemDetail', meta: { requiresAuth: true } },
+  { path:'/item/othersDetail/:itemId', component:OthersItemDetail, name:'othersItemDetail'},
   { path:'/user/login', component:Login, name:'login' },
   { path:'/user/register', component:Register, name:'register' },    
   { path:'/follow/list/:userId', component:FollowList, name:'followList', meta: { requiresAuth: true } },

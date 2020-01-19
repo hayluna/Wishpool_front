@@ -1,23 +1,25 @@
 <template>
      <div class="view">
-        <div class="header">
-            <div class="nav">
-                <div class="back" @click="onBack">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+         <div class="fix-top">
+            <div class="header">
+                <div class="nav">
+                    <div class="back" @click="onBack">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"/></svg>
+                    </div>
                 </div>
+                <div class="title">아이템 상세보기</div>
+                <div class="empty" style="display:flex; justify-content:flex-end; padding-right:1rem;"><div class="dropdown"></div>
+                    <a data-toggle="dropdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" @click="onShare">복사</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" @click="onEdit">수정</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" @click="onRemove">삭제</a></li>
+                    </ul>
+                </div>    
             </div>
-            <div class="title">아이템 상세보기</div>
-            <div class="empty" style="display:flex; justify-content:flex-end; padding-right:1rem;"><div class="dropdown"></div>
-                <a data-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" @click="onShare">복사</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" @click="onEdit">수정</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" @click="onRemove">삭제</a></li>
-                </ul>
-            </div>    
-        </div>
+         </div>
         <div class="contents">
             <div class="contents-header">
                 <div class="thumbnail">
@@ -47,7 +49,7 @@
                     <div class="item-link">
                         <a :href="item.itemLink" v-if="!voidLink" >: {{item.itemLink|filterLink}}</a>
                         <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">: 링크 없음</a>
-                        <div class="share" @click="onCopyLink" v-if="!voidLink"><v-icon name="copy" style="margin:0;"></v-icon></div>
+                        <div class="share" @click="onCopyLink" v-if="!voidLink" style="padding-left:0;"><v-icon name="copy" style="margin:0;"></v-icon></div>
                     </div>
                 </div>
             </div>
@@ -146,7 +148,7 @@ export default {
         },
         onShare(){
             //url copy
-            navigator.clipboard.writeText(this.$url+this.$route.fullPath);
+            navigator.clipboard.writeText(this.$url+'/item/othersDetail/'+this.item._id);
             //toast
             var x = document.getElementById("snackbar");
             x.className = "show";
@@ -193,11 +195,20 @@ export default {
         width: 100%;
         z-index: 3;
     }
+    .fix-top{
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:10;
+    }
     .nav{
         justify-self: flex-start;
         flex:1;
     }
     .back{
+        @include flex-center();
         border: 1px solid $dark-gray;
         border-radius: 5px;
         width: 2.5rem;
@@ -317,7 +328,7 @@ export default {
             div{
                 padding-left: 1.5rem;
                 color: $dark-gray;
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
         }
         h5{
@@ -326,7 +337,7 @@ export default {
             color:$dark-gray;
             display: flex;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
         }
         a{
