@@ -5,12 +5,14 @@
             <div style="padding-left: 4rem; margin-top: 2rem;">
                 <p style="font-weight:bold; font-size:1.5rem;color:transparent;">위시리스트</h4>
                 <p style="margin-bottom:0;color:transparent;">총 금액</p>
-                <p style="color:transparent; font-weight:bold; font-size:1.5rem;">{{ wishTotal }}원</p>
+                <p style="color:transparent; font-weight:bold; font-size:1.5rem;">
+                    <span class="total-price">{{ wishTotal }}원</span></p>
             </div>
             <div style="padding-left: 4rem; margin-top: 2rem;">
                 <p style="font-weight:bold; font-size:1.5rem;color:transparent;">완료리스트</p>
                 <p style="margin-bottom:0;color:transparent;">총 금액</p>
-                <p style="color:transparent; font-weight:bold; font-size:1.5rem;">{{ doneWishTotal }}원</p>
+                <p style="color:transparent; font-weight:bold; font-size:1.5rem;">
+                    <span class="total-price">{{ doneWishTotal }}원</span></p>
             </div>
         </div>
         <div class="fix-top">
@@ -298,6 +300,10 @@ export default {
             height: 100%;
             @include flex-center();
         }
+    }
+    .total-price{
+        color:$green;
+        font-size: 1.7rem;
     }
     .ul-item{
         margin-top: 12rem;

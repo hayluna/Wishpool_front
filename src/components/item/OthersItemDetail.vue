@@ -13,12 +13,17 @@
         </div>
         <div class="contents">
             <div class="contents-header">
-                <div class="item-name">{{item.itemName}}<span class="badge">공개</span></div>
+                <div class="item-name">{{item.itemName}}
+                    <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
+                </div>
                 <!-- <div class="badge-area"><span class="badge">{{item.visibleTo}}</span></div> -->
                 <div class="item-price">&#8361;&nbsp;{{item.itemPrice|filterPrice}}</div>
             </div>
             <div class="thumbnail" v-if="preview">
-                <img :src="preview" @error="imgLoadError" />
+                <div class="pic">
+                    <img :src="preview" v-if="preview&&!isError" @error="imgLoadError" />
+                    <v-icon name="package" v-if="isError"></v-icon>
+                </div>
             </div>
             <div class="cont">
                 <h5>LINK</h5>
@@ -61,7 +66,13 @@ export default {
                 return true;
             }
             return false;
-        }
+        },
+        isPublic(){
+            if(this.item.visibleTo == 'public'){
+                return true;
+            }
+            return false;
+        },
     },
     data(){
         return{
@@ -69,6 +80,8 @@ export default {
             user: {},
             thumbnail:'',
             preview:'',
+            isError: false,
+            badgeClass: 'badge',
         }
     },
     filters:{
@@ -101,11 +114,19 @@ export default {
                 return '메모없음';
             }
             return val;
-        }
+        },
+        filterVisible(val){
+            if(val=='public'){
+                return '공개'
+            }else{
+                return '비공개'
+            }
+        },
     },
     methods:{
         imgLoadError(){
-            this.item.itemImgPath='/assets/images/data_usage.svg';
+            // this.item.itemImgPath='/assets/images/data_usage.svg';
+            this.isError = true;
         },
         onBack(){
             this.$router.go(-1);
@@ -210,7 +231,20 @@ export default {
         border-radius: 5px;
         text-align: right;
         padding: 0.2rem;
-        border: 1px solid lightgray;
+        border:none;
+         @include flex-center();
+        .pic{
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+            @include flex-center();
+            svg{
+                width: 10rem;
+                height: 10rem;
+                color: lightgray;
+            }
+        }
         img{
             width:100%;
             height:100%;
@@ -248,13 +282,6 @@ export default {
             justify-content: flex-start;
             
         }
-        .badge{
-                height: 2rem;
-                width: 10rem;
-                background : transparent;
-                border: 1px solid $margenta;
-                color: $margenta;
-            }
         .item-price{
             font-size:1.5rem;
             color: black;
@@ -264,6 +291,24 @@ export default {
             padding-left:1rem;
             word-break: break-all;
         }
+    }
+    .badge{
+        border-radius: 9px;
+        display: inline-flex;
+        height: 2rem;
+        width: 7rem;
+        font-size: 0.9rem;
+        @include flex-center();
+        color : $margenta;
+        border: 1px solid $margenta;
+        background: transparent;
+
+    }
+    .blue-badge{
+        width: 7rem;
+        color : $green;
+        border: 1px solid $green;
+        background: transparent;
     }
     .cont{
         display: flex;

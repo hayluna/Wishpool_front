@@ -7,7 +7,7 @@
         <div class="desc" @click="onClick">
             <div class="text">
                 <span class="name">{{ item.itemName | filterName }}</span>
-                <span class="badge">{{ item.visibleTo | filterBadge }}</span>
+                <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
             </div>
             <span class="price">{{ item.itemPrice | filterPrice }}원</span>
         </div>
@@ -37,11 +37,18 @@ export default {
                 return '완료'
             }
             return '복구'
-        }
+        },
+        isPublic(){
+            if(this.item.visibleTo == 'public'){
+                return true;
+            }
+            return false;
+        },
     },
     data(){
         return{
-            isError: false
+            isError: false,
+            badgeClass: 'badge',
         }
     },
     methods:{
@@ -98,6 +105,13 @@ export default {
             }
             return val;
         },
+        filterVisible(val){
+            if(val=='public'){
+                return '공개'
+            }else{
+                return '비공개'
+            }
+        },
     }
 }
 </script>
@@ -131,10 +145,10 @@ export default {
     border: 1px solid lightgray;
     @include flex-center();
     img{
-        width: 95%;
-        height: 95%;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 10px;
+        border-radius: 15px;
     }
     svg{
         width: 2rem;
@@ -145,13 +159,25 @@ export default {
 }
 .badge{
     margin-left: 0.5rem;
-    border: 1px solid #A9AAB9;
-    border-radius: 8px;
+    border-radius: 9px;
+    display: inline-flex;
+    height: 2rem;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color : $margenta;
+    border: 1px solid $margenta;
     background: transparent;
-    color: #A9AAB9;
-    font-size: 0.8rem;
-    padding-right: 0.4rem;
-    padding-left: 0.4rem;
+
+}
+.blue-badge{
+    color : $green;
+    border: 1px solid $green;
+    background: transparent;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 svg{
     justify-self: flex-end;

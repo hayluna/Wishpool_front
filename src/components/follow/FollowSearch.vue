@@ -183,7 +183,6 @@ export default {
     }
     .search-btn{
         width: 5rem;
-        height: 100%;
         border-left: 1px solid lightgray;
         background: lightgray;
         border-radius: 0 10px 10px 0;

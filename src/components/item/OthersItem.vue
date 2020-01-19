@@ -1,12 +1,13 @@
 <template>
     <div class="item">
         <div class="thumb" @click="onClick">
-            <img :src="item.itemImgPath" @error="imgLoadError">
+            <img :src="item.itemImgPath" @error="imgLoadError" v-if="!isError">
+            <v-icon v-if="isError" name="package"></v-icon>
         </div>
         <div class="desc" @click="onClick">
             <div class="text">
                 <span class="name">{{ item.itemName | filterName }}</span>
-                <span class="badge">{{ item.visibleTo | filterBadge }}</span>
+                <span :class="[{'blue-badge':isPublic}, badgeClass]">{{item.visibleTo|filterVisible}}</span>
             </div>
             <span class="price">{{ item.itemPrice | filterPrice }}원</span>
         </div>
@@ -38,11 +39,18 @@ export default {
         },
         user(){
             return getters.getCurrentUser;
-        }
+        },
+        isPublic(){
+            if(this.item.visibleTo == 'public'){
+                return true;
+            }
+            return false;
+        },
     },
     data(){
         return{
-            isError: true
+            isError: false,
+            badgeClass: 'badge',
         }
     },
     methods:{
@@ -69,7 +77,8 @@ export default {
             dispatch('handleToggle', this.item);
         },
         imgLoadError(){
-            this.item.itemImgPath='/assets/images/data_usage.svg';
+            // this.item.itemImgPath='/assets/images/data_usage.svg';
+            this.isError = true;
         },
         onClick(){
             this.$emit('onClick', this.item);
@@ -100,6 +109,13 @@ export default {
                 return '-'
             }
             return val;
+        },
+        filterVisible(val){
+            if(val=='public'){
+                return '공개'
+            }else{
+                return '비공개'
+            }
         },
     }
 }
@@ -139,16 +155,34 @@ export default {
         object-fit: cover;
         border-radius: 10px;
     }
+    svg{
+        width: 2rem;
+        height: 2rem;
+        color: $dark-gray;
+        fill: transparent;
+    }
 }
 .badge{
     margin-left: 0.5rem;
-    border: 1px solid #A9AAB9;
-    border-radius: 8px;
+    border-radius: 9px;
+    display: inline-flex;
+    height: 2rem;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color : $margenta;
+    border: 1px solid $margenta;
     background: transparent;
-    color: #A9AAB9;
-    font-size: 0.8rem;
-    padding-right: 0.4rem;
-    padding-left: 0.4rem;
+
+}
+.blue-badge{
+    color : $green;
+    border: 1px solid $green;
+    background: transparent;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 svg{
     justify-self: flex-end;
