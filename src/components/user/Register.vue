@@ -266,15 +266,13 @@ export default {
         display:flex;
         flex-direction: row;
         width: 100%;
-        border-bottom: 1px solid darkgray;
+        border-bottom: 1px solid gray;
         &:focus-within, &:active{
          .x-circle{
             visibility: visible;
             cursor: pointer;
-            //  svg{
-            //  }
+            border-bottom: 1px solid darkgray;
          }   
-         border-bottom: 1px solid gray;
          input{
              border: none;
          }

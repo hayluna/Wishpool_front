@@ -393,7 +393,7 @@ export default {
     .btn-area{
         width: 100%;
         @include flex-center();
-        margin-bottom: 5rem;
+        margin-bottom: 9rem;
         a{
             display: inline-flex;
             align-items: center;

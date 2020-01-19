@@ -160,22 +160,24 @@ export default {
                 document.getElementById("mySidenav").children[1].children[0].style.color="black"
                 document.getElementById("mySidenav").children[1].children[1].style.color="black"
                 document.getElementById("mySidenav").children[1].children[2].style.color="gray"
+                document.getElementById("mySidenav").children[1].children[2].children[0].style.color="#0EC99C"
                 document.getElementById("mySidenav").children[2].children[0].style.color="black"
                 document.getElementById("mySidenav").children[2].children[1].style.color="black"
                 document.getElementById("mySidenav").children[2].children[2].style.color="gray"
+                document.getElementById("mySidenav").children[2].children[2].children[0].style.color="#0EC99C"
             }, 200)
             
         },
         closeNav(){
+            document.getElementById("mySidenav").children[1].children[0].style.color="transparent"
+            document.getElementById("mySidenav").children[1].children[1].style.color="transparent"
+            document.getElementById("mySidenav").children[1].children[2].style.color="transparent"
+            document.getElementById("mySidenav").children[1].children[2].children[0].style.color="transparent"
+            document.getElementById("mySidenav").children[2].children[0].style.color="transparent"
+            document.getElementById("mySidenav").children[2].children[1].style.color="transparent"
+            document.getElementById("mySidenav").children[2].children[2].style.color="transparent"
+            document.getElementById("mySidenav").children[2].children[2].children[0].style.color="transparent"
             document.getElementById("mySidenav").style.width = "0";
-            setTimeout(function(){
-                document.getElementById("mySidenav").children[1].children[0].style.color="transparent"
-                document.getElementById("mySidenav").children[1].children[1].style.color="transparent"
-                document.getElementById("mySidenav").children[1].children[2].style.color="transparent"
-                document.getElementById("mySidenav").children[2].children[0].style.color="transparent"
-                document.getElementById("mySidenav").children[2].children[1].style.color="transparent"
-                document.getElementById("mySidenav").children[2].children[2].style.color="transparent"
-            },50)
         },
          completeSnackbar(){
             var x = document.getElementById("complete");
@@ -288,6 +290,7 @@ export default {
         align-items: center;
         height: 5.8rem;
         padding: 0 1.5rem 0 1.5rem;
+        background: white;
         li{
             border: none;
             width: 100%;
@@ -302,7 +305,7 @@ export default {
         }
     }
     .total-price{
-        color:$green;
+        color:transparent;
         font-size: 1.7rem;
     }
     .ul-item{
@@ -317,7 +320,12 @@ export default {
         }
     }
     .tab-content, .tab-pane{
+        width: 100%;
         height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 3rem;
     }
     
     .empty-list{

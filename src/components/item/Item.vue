@@ -201,6 +201,7 @@ svg{
     a{
         color: white;
         width: fit-content;
+        cursor: pointer;
         &:hover, &:active{
             background-color: transparent;
             color: $green;

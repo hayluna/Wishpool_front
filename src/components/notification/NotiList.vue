@@ -136,10 +136,12 @@ export default {
         font-weight: 800;
     }
     .area{
-        height: 100%;
-        // overflow: scroll;
-        padding-bottom: 3rem;
         padding-top: 5rem;
+        width: 100%;
+        height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
     }
     .noti-header{
         color: #A9AAB9;

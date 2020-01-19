@@ -133,7 +133,12 @@ export default {
         margin-top: 5rem;
         display: flex;
         flex-direction: column;
+        width: 100%;
         height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 3rem;
     }
     .result-header{
         font-size: 2rem;
@@ -154,6 +159,7 @@ export default {
     ul{
         width: 100%;
         padding: 0;
+        padding-bottom: 8rem;
     }
     li{
         list-style: none;

@@ -47,8 +47,8 @@
                 <div>
                     <h5><v-icon name="link"></v-icon>아이템 링크</h5>
                     <div class="item-link">
-                        <a :href="item.itemLink" v-if="!voidLink" >: {{item.itemLink|filterLink}}</a>
-                        <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black;">: 링크 없음</a>
+                        <a :href="item.itemLink" v-if="!voidLink" style="word-break:break-all;">: {{item.itemLink|filterLink}}</a>
+                        <a href="javascript:void(0)" v-if="voidLink" style="text-decoration:none; color:black; word-break:break-all;">: 링크 없음</a>
                         <div class="share" @click="onCopyLink" v-if="!voidLink" style="padding-left:0;"><v-icon name="copy" style="margin:0;"></v-icon></div>
                     </div>
                 </div>
@@ -424,6 +424,7 @@ export default {
     a{
         color: white;
         width: fit-content;
+        cursor: pointer;
         &:hover, &:active{
             background-color: transparent;
             color: $green;

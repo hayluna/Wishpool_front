@@ -163,6 +163,7 @@ export default {
         left:0;
         width:100%;
         z-index:10;
+        background: white;
     }
     .header{
         display: flex;
@@ -216,6 +217,7 @@ export default {
         align-items: center;
         height: 6rem;
         padding: 0 1.5rem 0 1.5rem;
+        background: white;
         li{
             border: none;
             width: 100%;
@@ -227,8 +229,13 @@ export default {
             padding: 1rem 1rem 1.5rem 1rem;
         }
     }
-    .tab-content, .tab-pane{
-        height:100%;
+    .tab-content{
+        width: 100%;
+        height: 100%;
+        z-index: 1; 
+        overflow-y: scroll; 
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10rem;
     }
     .ul-item{
         padding: 0 1rem;
@@ -236,7 +243,6 @@ export default {
             list-style: none;
             cursor: pointer;
             border-bottom: 1px solid lightgray;
-            
         }
         
     }
@@ -244,6 +250,7 @@ export default {
         margin: 0 1.3rem;
         height: 8rem;
         border-bottom: 1px solid lightgray;
+        background: white;
     }
     .user-con{
         display: flex;
