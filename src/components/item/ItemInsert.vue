@@ -126,6 +126,7 @@ export default {
             if(file && file.type.match(/^image\/(png|jpeg)$/)){
                 this.preview = window.URL.createObjectURL(file);
                 this.thumbnail = file;
+                this.isError = false;
             }
         },
         onSubmit(){

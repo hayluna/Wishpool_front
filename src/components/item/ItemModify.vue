@@ -122,6 +122,7 @@ export default {
                 this.preview = window.URL.createObjectURL(file);
                 this.thumbnail = file;
                 this.prevImgName = this.item.itemImgName;
+                this.isError = false;
             }
         },
         onSubmit(){

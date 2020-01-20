@@ -342,7 +342,8 @@ export default {
         }
         a{
             display: block;
-            color: #49B7F5
+            color: #49B7F5;
+            word-break: break-all;
         }
         svg{
             width: 1.2rem;

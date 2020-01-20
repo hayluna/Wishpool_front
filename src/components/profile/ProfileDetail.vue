@@ -18,20 +18,20 @@
             <div class="modal-body">
                 <div class="profile">
                     <div class="nickname">{{user.nickname}}</div>
-                    <div class="msg">{{user.profileMsg}}</div>
+                    <div class="msg" style="color:gray;">{{user.profileMsg}}</div>
                 </div>
                 <div class="info-box">
                     <div class="info-item">
                         <p>팔로잉</p>
-                        <p>{{countFollows}}</p>
+                        <p style="font-weight: 800;">{{countFollows}}</p>
                     </div>
                     <div class="info-item">
                         <p>팔로워</p>
-                        <p>{{countFollowers}}</p>
+                        <p style="font-weight: 800;">{{countFollowers}}</p>
                     </div>
                     <div class="info-item">
                         <p>아이템</p>
-                        <p>0</p>
+                        <p style="font-weight: 800;">{{countItems}}</p>
                     </div>
                 </div>
             </div>
@@ -62,6 +62,7 @@ export default {
         'complete-snackbar' : CompleteSnackbar
     },
     created(){
+        dispatch('fetchMyAllItemList');
     },
     computed:{
         doIFollow(){
@@ -82,6 +83,12 @@ export default {
                 return this.user.followerId.length;
             }
             return 0;
+        },
+        countItems(){
+            if(this.isSelf){
+                return getters.myItemList.length;
+            }
+            return getters.othersItemList.length;
         },
         isSelf(){
             if(this.user._id){

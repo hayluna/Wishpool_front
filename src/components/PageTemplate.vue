@@ -53,6 +53,7 @@ export default {
         width:100%; 
         z-index:5;
         height: 6rem;
+        background: $light-white;
     }
    
 

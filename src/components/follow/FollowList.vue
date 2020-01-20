@@ -135,6 +135,7 @@ export default {
         getClickedUser(user){
             this.clickedUser = user;
             dispatch('setCurrentUser', user);
+            dispatch('fetchOthersItemList', user._id);
         },
         getMyProfile(){
             this.clickedUser = this.myProfile;

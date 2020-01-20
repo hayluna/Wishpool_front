@@ -137,6 +137,7 @@ export default {
     }
     .area{
         padding-top: 5rem;
+        padding-bottom: 10rem;
         width: 100%;
         height: 100%;
         z-index: 1; 

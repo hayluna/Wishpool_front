@@ -147,6 +147,7 @@ export default {
                 this.preview = window.URL.createObjectURL(file);
                 this.thumbnail = file;
                 this.prevImgName = this.profile.profileImgName;
+                this.isError = false;
             }
         },
         onSubmit(){

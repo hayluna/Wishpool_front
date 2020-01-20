@@ -150,10 +150,10 @@ export default {
     border: 1px solid lightgray;
     @include flex-center();
     img{
-        width: 95%;
-        height: 95%;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 10px;
+        border-radius: 15px;
     }
     svg{
         width: 2rem;
@@ -202,7 +202,7 @@ svg{
     min-width: 5rem;
     a{
         color: white;
-        width: fit-content;
+        width: 100%;
         &:hover, &:active{
             background-color: transparent;
             color: $green;
