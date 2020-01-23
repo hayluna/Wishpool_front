@@ -137,7 +137,6 @@ export default {
     }
     .area{
         padding-top: 5rem;
-        padding-bottom: 10rem;
         width: 100%;
         height: 100%;
         z-index: 1; 
@@ -170,6 +169,7 @@ export default {
     ul{
         padding: 1rem;
         z-index: 0;
+        padding-bottom:10rem;
         // overflow: scroll;
     }
     li{

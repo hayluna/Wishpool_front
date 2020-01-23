@@ -3,8 +3,8 @@
         <div class="content">
             <router-view></router-view>
         </div>
-        <div class="footer-nav">
-            <Footer v-if="isLogged&&showFooter" />
+        <div class="footer-nav" v-if="isLogged&&showFooter">
+            <Footer />
         </div>
     </div>
 </template>

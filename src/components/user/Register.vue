@@ -271,7 +271,6 @@ export default {
          .x-circle{
             visibility: visible;
             cursor: pointer;
-            border-bottom: 1px solid darkgray;
          }   
          input{
              border: none;

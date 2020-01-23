@@ -334,6 +334,7 @@ export default {
         @include flex-center();
         font-size: 1.5rem;
         text-align: center;
+        padding-top: 8rem;
     }
     .person{
         width: 4.5rem;

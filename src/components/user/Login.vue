@@ -25,6 +25,7 @@ export default {
     beforeRouteEnter(to, from, next){
         (async()=>{
             try {
+                dispatch('toggleFooterShow', false);
                 await dispatch('checkLogin'); //내 프로필 정보를 가져온다.
                 if(getters.isLoggedIn){
                     next({

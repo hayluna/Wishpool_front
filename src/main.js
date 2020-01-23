@@ -39,6 +39,7 @@ router.beforeEach(async (to, from, next)=>{
         next({name:'login'})
       }
   }else{ //인증을 필요하지 않는 곳이라면 그냥 통과시켜준다.
+    console.log('lllll')
     next(); 
   }
 });

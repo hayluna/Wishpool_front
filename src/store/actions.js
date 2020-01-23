@@ -222,7 +222,7 @@ export default{
         })();
     },
     checkLogin({commit}){
-        return new Promise(async (resolve, reject)=>{
+        return (async ()=>{
             const token = localStorage.getItem('wishToken');
             commit('auth_request');
             try {
@@ -234,15 +234,12 @@ export default{
                     await commit('auth_success', {token, userId:user._id});
                     await this.dispatch('fetchNotiList');
                     this.dispatch('toggleFooterShow', true);
-                    resolve(res);
                 }else{
                     await commit('auth_error');
-                    resolve(res);
                 }
             } catch (e) {
-                console.error(e);
                 await commit('auth_error');
-                reject(e);
+                console.error(e);
             }
         });
     },

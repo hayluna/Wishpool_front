@@ -238,8 +238,13 @@ export default {
         -webkit-overflow-scrolling: touch;
         padding-bottom: 10rem;
     }
+    .tab-pane{
+        height:100%;
+    }
     .ul-item{
-        padding: 0 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-bottom: 8rem;
         li{
             list-style: none;
             cursor: pointer;
@@ -298,7 +303,6 @@ export default {
         @include flex-center();
         font-size: 1.5rem;
         text-align: center;
-        margin-top: -3rem;
     }
     .person{
         width: 4.5rem;
