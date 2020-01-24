@@ -1,19 +1,18 @@
-# frontend
+## Wishpool - frontend
 
-## Project setup
-```
-yarn install
-```
+#### 프로젝트 세팅하기
 
-### Compiles and hot-reloads for development
+클론 후 
 ```
-yarn serve
+yarn install 혹은 npm run build
 ```
 
-### Compiles and minifies for production
+### 개발모드 : webpack 개발서버 핫 리로딩
 ```
-yarn build
+yarn serve 혹은 npm run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### production 모드를 위해 빌드 : Compile and minify
+```
+yarn build 혹은 npm run build
+```
