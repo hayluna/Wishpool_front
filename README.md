@@ -46,7 +46,7 @@ yarn build 혹은 npm run build
 ### Deploy to Azure Storage
 * VS Code extension 중 Azure Storage 검색 후 설치한다.
 * 빌드 된 ```dist```폴더위에 ```마우스 우클릭 - Deploy to Static Website```
-* ```스토리지 계정 선택``` 혹은 새 계정 생성 후 선택(새 스토리지 생성시 정적 웹 사이트 설정해야함)
+* ```스토리지 계정 선택``` 혹은 ```새 계정 생성``` 후 선택(새 스토리지 생성시 ```정적 웹 사이트 설정```해야함)
 * 기존 ```$web``` 컨테이너에 이미 배포된 것이 있다면, ```Delete and Deploy```
 * 배포가 끝나면 우측하단 알림창에 ```browse website``` 클릭하면 배포된 것을 확인할 수있따.
 
