@@ -150,6 +150,12 @@ export default {
                     return false;
                 }
             }
+            const payload= {
+                reqUser: getters.myProfile,
+                resUser: getters.getCurrentUser,
+                item: this.item
+            };
+            this.$socket.emit('request-purchase', payload);
             //toast
             var x = document.getElementById("snackbar");
             var y = document.getElementById("snackbar2");

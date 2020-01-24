@@ -20,6 +20,10 @@ export default {
       dispatch('fetchNotiList');
       this.$bus.$emit('globalMsg', payload);
     });
+    this.$socket.on('purchase-requested', payload=>{
+      console.log(payload);
+      this.$bus.$emit('purchaseRequestMsg', payload);
+    })
   },
   computed: {
     classObject(){
