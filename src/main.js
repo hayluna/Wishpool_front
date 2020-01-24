@@ -5,18 +5,22 @@ import store from './store'
 import axios from 'axios'
 import feather from 'vue-icon'
 import io from 'socket.io-client'
-// const socket = io('http://localhost:3001'); //개발용 서버 websocket 주소
+/*배포용코드 - 도메인 부분을 VM의 public ip로 대체 가능*/
 const socket = io('https://api-wish.codeplot.co.kr:3001'); //실제 서버 websocket 주소
+Vue.prototype.$url = 'https://wish.codeplot.co.kr'; //실제 Front 도메인 주소
+Vue.prototype.$api = 'https://api-wish.codeplot.co.kr';  //실제 REST API주소
+/*END OF 배포코드 */
+
+/*개발용코드*/
+// Vue.prototype.$url = 'http://localhost:8080'; //개발용 webpack server 주소
+// const socket = io('http://localhost:3001'); //개발용 서버 websocket 주소
+// Vue.prototype.$api = 'http://localhost:3000';  //개발용 REST API주소
+/*END OF 개발코드*/
 
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios; //axios 전역객체에 달기
 Vue.prototype.$socket = socket; //웹소켓 전역객체에 달기
-// Vue.prototype.$url = 'http://localhost:8080';
-Vue.prototype.$url = 'https://wish.codeplot.co.kr'; //개발용 webpack server 주소
-// Vue.prototype.$api = 'http://localhost:3000';  //개발용 REST API주소
-Vue.prototype.$api = 'https://api-wish.codeplot.co.kr';  //실제 REST API주소
-
 Vue.use(feather, 'v-icon');
 
 //웹소켓이 연결되면, 서버로부터 socket의 id를 받고, 내 uid를 보낸다.
@@ -40,7 +44,6 @@ router.beforeEach(async (to, from, next)=>{
         next({name:'login'})
       }
   }else{ //인증을 필요하지 않는 곳이라면 그냥 통과시켜준다.
-    console.log('lllll')
     next(); 
   }
 });
