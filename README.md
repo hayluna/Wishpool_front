@@ -37,7 +37,7 @@ yarn serve 혹은 npm run serve
 
 ### Build
 SPA는 ```build```하면 compiled and minified되어 배포할 수 있는 ```dist```폴더가 생성된다.
-이 ```dist```폴더 전체를 호스팅하고, 유저가 접속하는 default화면은 ```index.html```이다.
+이 ```dist```폴더 전체를 호스팅한다. 유저가 접속하는 default화면은 ```index.html```이다.
 
 ```
 #for prouction
