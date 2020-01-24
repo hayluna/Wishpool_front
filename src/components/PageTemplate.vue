@@ -42,6 +42,7 @@ export default {
         height: 100%;
         overflow-x: hidden;
         background: white;
+        overflow-y: hidden;
     }
     .content{
         flex:1;

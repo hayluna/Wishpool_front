@@ -359,7 +359,7 @@ export default {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 10; /* Stay on top */
+    z-index: 20; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
     background-color: #fff; /* Black*/

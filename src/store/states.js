@@ -32,4 +32,5 @@ export default {
     },
     notiNum: 0,
     footerShow: false,
+    item: {}
 }

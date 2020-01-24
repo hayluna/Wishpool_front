@@ -6,6 +6,7 @@ import {
     REMOVE_FOLLOW_LIST,
     FETCH_OTHERS_ITEM_LIST, 
     FETCH_NOTI_LIST,
+    FETCH_AN_ITEM_AND_USER,
 } from './mutations-types'
 
 export default {
@@ -33,6 +34,9 @@ export default {
     },
     [FETCH_NOTI_LIST](state, notis){
         state.notiList = notis;
+    },
+    [FETCH_AN_ITEM_AND_USER](state, item){
+        state.item = item;
     },
     startLoading(state){
         state.loading = true;

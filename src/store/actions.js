@@ -1,5 +1,6 @@
 import { 
     FETCH_MY_ALL_ITEM_LIST, 
+    FETCH_AN_ITEM_AND_USER,
     FETCH_MY_PROFILE, 
     FETCH_SEARCH_USER_LIST, 
     FETCH_NOTI_LIST,
@@ -71,6 +72,20 @@ export default{
             } catch (e) {
                 console.error(e);
             }
+        })();
+    },
+    fetchItemAndUser({ commit }, id){
+        return (async()=>{
+            try {
+                const res = await axios.get(this._vm.$api+'/item/itemOne/'+id);
+                const { code, msg, item } = res.data;
+                if(code=="200"){
+                    commit(FETCH_AN_ITEM_AND_USER, item);
+                    commit('setCurrentUser', item.userId);
+                }
+            } catch (e) {
+                console.error(e);
+            }                
         })();
     },
     setCurrentUser({ commit }, user){
@@ -241,7 +256,7 @@ export default{
                 await commit('auth_error');
                 console.error(e);
             }
-        });
+        })();
     },
     authSuccess({commit}, payload){
         return (async()=>{

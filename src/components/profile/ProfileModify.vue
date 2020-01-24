@@ -208,7 +208,7 @@ export default {
     @import '@/styles/utils.scss';
     .view{
         background: white;
-        height: 100%;
+        height: 95%;
         font-family: $font-stack;
         position: fixed; 
         width:100%; 
@@ -381,7 +381,7 @@ export default {
         width: 100%;
         @include flex-center();
         margin-top: 4rem;
-        margin-bottom: 10rem;
+        margin-bottom: 7rem;
         a{
             display: inline-flex;
             align-items: center;

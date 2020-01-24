@@ -190,7 +190,7 @@ export default {
     @import '@/styles/utils.scss';
     .view{
         background: white;
-        height: 100%;
+        height: 95%;
         font-family: $font-stack;
         position: fixed; 
         width:100%; 

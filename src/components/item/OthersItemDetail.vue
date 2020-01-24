@@ -43,18 +43,19 @@
             </div>
         </div>
         <div id="snackbarLink">링크가 복사되었습니다!<br><span style="color:lightgreen">친구와 공유해보세요!</span></div>
-        <div id="snackbar">사주기 요청을<br><span style="color:lightgreen"> {{user.userName}}</span>님에게 보냈습니다!</div>
-        <div id="snackbar2"><span style="color:lightgreen">{{user.userName}}</span> 님이 수락하시면 <br>해당 아이템이 사주기 완료가 됩니다!</div>
+        <div id="snackbar">사주기 요청을<br><span style="color:lightgreen"> {{user.nickname}}</span> 님에게 보냈습니다!</div>
+        <div id="snackbar2"><span style="color:lightgreen">{{user.nickname}}</span> 님이 수락하시면 <br>해당 아이템이 사주기 완료가 됩니다!</div>
     </div>
 </template>
 <script>
 import store from '../../store';
-const { getters, dispatch } = store;
+const { getters, dispatch, state } = store;
 export default {
     name: 'OthersItemDetail',
     beforeRouteEnter(to, from, next){
-        next(vm => {
-                vm.item = getters.othersAllItemList.find(item=>item._id == to.params.itemId);
+        next(async vm => {
+                await dispatch('fetchItemAndUser', to.params.itemId);
+                vm.item = state.item;
                 vm.user = getters.getCurrentUser;
                 vm.preview = vm.item.itemImgPath;
             });
@@ -142,6 +143,13 @@ export default {
             navigator.clipboard.writeText(this.$url+'/item/othersDetail/'+this.item._id);
         },
         reserveItem(){
+            if(state.userId =='' || getters.isLoggedIn == false){
+                if(confirm('로그인 페이지로 이동하시겠습니까?')){
+                    this.$router.push('/');
+                }else{
+                    return false;
+                }
+            }
             //toast
             var x = document.getElementById("snackbar");
             var y = document.getElementById("snackbar2");

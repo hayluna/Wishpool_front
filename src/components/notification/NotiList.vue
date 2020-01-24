@@ -138,7 +138,7 @@ export default {
     .area{
         padding-top: 5rem;
         width: 100%;
-        height: 100%;
+        height: 95%;
         z-index: 1; 
         overflow-y: scroll; 
         -webkit-overflow-scrolling: touch;
@@ -156,7 +156,7 @@ export default {
     .noti-contents{
         z-index: 0;
         // overflow: scroll;
-        height: 100%;
+        height: 80%;
     }
     .text{
         color: black;
@@ -169,7 +169,7 @@ export default {
     ul{
         padding: 1rem;
         z-index: 0;
-        padding-bottom:10rem;
+        height: 100%;
         // overflow: scroll;
     }
     li{
@@ -178,6 +178,10 @@ export default {
         margin-top: 0.5rem;
         &:hover, &:active{
             background-color: rgba(100, 100, 100, 0.05);
+        }
+    
+        &:last-child{
+            margin-bottom: 8rem;
         }
     }
     .empty-list{

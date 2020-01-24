@@ -232,23 +232,24 @@ export default {
     }
     .tab-content{
         width: 100%;
-        height: 100%;
-        z-index: 1; 
+        height: 90%;
         overflow-y: scroll; 
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 10rem;
     }
     .tab-pane{
-        height:100%;
+        height: 100%;
     }
     .ul-item{
         padding-right: 1rem;
         padding-left: 1rem;
-        padding-bottom: 8rem;
+        height: 100%;
         li{
+            // display: flex;
             list-style: none;
             cursor: pointer;
             border-bottom: 1px solid lightgray;
+            &:last-child{
+                margin-bottom: 5rem;
+            }
         }
         
     }
